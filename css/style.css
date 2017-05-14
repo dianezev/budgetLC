@@ -1,0 +1,56 @@
+/* Edit this to override font and/or sizes set in w3pro.css*/
+
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+body, html {
+    height: 100%;
+    line-height: 1.8;
+}
+
+.w3-bar .w3-button {
+    padding: 16px;
+}
+
+/* DMZ added in order to use opacity on background image*/
+.bgimg-1 {
+    background-position: center;
+    background-size: cover;
+    min-height: 100%;
+    position: relative;
+    background: #ffffff;
+    overflow: hidden;
+}
+.bgimg-1:before {
+    content: ' ';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    opacity: .4;
+    background-image: url("../images/one_dollar.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    -ms-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+
+a {
+  text-decoration-line: none
+}
+.snug p {
+  margin: 0
+}
+.snug h4 {
+  margin-bottom: 0
+}
+.snug p:last-of-type {
+  margin-bottom: 10px
+}
+button:hover {
+  text-decoration: none
+}
