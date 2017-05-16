@@ -31,7 +31,7 @@
     </div>
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
-    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" id="menu_icon">
       <i class="fa fa-bars"></i>
     </a>
   </div>
@@ -39,13 +39,13 @@
 
 <!-- Sidebar on small screens when clicking the menu icon -->
 <nav class="w3-sidebar w3-bar-block w3-black w3-card-2 w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
-  <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
-  <a href="#income" onclick="w3_close()" class="w3-bar-item w3-button">INCOME</a>
-  <a href="#expenses" onclick="w3_close()" class="w3-bar-item w3-button">EXPENSES</a>
-  <a href="#savings" onclick="w3_close()" class="w3-bar-item w3-button">SAVINGS</a>
-  <a href="#budget" onclick="w3_close()" class="w3-bar-item w3-button">BUDGET</a>
-  <a href="#settings" onclick="w3_close()" class="w3-bar-item w3-button">SETTINGS</a>
-  <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">ABOUT</a>
+  <a href="javascript:void(0)" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+  <a href="#income" class="w3-bar-item w3-button">INCOME</a>
+  <a href="#expenses" class="w3-bar-item w3-button">EXPENSES</a>
+  <a href="#savings" class="w3-bar-item w3-button">SAVINGS</a>
+  <a href="#budget" class="w3-bar-item w3-button">BUDGET</a>
+  <a href="#settings" class="w3-bar-item w3-button">SETTINGS</a>
+  <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
 </nav>
 
 <!-- Header with full-height image -->
@@ -54,7 +54,7 @@
     <span class="w3-jumbo w3-hide-small">Track your Finances</span><br>
     <span class="w3-xxlarge w3-hide-large w3-hide-medium">Track your Finances</span><br>
     <span class="w3-xlarge">and make your money go further</span>
-    <p><a href="#login" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Log In or Sign Up</a></p>
+    <p id="gotoLogin"><a href="#login" class="w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Log In or Sign Up</a></p>
   </div> 
   <div class="w3-display-bottomleft w3-text-grey w3-xxlarge" style="padding:24px 48px">
     <a target="_blank"  href="https://github.com/">
@@ -66,40 +66,25 @@
   </div>
 </header>
 
-<!-- TBD make this modal-->
 <!-- Log In/Sign Up Section -->
-<div class="w3-container w3-grey" style="padding:128px 16px" id="login">
-  <h1>TBD: Make this modal - overlaying on top of start screen</h1>
-  <div class="login-page" id="login">
-    <div class="form">
-      <form class="register-form">
-        <input type="text" placeholder="name"/>
-        <input type="password" placeholder="password"/>
-        <input type="text" placeholder="email address"/>
-        <button class="w3-button w3-black">create</button>
-        <p class="message">Already registered? <a href="#login">Sign In</a></p>
-      </form>
-      <form class="login-form">
-        <input type="text" placeholder="username"/>
-        <input type="password" placeholder="password"/>
-        <button class="w3-button w3-black">login</button>
-        <p class="message">Not registered? <a href="#login">Create an account</a></p>
-      </form>
-    </div>
+<div id="login" class="w3-modal">
+  <div class="w3-modal-content form">
+    <span class="w3-button w3-display-topright">&times;</span>
+    <form class="register-form">
+      <input type="text" placeholder="name"/>
+      <input type="password" placeholder="password"/>
+      <input type="text" placeholder="email address"/>
+      <button class="w3-button w3-black" id="signin_first">create</button>
+      <p class="message">Already registered? <a href="#login">Sign In</a></p>
+    </form>
+    <form class="login-form">
+      <input type="text" placeholder="username"/>
+      <input type="password" placeholder="password"/>
+      <button class="w3-button w3-black" id="signin_return">login</button>
+      <p class="message">Not registered? <a href="#login">Create an account</a></p>
+    </form>
   </div>
 </div>
-  
-<!-- MAY USE LATER -- Adapt for log in-->
-<!--
-<div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">
-  <span class="w3-button w3-xxlarge w3-black w3-padding-large w3-display-topright" title="Close Modal Image">×</span>
-  <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
-    <img id="img01" class="w3-image">
-    <p id="caption" class="w3-opacity w3-large"></p>
-  </div>
-</div>
--->
-
   
 <!-- Income Section -->
 <div class="w3-row-padding w3-text-blue w3-grey" style="padding:128px 16px" id="income">
@@ -521,7 +506,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="js/model/model.js"></script>
+<script src="js/view/view.js"></script>
+<script src="js/controller/controller.js"></script>
 <script src="js/script.js"></script>
+<script src="js/events/events.js"></script>
+
   
 </body>
 </html>
