@@ -13,4 +13,8 @@ $(document).ready(function() {
 
   // call any LCB.view or LCB.model methods needed to initialize...
   
+  // Hide worksheets so only start screen displays
+  LCB.view.togglePages('#m_home');
+  LCB.view.defDate();
+
 });

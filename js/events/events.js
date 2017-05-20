@@ -1,5 +1,5 @@
 // Display login modal window
-$('#gotoLogin').on('click', function() {
+$('.toLogin').on('click', function() {
   $('#login').toggle();
 });
 
@@ -37,4 +37,9 @@ $('#menu_icon').on('click', function() {
 // Hide sidebar if user clicks on any sidebar option (incl 'close')
 $('#mySidebar a').on('click', function() {
   $('#mySidebar').hide();
+});
+
+// Call fcn to hide/display correct page (home, income, budget...)
+$('.swap').on('click', function(e) {
+  LCB.view.togglePages(e.target.hash);
 });
