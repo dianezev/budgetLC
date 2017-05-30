@@ -1,7 +1,6 @@
 <?php
 	include_once "common/base.php";
     $pageTitle = "Reset Your Password";
-	include_once "common/header.php";
 ?>
 
 		<h2>Reset Your Password</h2>
