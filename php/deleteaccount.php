@@ -1,7 +1,6 @@
 <?php
 	include_once "common/base.php";
     $pageTitle = "Bye Bye";
-	include_once "common/header.php";
 ?>
 
 		<h2>Are You Sure?</h2>
