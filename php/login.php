@@ -2,15 +2,15 @@
 	include_once "common/base.php";
 	$pageTitle = "Log In";
 
-	//if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])):
+	if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])):
 	//	include_once "common/header.php";
 ?>
 
-	<!--	<p>You are currently <strong>logged in.</strong></p>
+		<p>You are currently <strong>logged in.</strong></p>
 		<p><a href="/logout.php">Log out</a></p>
-	-->
+	
 <?php
-	/*else*/if
+	elseif
 		(
 			!empty($_POST['token'])
 			&& $_SESSION['token']==$_POST['token']
@@ -23,7 +23,7 @@
 			header("Location: /");
 			exit;
 		else:
-			include_once "common/header.php";
+			//include_once "common/header.php";
 ?>
 		    	
 		<h2>Login Failed&mdash;Try Again?</h2>
@@ -44,7 +44,7 @@
 <?php
 		endif;
 	else:
-		include_once "common/header.php";
+		//include_once "common/header.php";
 ?>
 		      
 		<h2>Your list awaits...</h2>
