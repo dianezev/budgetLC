@@ -7,6 +7,5 @@
 		<h2>Password Reset Requested</h2>
 		<p>Check your email to finish the reset process.</p>
 <?php
-	include_once "common/ads.php";
 	include_once "common/close.php";
 ?>
