@@ -21,6 +21,5 @@
 			</div>
 		</form>
 <?php
-	include_once "common/ads.php";
 	include_once "common/close.php";
 ?>
