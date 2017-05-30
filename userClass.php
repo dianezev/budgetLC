@@ -98,7 +98,6 @@ class Users
                 . "user information into the database. </p>";
         }
     }
- // Class properties and other methods omitted to save space
  
     /**
      * Sends an email to a user with a link to verify their new account
@@ -137,8 +136,118 @@ Thanks!
  
         return mail($to, $subject, $msg, $headers);
     }
-}
-}
  
+    /**
+     * Checks credentials and verifies a user account
+     *
+     * @return array    an array containing a status code and status message
+     */
+    public function verifyAccount()
+    {
+        $sql = "SELECT Username
+                FROM users
+                WHERE ver_code=:ver
+                AND SHA1(Username)=:user
+                AND verified=0";
  
+        if($stmt = $this->_db->prepare($sql))
+        {
+            $stmt->bindParam(':ver', $_GET['v'], PDO::PARAM_STR);
+            $stmt->bindParam(':user', $_GET['e'], PDO::PARAM_STR);
+            $stmt->execute();
+            $row = $stmt->fetch();
+            if(isset($row['Username']))
+            {
+                // Logs the user in if verification is successful
+                $_SESSION['Username'] = $row['Username'];
+                $_SESSION['LoggedIn'] = 1;
+            }
+            else
+            {
+                return array(4, "<h2>Verification Error</h2>n"
+                    . "<p>This account has already been verified. "
+                    . "Did you <a href="/password.php">forget "
+                    . "your password?</a>");
+            }
+            $stmt->closeCursor();
+ 
+            // No error message is required if verification is successful
+            return array(0, NULL);
+        }
+        else
+        {
+            return array(2, "<h2>Error</h2>n<p>Database error.</p>");
+        }
+    }
+    /**
+     * Changes the user's password
+     *
+     * @return boolean    TRUE on success and FALSE on failure
+     */
+    public function updatePassword()
+    {
+        if(isset($_POST['p'])
+        && isset($_POST['r'])
+        && $_POST['p']==$_POST['r'])
+        {
+            $sql = "UPDATE users
+                    SET Password=MD5(:pass), verified=1
+                    WHERE ver_code=:ver
+                    LIMIT 1";
+            try
+            {
+                $stmt = $this->_db->prepare($sql);
+                $stmt->bindParam(":pass", $_POST['p'], PDO::PARAM_STR);
+                $stmt->bindParam(":ver", $_POST['v'], PDO::PARAM_STR);
+                $stmt->execute();
+                $stmt->closeCursor();
+ 
+                return TRUE;
+            }
+            catch(PDOException $e)
+            {
+                return FALSE;
+            }
+        }
+        else
+        {
+            return FALSE;
+        }
+    }
+    /**
+     * Checks credentials and logs in the user
+     *
+     * @return boolean    TRUE on success and FALSE on failure
+     */
+    public function accountLogin()
+    {
+        $sql = "SELECT Username
+                FROM users
+                WHERE Username=:user
+                AND Password=MD5(:pass)
+                LIMIT 1";
+        try
+        {
+            $stmt = $this->_db->prepare($sql);
+            $stmt->bindParam(':user', $_POST['username'], PDO::PARAM_STR);
+            $stmt->bindParam(':pass', $_POST['password'], PDO::PARAM_STR);
+            $stmt->execute();
+            if($stmt->rowCount()==1)
+            {
+                $_SESSION['Username'] = htmlentities($_POST['username'], ENT_QUOTES);
+                $_SESSION['LoggedIn'] = 1;
+                return TRUE;
+            }
+            else
+            {
+                return FALSE;
+            }
+        }
+        catch(PDOException $e)
+        {
+            return FALSE;
+        }
+    }
+    
+} 
 ?>
