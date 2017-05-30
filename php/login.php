@@ -17,7 +17,7 @@
 			&& !empty($_POST['password'])
 		):
 		include_once 'inc/class.users.inc.php';
-		$users = new ColoredListsUsers($db);
+		$users = new FinanceUsers($db);
 		if($users->accountLogin()===TRUE):
 			header("Location: /");
 			exit;
