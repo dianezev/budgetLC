@@ -1,7 +1,6 @@
 <?php
 	include_once "common/base.php";
     $pageTitle = "Reset Pending";
-	include_once "common/header.php";
 ?>
 			
 		<h2>Password Reset Requested</h2>
