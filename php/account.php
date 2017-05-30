@@ -98,6 +98,5 @@
 <div class="clear"></div>
  
 <?php
-    include_once "common/ads.php";
     include_once "common/close.php";
 ?>
