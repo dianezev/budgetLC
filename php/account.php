@@ -2,7 +2,6 @@
     include_once "common/base.php";
     if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn']==1):
         $pageTitle = "Your Account";
-        include_once "common/header.php";
         include_once 'inc/class.users.inc.php';
         $users = new Users($db);
  
