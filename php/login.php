@@ -67,6 +67,5 @@
 
 		<div style="clear: both;"></div>
 <?php
-	include_once "common/ads.php";
 	include_once "common/close.php";
 ?>
