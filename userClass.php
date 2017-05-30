@@ -98,6 +98,46 @@ class Users
                 . "user information into the database. </p>";
         }
     }
+ // Class properties and other methods omitted to save space
+ 
+    /**
+     * Sends an email to a user with a link to verify their new account
+     *
+     * @param string $email    The user's email address
+     * @param string $ver    The random verification code for the user
+     * @return boolean        TRUE on successful send and FALSE on failure
+     */
+    private function sendVerificationEmail($email, $ver)
+    {
+        $e = sha1($email); // For verification purposes
+        $to = trim($email);
+ 
+        $subject = "[Colored Lists] Please Verify Your Account";
+ 
+        $headers = <<<MESSAGE
+From: Total Finance <donotreply@totalfinance.com>
+Content-Type: text/plain;
+MESSAGE;
+ 
+        $msg = <<<EMAIL
+You have a new account at Total Finance!
+ 
+To get started, please activate your account and choose a
+password by following the link below.
+ 
+Your Username: $email
+ 
+Activate your account: http://totalfinance.com/accountverify.php?v=$ver&e=$e
+ 
+If you have any questions, please contact help@totalfinance.com.
+ 
+--
+Thanks!
+;
+ 
+        return mail($to, $subject, $msg, $headers);
+    }
+}
 }
  
  
