@@ -288,7 +288,7 @@ password by following the link below.
 
 Your Username: $email
 
-Activate your account: http://coloredlists.com/accountverify.php?v=$ver&e=$e
+Activate your account: http://coloredlists.com/accountVerify.php?v=$ver&e=$e
 
 If you have any questions, please contact help@coloredlists.com.
 
