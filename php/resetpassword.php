@@ -51,6 +51,5 @@
 		echo '<meta http-equiv="refresh" content="0;/">';
 	endif;
 
-	include_once("common/ads.php");
 	include_once 'common/close.php';
 ?>
