@@ -438,7 +438,7 @@ EMAIL;
 
 			// Destroy the user's session and send to a confirmation page
 			unset($_SESSION['LoggedIn'], $_SESSION['Username']);
-			header("Location: /gone.php");
+			header("Location: /accountDeleted.php");
 			exit;
 		}
 		else
