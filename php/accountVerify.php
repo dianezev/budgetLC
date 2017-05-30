@@ -6,13 +6,13 @@
     if(isset($_GET['v']) && isset($_GET['e']))
     {
         include_once "inc/class.users.inc.php";
-        $users = new ColoredListsUsers($db);
+        $users = new FinanceUsers($db);
         $ret = $users->verifyAccount();
     }
     elseif(isset($_POST['v']))
     {
         include_once "inc/class.users.inc.php";
-        $users = new ColoredListsUsers($db);
+        $users = new FinanceUsers($db);
         $ret = $users->updatePassword();
     }
     else
