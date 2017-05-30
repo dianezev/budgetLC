@@ -5,7 +5,7 @@
  * 
  * PHP version 5
  */
-class ColoredListsUsers
+class FinanceUsers
 {
 	/**
 	 * The database object
