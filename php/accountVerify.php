@@ -1,7 +1,6 @@
 <?php
     include_once "common/base.php";
     $pageTitle = "Verify Your Account";
-    include_once "common/header.php";
  
     if(isset($_GET['v']) && isset($_GET['e']))
     {
