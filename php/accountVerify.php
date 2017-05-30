@@ -29,7 +29,7 @@
  
         <h2>Choose a Password</h2>
  
-        <form method="post" action="accountverify.php">
+        <form method="post" action="accountVerify.php">
             <div>
                 <label for="p">Choose a Password:</label>
                 <input type="password" name="p" id="p" /><br />
