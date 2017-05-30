@@ -2,14 +2,15 @@
 	include_once "common/base.php";
 	$pageTitle = "Log In";
 
-	if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])):
-		include_once "common/header.php";
+	//if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])):
+	//	include_once "common/header.php";
 ?>
 
-		<p>You are currently <strong>logged in.</strong></p>
+	<!--	<p>You are currently <strong>logged in.</strong></p>
 		<p><a href="/logout.php">Log out</a></p>
+	-->
 <?php
-	elseif
+	/*else*/if
 		(
 			!empty($_POST['token'])
 			&& $_SESSION['token']==$_POST['token']
