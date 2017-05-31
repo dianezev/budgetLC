@@ -1,7 +1,6 @@
 <?php
 	include_once "common/base.php";
 	$pageTitle = "Home";
-	include_once "common/header.php";
 ?>
 
 		<div id="main">
@@ -31,7 +30,7 @@ if(isset($_SESSION['LoggedIn']) && isset($_SESSION['Username'])):
 			<div class="clear"></div>
 
 			<div id="share-area">
-				<p>Public list URL: <a target="_blank" href="http://coloredlists.com/<?php echo $URL ?>.html">http://coloredlists.com/<?php echo $URL ?>.html</a>
+				<p>Public list URL: <a target="_blank" href="http://pacifictech.us/<?php echo $URL ?>.html">http://pacifictech.us/<?php echo $URL ?>.html</a>
 				&nbsp; <small>(Nobody but YOU will be able to edit this list)</small></p>
 			</div>
 
@@ -59,6 +58,5 @@ else:
 		</div>
 		  
 <?php
-	include_once "common/ads.php";
 	include_once "common/close.php";
 ?>
