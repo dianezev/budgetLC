@@ -25,7 +25,7 @@
 		else:
 			//include_once "common/header.php";
 ?>
-		    	
+
 		<h2>Login Failed&mdash;Try Again?</h2>
 		<form method="post" action="login.php" name="loginform" id="loginform">
 			<div>
@@ -46,8 +46,6 @@
 	else:
 		//include_once "common/header.php";
 ?>
-		      
-		<h2>Your list awaits...</h2>
 		<form method="post" action="login.php" name="loginform" id="loginform">
 			<div>
 				<input type="text" name="username" id="username" />
@@ -60,8 +58,7 @@
 				<input type="hidden" name="token"
 					value="<?php echo $_SESSION['token']; ?>" />
 			</div>
-		</form><br /><br />
-		<p><a href="/password.php">Did you forget your password?</a></p>
+		</form>
 <?php
 	endif;
 ?>
