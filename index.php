@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
@@ -73,12 +72,14 @@
   <div class="w3-modal-content form">
     <span class="w3-button w3-display-topright">&times;</span>
     <form class="register-form">
-      <input type="text" placeholder="Name"/>
+    <form action="login.php" method="post">
+      <input type="text" name="regname" placeholder="Name"/>
       <input type="password" placeholder="Password"/>
       <input type="text" placeholder="Email address"/>
       <button class="w3-button w3-black" id="signin_first">create</button>
       <p class="message">Already registered? <a href="#login">Sign In</a></p>
     </form>
+	  </form>
     <form class="login-form">
       <input type="text" placeholder="Username"/>
       <input type="password" placeholder="Password"/>
