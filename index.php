@@ -1,5 +1,6 @@
+<!DOCTYPE html>
 <html>
-<title>W3.CSS Template</title>
+<title>Total Finance</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -22,11 +23,11 @@
     <!-- Right-sided navbar links -->
     <div class="w3-right w3-hide-small">
       <a href="#login" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
-      <a href="#m_income" class="swap w3-bar-item w3-button">INCOME</a>
+      <!--<a href="#m_income" class="swap w3-bar-item w3-button">INCOME</a>-->
       <a href="#m_expenses" class="swap w3-bar-item w3-button">EXPENSES</a>
-      <a href="#m_accounts" class="swap w3-bar-item w3-button">ACCOUNTS</a>
+      <!--<a href="#m_accounts" class="swap w3-bar-item w3-button">ACCOUNTS</a>-->
       <a href="#m_budget" class="swap w3-bar-item w3-button">BUDGET</a>
-      <a href="#m_settings" class="swap w3-bar-item w3-button">SETTINGS</a>
+      <a href="#m_settings" class="swap w3-bar-item w3-button">ACCOUNT</a>
       <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
     </div>
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
@@ -41,11 +42,11 @@
 <nav class="w3-sidebar w3-bar-block w3-black w3-card-2 w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
   <a href="javascript:void(0)" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
   <a href="#login" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
-  <a href="#m_income" class="swap w3-bar-item w3-button">INCOME</a>
+  <!--<a href="#m_income" class="swap w3-bar-item w3-button">INCOME</a>-->
   <a href="#m_expenses" class="swap w3-bar-item w3-button">EXPENSES</a>
-  <a href="#m_accounts" class="swap w3-bar-item w3-button">ACCOUNTS</a>
+  <!--<a href="#m_accounts" class="swap w3-bar-item w3-button">ACCOUNTS</a>-->
   <a href="#m_budget" class="swap w3-bar-item w3-button">BUDGET</a>
-  <a href="#m_settings" class="swap w3-bar-item w3-button">SETTINGS</a>
+  <a href="#m_settings" class="swap w3-bar-item w3-button">ACCOUNT</a>
   <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
 </nav>
 
@@ -71,19 +72,19 @@
 <div id="login" class="w3-modal">
   <div class="w3-modal-content form">
     <span class="w3-button w3-display-topright">&times;</span>
-    <form class="register-form">
-    <form action="login.php" method="post">
+    <form class="register-form" action="login.php" method="post">
       <input type="text" name="regname" placeholder="Name"/>
-      <input type="password" placeholder="Password"/>
-      <input type="text" placeholder="Email address"/>
+      <input type="password" name="regPW" placeholder="Password"/>
+      <input type="text" name="regemail" placeholder="Email address"/>
       <button class="w3-button w3-black" id="signin_first">create</button>
       <p class="message">Already registered? <a href="#login">Sign In</a></p>
     </form>
-	  </form>
     <form class="login-form">
-      <input type="text" placeholder="Username"/>
-      <input type="password" placeholder="Password"/>
+      <input type="text" name="loginemail" placeholder="Email"/>
+      <input type="password" name="loginpw" placeholder="Password"/>
       <button class="w3-button w3-black" id="signin_return">login</button>
+	<br /><br />
+	<p><a href="/password.php">Did you forget your password?</a></p>
       <p class="message">Not registered? <a href="#login">Create an account</a></p>
     </form>
   </div>
@@ -526,22 +527,25 @@
   
 
   
-<!-- Settings Section -->
-<div class="w3-row-padding w3-text-teal w3-grey" style="padding:128px 16px" id="m_settings">
+<!-- Account Section -->
+<div class="w3-row-padding w3-text-teal w3-grey" style="padding:128px 16px" id="m_account">
   <div class="w3-card w3-light-grey">
     <div class="w3-container w3-deep-orange">
-      <h3 class="w3-center">USER SETTINGS</h3>
+      <h3 class="w3-center">USER ACCOUNT</h3>
     </div>
     <form action="" target="_blank">
       <div class="w3-container w3-border-top">
       
         <!-- Preferences, part 1 -->
         <div class="w3-half w3-margin-bottom" style="padding:16px 16px">
-          <h3 class="w3-center">User Preferences</h3>
-            <p><input class="w3-input w3-border" type="text" placeholder="stuff"></p>
+          <h3 class="w3-center">Account Preferences</h3>
+		<p>Account Email: <?php echo $_POST["useremail"]; ?></p>
+		   <a href="/php/newemail.php">+ New Email</a>
+		<p>Password:<br><a href="/php/password.php">Change Password</a></p>
+            <!--<p><input class="w3-input w3-border" type="text" placeholder="+New Email"></p>
             <p><input class="w3-input w3-border" type="email" placeholder="stuff"></p>
             <p><input class="w3-input w3-border" type="password" placeholder="stuff"></p>
-            <p><input class="w3-input w3-border" type="password" placeholder="stuff"></p>
+            <p><input class="w3-input w3-border" type="password" placeholder="stuff"></p>-->
         </div>
 
         <!-- Preferences, part 2 -->
@@ -554,7 +558,7 @@
               <input type="radio" name="pay_per" id="monthly"><span>Monthly&nbsp;&nbsp;&nbsp;</span>
               <input type="radio" name="pay_per" id="yearly"><span>Yearly&nbsp;&nbsp;&nbsp;</span>
             </p>
-            <h4>Sample drop-down:</h4>
+            <h4>Your State</h4>
             <select name="state" id="state">
               <option value="AL">Alabama</option>
               <option value="AK">Alaska</option>
