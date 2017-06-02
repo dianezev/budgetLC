@@ -620,7 +620,7 @@
       </div>
       <p class="w3-center">
         <button class="w3-button w3-black" type="submit" action="/php/account.php">SAVE USER SETTINGS</button>
-	<button class="w3-button w3-black" type="submit" action="php/deleteaccount.php">DELETE ACCOUNT</button>
+	<button class="w3-button w3-black" type="submit" action="/php/deleteaccount.php">DELETE ACCOUNT</button>
       </p>
     </form>
 
@@ -646,9 +646,12 @@
             <a target="_blank"  href="#">
               <i class="fa fa-github w3-hover-opacity"></i>
             </a>
-            <a target="_blank" href="https://github.com/">
+            <a target="_blank" href="https://github.com/danielalanclough">
               <i class="fa fa-linkedin w3-hover-opacity"></i>
             </a>
+		   <a target="_blank" href="http://pacifictech.us">
+			   <i class="fa fa-personal w3-hover-opacity"></i>
+		   </a>
           </div>
         </div>
       </div>
