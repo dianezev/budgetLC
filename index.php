@@ -27,8 +27,8 @@
       <a href="#m_expenses" class="swap w3-bar-item w3-button">EXPENSES</a>
       <!--<a href="#m_accounts" class="swap w3-bar-item w3-button">ACCOUNTS</a>-->
       <a href="#m_budget" class="swap w3-bar-item w3-button">BUDGET</a>
-      <a href="#m_settings" class="swap w3-bar-item w3-button">ACCOUNT</a>
-      <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+      <a href="#m_account" class="swap w3-bar-item w3-button">ACCOUNT</a>
+      <!--<a href="#about" class="w3-bar-item w3-button">ABOUT</a>-->
     </div>
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
@@ -46,8 +46,8 @@
   <a href="#m_expenses" class="swap w3-bar-item w3-button">EXPENSES</a>
   <!--<a href="#m_accounts" class="swap w3-bar-item w3-button">ACCOUNTS</a>-->
   <a href="#m_budget" class="swap w3-bar-item w3-button">BUDGET</a>
-  <a href="#m_settings" class="swap w3-bar-item w3-button">ACCOUNT</a>
-  <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+  <a href="#m_account" class="swap w3-bar-item w3-button">ACCOUNT</a>
+  <!--<a href="#about" class="w3-bar-item w3-button">ABOUT</a>-->
 </nav>
 
 <!-- Header with full-height image -->
@@ -539,26 +539,21 @@
         <!-- Preferences, part 1 -->
         <div class="w3-half w3-margin-bottom" style="padding:16px 16px">
           <h3 class="w3-center">Account Preferences</h3>
-		<!--<p>Account Email: <?php echo $_POST["useremail"]; ?></p>
-		   <a href="/php/newemail.php">+ New Email</a>
-		<p>Password:<br><a href="/php/password.php">Change Password</a></p>-->
-            <!--<p><input class="w3-input w3-border" type="text" placeholder="+New Email"></p>
-            <p><input class="w3-input w3-border" type="email" placeholder="stuff"></p>
-            <p><input class="w3-input w3-border" type="password" placeholder="stuff"></p>
-            <p><input class="w3-input w3-border" type="password" placeholder="stuff"></p>-->
+		<p>Account Email: <?php echo $_POST["useremail"]; ?></p>
+		   <a href="/php/newemail.php">Add New Email</a>
+		<p>Password:<a href="/php/password.php">Change Password</a></p>
         </div>
 
         <!-- Preferences, part 2 -->
         <div class="w3-half w3-margin-bottom snug" style="padding:16px 16px">
-          <h3 class="w3-center">More Preferences</h3>
-            <h4>Sample radio button:</h4>
-            <p>
-              <input type="radio" name="pay_per" id="hourly"><span>Hourly&nbsp;&nbsp;&nbsp;</span>
-              <input type="radio" name="pay_per" id="weekly"><span>Weekly&nbsp;&nbsp;&nbsp;</span>
-              <input type="radio" name="pay_per" id="monthly"><span>Monthly&nbsp;&nbsp;&nbsp;</span>
-              <input type="radio" name="pay_per" id="yearly"><span>Yearly&nbsp;&nbsp;&nbsp;</span>
-            </p>
-            <h4>Your State</h4>
+          <h3 class="w3-center">Additional Information</h3>
+		<p><a href="/whyneeded">Why are you asking for this?</a></p>
+            <h4>I File My Taxes As...</h4>
+		<p><input type="radio" name="pay_per" id="hourly"><span>Single</span></p>
+		<p><input type="radio" name="pay_per" id="weekly"><span>Head of Household</span></p>
+              <p><input type="radio" name="pay_per" id="monthly"><span>Married Filing Separately</span></p>
+              <p><input type="radio" name="pay_per" id="yearly"><span>Married Filing Jointly</span><br></p>
+            <h4>I reside in...</h4>
             <select name="state" id="state">
               <option value="AL">Alabama</option>
               <option value="AK">Alaska</option>
@@ -621,16 +616,11 @@
               <option value="AP">Armed Forces Pacific</option>
               <option value="AE">Armed Forces Others</option>		
             </select>				
-			
-            <h4>Sample numeric input:</h4>
-            <p><input class="w3-input w3-border" type="number" min="0" name="junk1" id="junk1"></p>
-            <h4>Sample text input:</h4>
-            <p><input class="w3-input w3-border" type="text" placeholder="Comment goes here..." min="0" name="junk1" id="junk1"></p>
         </div>
       </div>
-      
       <p class="w3-center">
-        <button class="w3-button w3-black" type="submit">SAVE USER SETTINGS</button>
+        <button class="w3-button w3-black" type="submit" action="/php/account.php">SAVE USER SETTINGS</button>
+	<button class="w3-button w3-black" type="submit" action="php/deleteaccount.php">DELETE ACCOUNT</button>
       </p>
     </form>
 
