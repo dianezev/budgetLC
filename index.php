@@ -72,20 +72,21 @@
 <div id="login" class="w3-modal">
   <div class="w3-modal-content form">
     <span class="w3-button w3-display-topright">&times;</span>
+	  <!--REGISTER-->
     <form class="register-form" action="login.php" method="post">
       <input type="text" name="regname" placeholder="Name"/>
       <input type="password" name="regPW" placeholder="Password"/>
       <input type="text" name="regemail" placeholder="Email address"/>
-      <button class="w3-button w3-black" id="signin_first">create</button>
+      <button class="w3-button w3-black" id="signin_first" a href="/php/register.php">create</button>
       <p class="message">Already registered? <a href="#login">Sign In</a></p>
     </form>
+	  <!--LOGIN-->
     <form class="login-form">
       <input type="text" name="loginemail" placeholder="Email"/>
       <input type="password" name="loginpw" placeholder="Password"/>
-      <button class="w3-button w3-black" id="signin_return">login</button>
-	<br /><br />
-	<p><a href="/password.php">Did you forget your password?</a></p>
-      <p class="message">Not registered? <a href="#login">Create an account</a></p>
+      <button class="w3-button w3-black" id="signin_return" a href="/php/login.php">login</button><br/><br/>
+	<p class="message"><a href="/php/password.php">Did you forget your password?</a></p>
+        <p class="message">Not registered? <a href="#login">Create an account</a></p>
     </form>
   </div>
 </div>
