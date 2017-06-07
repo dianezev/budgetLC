@@ -1,5 +1,5 @@
 <?php
-	include_once "common/base.php";
+	include_once "php/common/base.php";
     $pageTitle = "Reset Your Password";
 ?>
 
@@ -7,7 +7,7 @@
 		<p>Enter the email address you signed up with and we'll send 
 		you a link to reset your password.</p>
 
-		<form action="db-interaction/users.php" method="post">
+		<form action="php/db-interaction/users.php" method="post">
 			<div>
 				<input type="hidden" name="action"
 					value="resetpassword" />
@@ -20,5 +20,5 @@
 			</div>
 		</form>
 <?php
-	include_once "common/close.php";
+	include_once "php/common/close.php";
 ?>
