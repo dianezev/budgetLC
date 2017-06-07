@@ -1,5 +1,5 @@
 <?php
-	include_once "common/base.php";
+	include_once "php/common/base.php";
     $pageTitle = "Bye Bye";
 ?>
 
@@ -7,7 +7,7 @@
 		<p>If you delete your account, <em>all</em> of your 
 		information will be permanently deleted.</p>
 
-		<form action="db-interaction/users.php" method="post">
+		<form action="php/db-interaction/users.php" method="post">
 			<div>
 				<input type="hidden" name="action"
 					value="deleteaccount" />
@@ -20,5 +20,5 @@
 			</div>
 		</form>
 <?php
-	include_once "common/close.php";
+	include_once "php/common/close.php";
 ?>
