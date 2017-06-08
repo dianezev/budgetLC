@@ -27,7 +27,7 @@
       <a href="#m_expenses" class="swap w3-bar-item w3-button">EXPENSES</a>
       <!--<a href="#m_accounts" class="swap w3-bar-item w3-button">ACCOUNTS</a>-->
       <a href="#m_budget" class="swap w3-bar-item w3-button">BUDGET</a>
-      <a href="/php/account.php" class="swap w3-bar-item w3-button">ACCOUNT</a>
+      <a href="#/php/account.php" class="swap w3-bar-item w3-button">ACCOUNT</a>
       <!--<a href="#about" class="w3-bar-item w3-button">ABOUT</a>-->
     </div>
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
@@ -46,7 +46,7 @@
   <a href="#m_expenses" class="swap w3-bar-item w3-button">EXPENSES</a>
   <!--<a href="#m_accounts" class="swap w3-bar-item w3-button">ACCOUNTS</a>-->
   <a href="#m_budget" class="swap w3-bar-item w3-button">BUDGET</a>
-  <a href="/php/account.php" class="swap w3-bar-item w3-button">ACCOUNT</a>
+  <a href="#/php/account.php" class="swap w3-bar-item w3-button">ACCOUNT</a>
   <!--<a href="#about" class="w3-bar-item w3-button">ABOUT</a>-->
 </nav>
 
