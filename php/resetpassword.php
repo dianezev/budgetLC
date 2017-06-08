@@ -1,5 +1,5 @@
 <?php
-	include_once "common/base.php";
+	include_once "php/common/base.php";
 
 	if(isset($_GET['v']) && isset($_GET['e']))
 	{
@@ -22,14 +22,13 @@
 	}
 
 	$pageTitle = "Reset Your Password";
-	include_once "php/common/header.php";
 
 	if(isset($ret[0])):
 		echo isset($ret[1]) ? $ret[1] : NULL;
 
 		if($ret[0]<3):
 ?>
-
+<center>
 		<h2>Reset Your Password</h2>
 
 		<form method="post" action="php/accountVerify.php">
@@ -44,7 +43,7 @@
 					value="<?php echo $_SESSION['token']; ?>" />
 			</div>
 		</form>
-
+</center>
 <?php
 		endif;
 	else:
