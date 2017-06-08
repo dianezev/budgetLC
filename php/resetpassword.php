@@ -4,13 +4,13 @@
 	if(isset($_GET['v']) && isset($_GET['e']))
 	{
 		include_once "php/inc/class.users.inc.php";
-		$users = new FinanceUsers($db);
+		$users = new TotalFinanceUsers($db);
 		$ret = $users->verifyAccount();
 	}
 	elseif(isset($_POST['v']))
 	{
 		include_once "php/inc/class.users.inc.php";
-		$users = new FinanceUsers($db);
+		$users = new TotalFinanceUsers($db);
 		$status = $users->updatePassword() ? "changed" : "failed";
 		header("Location: /php/account.php?password=$status");
 		exit;
