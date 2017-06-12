@@ -1,5 +1,5 @@
 <?php
-	include_once "common/base.php";
+	include_once "php/common/base.php";
     $pageTitle = "Reset Your Password";
 ?>
 
@@ -11,8 +11,8 @@
 			<div>
 				<input type="hidden" name="action"
 					value="resetpassword" />
-				<input type="text" name="username" id="username" />
-				<label for="username">Email</label><br /><br />
+				<label for="username">Email</label>
+				<input type="text" name="username" id="username" /><br /><br />
 				<input type="submit" name="reset" id="reset"
 					value="Reset Password" class="button" />
 				<input type="hidden" name="token"
@@ -20,5 +20,5 @@
 			</div>
 		</form>
 <?php
-	include_once "common/close.php";
+	include_once "php/common/close.php";
 ?>
