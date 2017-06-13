@@ -1,5 +1,5 @@
 <?php
-	include_once "common/base.php";
+	include_once "php/common/base.php";
     $pageTitle = "Reset Your Password";
 ?>
 
