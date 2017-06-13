@@ -19,7 +19,7 @@
 <!-- Navbar (sit on top) -->
 <div class="w3-top">
   <div class="w3-bar w3-white w3-card-2" id="myNavbar">
-    <a href="#m_home" class="swap w3-bar-item w3-button w3-wide">APP NAME</a>
+    <a href="#m_home" class="swap w3-bar-item w3-button w3-wide">TOTAL FINANCE</a>
     <!-- Right-sided navbar links -->
     <div class="w3-right w3-hide-small">
       <a href="#login" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
@@ -85,6 +85,51 @@
   </div>
 </div>  
 
+<!-- Income Section
+<div class="w3-row-padding w3-text-blue w3-grey" style="padding:128px 16px" id="m_income">
+  <div class="w3-card w3-light-grey">
+    <div class="w3-container w3-blue">
+      <h3 class="w3-center">INCOME</h3>
+    </div>
+    <form action="" target="_blank">
+      <div class="w3-container w3-border-top snug">
+<h2>TBD: discuss how to incorporate dates for both monthly &amp; variable $$ (same with Expenses, Savings &amp; Budget sections)</h2>
+        <!-- Income
+        <div class="w3-half w3-margin-bottom" style="padding:16px 16px">
+          <h3 class="w3-center">Monthly Income &amp;Deductions</h3>
+          <h4>Wages/salary:</h4>
+          <p><input class="w3-input w3-border" type="number" min="0" name="sal_inc" id="sal_inc"></p>
+          <h4>401K:</h4>
+          <p><input class="w3-input w3-border" type="number" min="0" name="opd_vpmt" id="opd_vpmt"></p>
+          <!-- are we adding employer match info
+          <h4>FICA/Social Security/Medicare:</h4>
+          <p><input class="w3-input w3-border" type="number" min="0" name="cRep_vpmt" id="cRep_vpmt"></p>
+          <h4>State &amp; local taxes:</h4>
+          <p><input class="w3-input w3-border" type="number" min="0" name="hRep_vpmt" id="hRep_vpmt"></p>
+          <h4>Federal income tax:</h4>
+          <p><input class="w3-input w3-border" type="number" min="0" name="cloth_vpmt" id="cloth_vpmt"></p>
+        </div>
+
+      <!-- Deductions
+        <div class="w3-half w3-margin-bottom" style="padding:16px 16px">
+          <h3 class="w3-center">Variable Income &amp;Deductions</h3>
+          <h4>Dividends:</h4>
+          <p><input class="w3-input w3-border" type="number" min="0" name="div_inc" id="div_inc"></p>
+          <h4>Interest:</h4>
+          <p><input class="w3-input w3-border" type="number" min="0" name="int_inc" id="int_inc"></p>
+          <h4>Other earnings:</h4>
+          <p><input class="w3-input w3-border" type="number" min="0" name="oth_inc" id="oth_inc"></p>
+        </div>
+      </div>
+      
+      <p class="w3-center">
+        <button class="w3-button w3-black" type="submit">SAVE INCOME INFORMATION</button>
+      </p>
+    </form>
+    
+    <div class="w3-container w3-blue w3-large" style="height: 2em"></div>
+  </div>
+-->
 <!-- Expenses Section -->
 <!-- TBD: Add template to make this dynamic for all expense categories-->
 <!--  TBD: Expenses & Budget may be similar enough to just use one template-->
@@ -273,6 +318,49 @@
   </div>
 </div>
 
+<!-- Savings Section
+<div class="w3-row-padding w3-text-deep-purple w3-grey" style="padding:128px 16px" id="m_accounts">
+  <div class="w3-card w3-light-grey">
+    <div class="w3-container w3-deep-purple">
+      <h3 class="w3-center">ACCOUNTS</h3>
+    </div>
+    <form action="" target="_blank">
+      <div class="w3-container w3-border-top snug">
+
+        <!-- Accounts - part 1
+        <div class="w3-half w3-margin-bottom" style="padding:16px 16px">
+          <h3 class="w3-center">Accounts (maybe monthly stuff...)</h3>
+          <h4>Additional 401K deposits (in addition to automatic deposit of $___):</h4>
+          <p><input class="w3-input w3-border" type="number" min="0" name="add401k_sav" id="add401k_sav"></p>
+          <h4>IRA deposits:</h4>
+          <p><input class="w3-input w3-border" type="number" min="0" name="ira_sav" id="ira_sav"></p>
+          <h4>Educational IRA deposits:</h4>
+          <p><input class="w3-input w3-border" type="number" min="0" name="edira_sav" id="edira_sav"></p>
+          <h4>Savings/checking/money market:</h4>
+          <p><input class="w3-input w3-border" type="number" min="0" name="basic_sav" id="basic_sav"></p>
+          <h4>Other investments:</h4>
+          <p><input class="w3-input w3-border" type="number" min="0" name="inv_sav" id="inv_sav"></p>
+        </div>
+
+        <!-- Accounts - part 2 (if needed)
+        <div class="w3-half w3-margin-bottom" style="padding:16px 16px">
+          <h3 class="w3-center">Accounts (maybe variable stuff)</h3>
+          <h4>What else:</h4>
+          <p><input class="w3-input w3-border" type="number" min="0" name="blah1_sav" id="blah1_sav"></p>
+          <h4>What else:</h4>
+          <p><input class="w3-input w3-border" type="number" min="0" name="blah2_sav" id="blah2_sav"></p>
+        </div>
+      </div>
+      
+      <p class="w3-center">
+        <button class="w3-button w3-black" type="submit">SAVE ACCOUNT INFORMATION</button>
+      </p>
+    </form>
+    
+    <div class="w3-container w3-deep-purple w3-large" style="height: 2em"></div>
+  </div>
+</div>
+-->
   
 <!-- Budget Section -->
 <!-- template will make the category dynamic...-->
@@ -428,10 +516,10 @@
 
   
 <!-- Settings Section -->
-<div class="w3-row-padding w3-text-teal w3-grey" style="padding:128px 16px" id="m_settings">
+<div class="w3-row-padding w3-text-teal w3-grey" style="padding:128px 16px" id="m_account">
   <div class="w3-card w3-light-grey">
     <div class="w3-container w3-deep-orange">
-      <h3 class="w3-center">USER SETTINGS</h3>
+      <h3 class="w3-center">USER ACCOUNT</h3>
     </div>
     <form action="" target="_blank">
       <div class="w3-container w3-border-top">
@@ -439,23 +527,22 @@
         <!-- Preferences, part 1 -->
         <div class="w3-half w3-margin-bottom" style="padding:16px 16px">
           <h3 class="w3-center">User Preferences</h3>
-            <p><input class="w3-input w3-border" type="text" placeholder="stuff"></p>
-            <p><input class="w3-input w3-border" type="email" placeholder="stuff"></p>
-            <p><input class="w3-input w3-border" type="password" placeholder="stuff"></p>
-            <p><input class="w3-input w3-border" type="password" placeholder="stuff"></p>
+          <h3 class="w3-center">Account Preferences</h3>
+		<p>Account Email: <?php echo $_POST["useremail"]; ?></p>
+		   <a href="/php/newemail.php">Add New Email</a>
+		<p>Password:<a href="/php/password.php">Change Password</a></p>
         </div>
 
         <!-- Preferences, part 2 -->
         <div class="w3-half w3-margin-bottom snug" style="padding:16px 16px">
-          <h3 class="w3-center">More Preferences</h3>
-            <h4>Sample radio button:</h4>
-            <p>
-              <input type="radio" name="pay_per" id="hourly"><span>Hourly&nbsp;&nbsp;&nbsp;</span>
-              <input type="radio" name="pay_per" id="weekly"><span>Weekly&nbsp;&nbsp;&nbsp;</span>
-              <input type="radio" name="pay_per" id="monthly"><span>Monthly&nbsp;&nbsp;&nbsp;</span>
-              <input type="radio" name="pay_per" id="yearly"><span>Yearly&nbsp;&nbsp;&nbsp;</span>
-            </p>
-            <h4>Sample drop-down:</h4>
+          <h3 class="w3-center">Additional Information</h3>
+		<p><a href="/whyneeded">Why are you asking for this?</a></p>
+            <h4>I File My Taxes As...</h4>
+		<p><input type="radio" name="pay_per" id="hourly"><span>Single</span></p>
+		<p><input type="radio" name="pay_per" id="weekly"><span>Head of Household</span></p>
+              <p><input type="radio" name="pay_per" id="monthly"><span>Married Filing Separately</span></p>
+              <p><input type="radio" name="pay_per" id="yearly"><span>Married Filing Jointly</span><br></p>
+            <h4>I reside in...</h4>
             <select name="state" id="state">
               <option value="AL">Alabama</option>
               <option value="AK">Alaska</option>
@@ -518,15 +605,12 @@
               <option value="AP">Armed Forces Pacific</option>
               <option value="AE">Armed Forces Others</option>		
             </select>				
-			
-            <h4>Sample numeric input:</h4>
-            <p><input class="w3-input w3-border" type="number" min="0" name="junk1" id="junk1"></p>
-            <h4>Sample text input:</h4>
-            <p><input class="w3-input w3-border" type="text" placeholder="Comment goes here..." min="0" name="junk1" id="junk1"></p>
         </div>
       </div>
       
       <p class="w3-center">
+        <button class="w3-button w3-black" type="submit" action="/php/account.php">SAVE USER SETTINGS</button>
+	<button class="w3-button w3-black" type="submit" action="/php/deleteaccount.php">DELETE ACCOUNT</button>
         <button class="w3-button w3-black" type="submit">SAVE USER SETTINGS</button>
       </p>
     </form>
@@ -553,9 +637,12 @@
             <a target="_blank"  href="#">
               <i class="fa fa-github w3-hover-opacity"></i>
             </a>
-            <a target="_blank" href="https://github.com/">
+            <a target="_blank" href="https://github.com/danielalanclough">
               <i class="fa fa-linkedin w3-hover-opacity"></i>
             </a>
+	    <a target="_blank" href="http://pacifictech.us">
+		<i class="fa fa-personal w3-hover-opacity"></i>
+	    </a>
           </div>
         </div>
       </div>
