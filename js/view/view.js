@@ -50,7 +50,7 @@ LCB.view = (function() {
     userVerify: function(user) {
 
       // TBD: display should prompt user to check email & complete verification
-      alert("TBD...display should prompt user to check email & complete verification");
+      alert("Please check your email for a verification link");
     }
   };
   return publicAPI;
