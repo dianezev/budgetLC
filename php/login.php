@@ -1,9 +1,7 @@
 <?php
-	include_once "common/base.php";
-	$pageTitle = "Log In";
+	include_once "php/common/base.php";
 
 	if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])):
-	//	include_once "common/header.php";
 ?>
 
 		<p>You are currently <strong>logged in.</strong></p>
@@ -17,7 +15,7 @@
 			&& !empty($_POST['username'])
 			&& !empty($_POST['password'])
 		):
-		include_once 'inc/class.users.inc.php';
+		include_once 'php/inc/class.users.inc.php';
 		$users = new FinanceUsers($db);
 		if($users->accountLogin()===TRUE):
 			header("Location: /");
@@ -40,14 +38,13 @@
 					value="<?php echo $_SESSION['token']; ?>" />
 			</div>
 		</form>
-		<p><a href="/password.php">Did you forget your password?</a></p>
+		<p><a href="/php/password.php">Did you forget your password?</a></p>
 <?php
 		endif;
 	else:
 		//include_once "common/header.php";
 ?>
 		      
-		<h2>Your list awaits...</h2>
 		<form method="post" action="login.php" name="loginform" id="loginform">
 			<div>
 				<input type="text" name="username" id="username" />
@@ -68,5 +65,5 @@
 
 		<div style="clear: both;"></div>
 <?php
-	include_once "common/close.php";
+	include_once "php/common/close.php";
 ?>
