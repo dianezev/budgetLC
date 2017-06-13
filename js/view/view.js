@@ -44,6 +44,8 @@ LCB.view = (function() {
         $('#mySidebar a:nth-child(2) span').text(' ' + user.name);
         $('#myNavbar div a:first-child').show();
         $('#mySidebar a:nth-child(2)').show();
+        $('#myNavbar div a:nth-child(3)').text('myAccount');
+        $('#mySidebar a:nth-child(3)').text('myAccount');
       }
       
     },
