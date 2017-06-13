@@ -1,24 +1,9 @@
 <?php
-    include_once "common/base.php";
-    $pageTitle = "Register";
+    include_once "php/common/base.php";
  
     if(!empty($_POST['username'])):
-        include_once "inc/class.users.inc.php";
-        $users = new FinanceUsers($db);
+        include_once "php/inc/class.users.inc.php";
+        $users = new TotalFinanceUsers($db);
         echo $users->createAccount();
-    else:
-?>
- 
-        <h2>Sign up</h2>
-        <form method="post" action="signup.php" id="registerform">
-            <div>
-                <label for="username">Email:</label>
-                <input type="text" name="username" id="username" /><br />
-                <input type="submit" name="register" id="register" value="Sign up" />
-            </div>
-        </form>
- 
-<?php
-    endif;
-    include_once 'common/close.php';
+    include_once 'php/common/close.php';
 ?>
