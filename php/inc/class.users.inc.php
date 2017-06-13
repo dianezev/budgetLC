@@ -5,7 +5,7 @@
  * 
  * PHP version 5
  */
-class FinanceUsers
+class TotalFinanceUsers
 {
 	/**
 	 * The database object
@@ -273,30 +273,30 @@ class FinanceUsers
 		$e = sha1($email); // For verification purposes
 		$to = trim($email);
 	
-		$subject = "[Colored Lists] Please Verify Your Account";
+		$subject = "[Total Finance] Please Verify Your Account";
 
 		$headers = <<<MESSAGE
-From: Colored Lists <donotreply@coloredlists.com>
+From: Total Finance Mailer <donotreply@pacifictech.us>
 Content-Type: text/plain;
 MESSAGE;
 
 		$msg = <<<EMAIL
-You have a new account at Colored Lists!
+You have a new account at Total Finance!
 
 To get started, please activate your account and choose a
 password by following the link below.
 
 Your Username: $email
 
-Activate your account: http://coloredlists.com/accountVerify.php?v=$ver&e=$e
+Activate your account: http://totalFinance.herokuapp.com/accountVerify.php?v=$ver&e=$e
 
-If you have any questions, please contact help@coloredlists.com.
+If you have any questions, please contact daniel@pacifictech.us .
 
 --
 Thanks!
 
-Chris and Jason
-www.ColoredLists.com
+Total Finance Team
+TotalFinance.Herokuapp.com
 EMAIL;
 
 		return mail($to, $subject, $msg, $headers);
@@ -314,10 +314,10 @@ EMAIL;
 		$e = sha1($email); // For verification purposes
 		$to = trim($email);
 	
-		$subject = "[Colored Lists] Request to Reset Your Password";
+		$subject = "[Total Finance] Request to Reset Your Password";
 
 		$headers = <<<MESSAGE
-From: Colored Lists <donotreply@coloredlists.com>
+From: Total Finance <donotreply@pacifictech.us>
 Content-Type: text/plain;
 MESSAGE;
 
@@ -326,15 +326,15 @@ We just heard you forgot your password! Bummer! To get going again,
 head over to the link below and choose a new password.
 
 Follow this link to reset your password:
-http://coloredlists.com/resetpassword.php?v=$ver&e=$e
+http://totalFinance.herokuapp.com/resetPassword.php?v=$ver&e=$e
 
-If you have any questions, please contact help@coloredlists.com.
+If you have any questions, please contact daniel@pacifictech.us.
 
 --
 Thanks!
 
-Chris and Jason
-www.ColoredLists.com
+Total Finance Team
+TotalFinance.Herokuapp.com
 EMAIL;
 
 		return mail($to, $subject, $msg, $headers);
