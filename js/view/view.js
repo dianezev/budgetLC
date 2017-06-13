@@ -14,8 +14,9 @@ LCB.view = (function() {
   // Public vars & functions here
   var publicAPI = {
     
-    
     // Public vars here
+    
+    
 
     // Public functions here
     defDate: function() {
@@ -28,8 +29,29 @@ LCB.view = (function() {
     togglePages: function(hash) {
       $('[id^="m_"]').hide();
       $(hash).show();
+    },
+    userAcct: function(user) {
+      var menuItem;
+      
+      if (user === null) {
+        $('a.toLogin').text('LOG IN/SIGN UP');
+        $('#myNavbar div a:first-child').hide();
+        $('#mySidebar a:nth-child(2)').hide();
+      
+      } else {
+        $('a.toLogin').text('LOG OUT');
+        $('#myNavbar div a:first-child span').text(' ' + user.name);
+        $('#mySidebar a:nth-child(2) span').text(' ' + user.name);
+        $('#myNavbar div a:first-child').show();
+        $('#mySidebar a:nth-child(2)').show();
+      }
+      
+    },
+    userVerify: function(user) {
+
+      // TBD: display should prompt user to check email & complete verification
+      alert("TBD...display should prompt user to check email & complete verification");
     }
-  
   };
   return publicAPI;
 })();

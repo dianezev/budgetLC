@@ -16,5 +16,6 @@ $(document).ready(function() {
   // Hide worksheets so only start screen displays
   LCB.view.togglePages('#m_home');
   LCB.view.defDate();
-
+  LCB.view.userAcct(null);
+  
 });
