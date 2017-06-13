@@ -64,7 +64,7 @@
 </header>
 
 <!-- Log In/Sign Up Section -->
-<div id="login" class="w3-modal">
+<div id="m_login" class="w3-modal">
   <div class="w3-modal-content form">
     <span class="w3-button w3-display-topright">&times;</span>
 	  <!-- REGISTER -->
