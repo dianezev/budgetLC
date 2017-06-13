@@ -5,7 +5,7 @@
  * 
  * PHP version 5
  */
-class TotalFinanceItems
+class ColoredListsItems
 {
 	/**
 	 * The database object
@@ -175,7 +175,7 @@ class TotalFinanceItems
 	 * @param int $color	the color code of an item
 	 * @return string		the corresponding CSS class for the color code
 	 */
-	private function getItemClass($color)
+	private function getColorClass($color)
 	{
 		switch($color)
 		{
