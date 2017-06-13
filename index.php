@@ -22,10 +22,11 @@
     <a href="#m_home" class="swap w3-bar-item w3-button w3-wide">APP NAME</a>
     <!-- Right-sided navbar links -->
     <div class="w3-right w3-hide-small">
-      <a href="#m_settings" class="swap w3-bar-item w3-button" style="display: none"><i class="fa fa-cog"></i><span> SETTINGS</span></a>
+      <a href="#login" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
       <a href="#m_expenses" class="swap w3-bar-item w3-button">EXPENSES</a>
       <a href="#m_budget" class="swap w3-bar-item w3-button">BUDGET</a>
-      <a href="#login" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
+      <a href="#m_settings" class="swap w3-bar-item w3-button" style="display: none">
+	      <i class="fa fa-cog"></i><span> SETTINGS</span></a>
     </div>
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
@@ -38,10 +39,10 @@
 <!-- Sidebar on small screens when clicking the menu icon -->
 <nav class="w3-sidebar w3-bar-block w3-black w3-card-2 w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
   <a href="javascript:void(0)" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
-  <a href="#m_settings" class="swap w3-bar-item w3-button"><i class="fa fa-cog"></i><span> SETTINGS</span></a>
+  <a href="#login" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
   <a href="#m_expenses" class="swap w3-bar-item w3-button">EXPENSES</a>
   <a href="#m_budget" class="swap w3-bar-item w3-button">BUDGET</a>
-  <a href="#login" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
+  <a href="#m_settings" class="swap w3-bar-item w3-button"><i class="fa fa-cog"></i><span> SETTINGS</span></a>
 </nav>
 
 <!-- Header with full-height image -->
@@ -66,16 +67,18 @@
 <div id="login" class="w3-modal">
   <div class="w3-modal-content form">
     <span class="w3-button w3-display-topright">&times;</span>
-    <form class="register-form">
-      <input id="name_set" type="text" placeholder="Name"/>
-      <input id="password_set" type="password" placeholder="Password"/>
-      <input id="email_set" type="text" placeholder="Email address"/>
+	  <!-- REGISTER -->
+    <form class="register-form" action="signup.php" method="POST">
+      <input id="name_set" type="text" name="registerName" placeholder="Name"/>
+      <input id="password_set" type="password" name="registerPW" placeholder="Password"/>
+      <input id="email_set" type="text" name="registerEmail" placeholder="Email address"/>
       <button type="button" class="w3-button w3-black" id="signin_first">create</button>
       <p class="message">Already registered? <a href="#login">Sign In</a></p>
     </form>
-    <form class="login-form">
-      <input id="email" type="text" placeholder="Email"/>
-      <input id="password" type="password" placeholder="Password"/>
+	  <!-- LOGIN -->
+    <form class="login-form" action="login.php" method="POST">
+      <input id="email" type="text" name="loginEmail" placeholder="Email"/>
+      <input id="password" type="password" name="loginPW" placeholder="Password"/>
       <button type="button" class="w3-button w3-black" id="signin_return">login</button>
       <p class="message">Not registered? <a href="#login">Create an account</a></p>
     </form>
