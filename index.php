@@ -515,7 +515,7 @@
   
 
   
-<!-- Settings Section -->
+<!-- Account Section -->
 <div class="w3-row-padding w3-text-teal w3-grey" style="padding:128px 16px" id="m_account">
   <div class="w3-card w3-light-grey">
     <div class="w3-container w3-deep-orange">
@@ -526,7 +526,6 @@
       
         <!-- Preferences, part 1 -->
         <div class="w3-half w3-margin-bottom" style="padding:16px 16px">
-          <h3 class="w3-center">User Preferences</h3>
           <h3 class="w3-center">Account Preferences</h3>
 		<p>Account Email: <?php echo $_POST["useremail"]; ?></p>
 		   <a href="/php/newemail.php">Add New Email</a>
