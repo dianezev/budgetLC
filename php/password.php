@@ -20,5 +20,5 @@
 			</div>
 		</form>
 <?php
-	include_once "common/close.php";
+	include_once "php/common/close.php";
 ?>
