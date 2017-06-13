@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -23,12 +23,10 @@
     <!-- Right-sided navbar links -->
     <div class="w3-right w3-hide-small">
       <a href="#login" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
-      <!--<a href="#m_income" class="swap w3-bar-item w3-button">INCOME</a>-->
       <a href="#m_expenses" class="swap w3-bar-item w3-button">EXPENSES</a>
-      <!--<a href="#m_accounts" class="swap w3-bar-item w3-button">ACCOUNTS</a>-->
       <a href="#m_budget" class="swap w3-bar-item w3-button">BUDGET</a>
-      <a href="php/account.php" class="swap w3-bar-item w3-button">ACCOUNT</a>
-      <!--<a href="#about" class="w3-bar-item w3-button">ABOUT</a>-->
+      <a href="#m_settings" class="swap w3-bar-item w3-button" style="display: none">
+	      <i class="fa fa-cog"></i><span> SETTINGS</span></a>
     </div>
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
@@ -42,12 +40,9 @@
 <nav class="w3-sidebar w3-bar-block w3-black w3-card-2 w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
   <a href="javascript:void(0)" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
   <a href="#login" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
-  <!--<a href="#m_income" class="swap w3-bar-item w3-button">INCOME</a>-->
   <a href="#m_expenses" class="swap w3-bar-item w3-button">EXPENSES</a>
-  <!--<a href="#m_accounts" class="swap w3-bar-item w3-button">ACCOUNTS</a>-->
   <a href="#m_budget" class="swap w3-bar-item w3-button">BUDGET</a>
-  <a href="php/account.php" class="swap w3-bar-item w3-button">ACCOUNT</a>
-  <!--<a href="#about" class="w3-bar-item w3-button">ABOUT</a>-->
+  <a href="#m_settings" class="swap w3-bar-item w3-button"><i class="fa fa-cog"></i><span> SETTINGS</span></a>
 </nav>
 
 <!-- Header with full-height image -->
@@ -72,26 +67,25 @@
 <div id="login" class="w3-modal">
   <div class="w3-modal-content form">
     <span class="w3-button w3-display-topright">&times;</span>
-	  <!--REGISTER-->
-    <form class="register-form" action="login.php" method="post">
-      <input type="text" name="regname" placeholder="Name"/>
-      <input type="password" name="regPW" placeholder="Password"/>
-      <input type="text" name="regemail" placeholder="Email address"/>
-      <button class="w3-button w3-black" id="signin_first" a href="/php/register.php">create</button>
+	  <!-- REGISTER -->
+    <form class="register-form" action="signup.php" method="POST">
+      <input id="name_set" type="text" name="registerName" placeholder="Name"/>
+      <input id="password_set" type="password" name="registerPW" placeholder="Password"/>
+      <input id="email_set" type="text" name="registerEmail" placeholder="Email address"/>
+      <button type="button" class="w3-button w3-black" id="signin_first">create</button>
       <p class="message">Already registered? <a href="#login">Sign In</a></p>
     </form>
-	  <!--LOGIN-->
-    <form class="login-form">
-      <input type="text" name="loginemail" placeholder="Email"/>
-      <input type="password" name="loginpw" placeholder="Password"/>
-      <button class="w3-button w3-black" id="signin_return" a href="/php/login.php">login</button><br/><br/>
-	<p class="message"><a href="/php/password.php">Did you forget your password?</a></p>
-        <p class="message">Not registered? <a href="#login">Create an account</a></p>
+	  <!-- LOGIN -->
+    <form class="login-form" action="login.php" method="POST">
+      <input id="email" type="text" name="loginEmail" placeholder="Email"/>
+      <input id="password" type="password" name="loginPW" placeholder="Password"/>
+      <button type="button" class="w3-button w3-black" id="signin_return">login</button>
+      <p class="message">Not registered? <a href="#login">Create an account</a></p>
     </form>
   </div>
-</div>
-  
-<!-- Income Section -->
+</div>  
+
+<!-- Income Section
 <div class="w3-row-padding w3-text-blue w3-grey" style="padding:128px 16px" id="m_income">
   <div class="w3-card w3-light-grey">
     <div class="w3-container w3-blue">
@@ -100,14 +94,14 @@
     <form action="" target="_blank">
       <div class="w3-container w3-border-top snug">
 <h2>TBD: discuss how to incorporate dates for both monthly &amp; variable $$ (same with Expenses, Savings &amp; Budget sections)</h2>
-        <!-- Income -->
+        <!-- Income
         <div class="w3-half w3-margin-bottom" style="padding:16px 16px">
           <h3 class="w3-center">Monthly Income &amp;Deductions</h3>
           <h4>Wages/salary:</h4>
           <p><input class="w3-input w3-border" type="number" min="0" name="sal_inc" id="sal_inc"></p>
           <h4>401K:</h4>
           <p><input class="w3-input w3-border" type="number" min="0" name="opd_vpmt" id="opd_vpmt"></p>
-          <!-- are we adding employer match info -->
+          <!-- are we adding employer match info
           <h4>FICA/Social Security/Medicare:</h4>
           <p><input class="w3-input w3-border" type="number" min="0" name="cRep_vpmt" id="cRep_vpmt"></p>
           <h4>State &amp; local taxes:</h4>
@@ -116,7 +110,7 @@
           <p><input class="w3-input w3-border" type="number" min="0" name="cloth_vpmt" id="cloth_vpmt"></p>
         </div>
 
-      <!-- Deductions -->
+      <!-- Deductions
         <div class="w3-half w3-margin-bottom" style="padding:16px 16px">
           <h3 class="w3-center">Variable Income &amp;Deductions</h3>
           <h4>Dividends:</h4>
@@ -135,8 +129,7 @@
     
     <div class="w3-container w3-blue w3-large" style="height: 2em"></div>
   </div>
-</div>
-
+-->
 <!-- Expenses Section -->
 <!-- TBD: Add template to make this dynamic for all expense categories-->
 <!--  TBD: Expenses & Budget may be similar enough to just use one template-->
@@ -168,7 +161,7 @@
       </div>
 <!--    </div>-->
     <form action="" target="_blank">
-      <div class="w3-container" style="margin-top:32px">
+      <div class="w3-container w3-hide-small" style="margin-top:32px">
 
 <!--
         Note: The reason the table headers are outside
@@ -188,7 +181,7 @@
           </thead>
         </table>
       </div>
-      <div class="w3-center scrollit">
+      <div class="w3-center scrollit w3-hide-small">
         <table>
           <tbody class="addColor" id="qryResults">
 
@@ -325,8 +318,7 @@
   </div>
 </div>
 
-  
-<!-- Savings Section -->
+<!-- Savings Section
 <div class="w3-row-padding w3-text-deep-purple w3-grey" style="padding:128px 16px" id="m_accounts">
   <div class="w3-card w3-light-grey">
     <div class="w3-container w3-deep-purple">
@@ -335,7 +327,7 @@
     <form action="" target="_blank">
       <div class="w3-container w3-border-top snug">
 
-        <!-- Accounts - part 1 -->
+        <!-- Accounts - part 1
         <div class="w3-half w3-margin-bottom" style="padding:16px 16px">
           <h3 class="w3-center">Accounts (maybe monthly stuff...)</h3>
           <h4>Additional 401K deposits (in addition to automatic deposit of $___):</h4>
@@ -350,7 +342,7 @@
           <p><input class="w3-input w3-border" type="number" min="0" name="inv_sav" id="inv_sav"></p>
         </div>
 
-        <!-- Accounts - part 2 (if needed) -->
+        <!-- Accounts - part 2 (if needed)
         <div class="w3-half w3-margin-bottom" style="padding:16px 16px">
           <h3 class="w3-center">Accounts (maybe variable stuff)</h3>
           <h4>What else:</h4>
@@ -368,7 +360,7 @@
     <div class="w3-container w3-deep-purple w3-large" style="height: 2em"></div>
   </div>
 </div>
-
+-->
   
 <!-- Budget Section -->
 <!-- template will make the category dynamic...-->
@@ -378,8 +370,6 @@
       <!-- template will make the category dynamic...-->
       <h3 class="w3-center">HOUSEHOLD BUDGET</h3>
     </div>
-<!--    <div class="w3-container">-->
-<!--      <div class="w3-top">-->
       <div class="subMenu w3-bar w3-white w3-card-2" id="navCateg">
         <div class="w3-center">
           <a href="#" class="w3-bar-item w3-button">Household</a>
@@ -398,16 +388,13 @@
           <a href="#" class="w3-bar-item w3-button">Misc</a>
         </div>
       </div>
-<!--    </div>-->
     <form action="" target="_blank">
-      <div class="w3-container" style="margin-top:32px">
+      <div class="w3-container w3-hide-small" style="margin-top:32px">
 
 <!--
         Note: The reason the table headers are outside
         of scroll div is that the headers scroll out of view
-        when they are included. The tradeoff is that when
-        screen size is very small, headers are not aligned with data.
-        It might work to drop the horiz scroll bar and hide overflow?
+        when they are included.
 -->
         <table>
           <thead>
@@ -420,7 +407,7 @@
           </thead>
         </table>
       </div>
-      <div class="w3-center scrollit">
+      <div class="w3-center scrollit w3-hide-small">
         <table>
           <tbody class="addColor" id="qryResults">
 
@@ -619,9 +606,11 @@
             </select>				
         </div>
       </div>
+      
       <p class="w3-center">
         <button class="w3-button w3-black" type="submit" action="/php/account.php">SAVE USER SETTINGS</button>
 	<button class="w3-button w3-black" type="submit" action="/php/deleteaccount.php">DELETE ACCOUNT</button>
+        <button class="w3-button w3-black" type="submit">SAVE USER SETTINGS</button>
       </p>
     </form>
 
@@ -650,9 +639,9 @@
             <a target="_blank" href="https://github.com/danielalanclough">
               <i class="fa fa-linkedin w3-hover-opacity"></i>
             </a>
-		   <a target="_blank" href="http://pacifictech.us">
-			   <i class="fa fa-personal w3-hover-opacity"></i>
-		   </a>
+	    <a target="_blank" href="http://pacifictech.us">
+		<i class="fa fa-personal w3-hover-opacity"></i>
+	    </a>
           </div>
         </div>
       </div>
