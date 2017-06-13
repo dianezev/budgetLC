@@ -235,11 +235,11 @@ class FinanceUsers
 		FB::info("Username: $u");
 		FB::info("Verification: $v");
 		if(!isset($u)) { echo "No account found! <a href=\"/password.php\">Try again.</a>"; return FALSE; }
-//		$sql = "UPDATE users
-//				SET verified=0
-//				WHERE UserID=:user
-//				AND ver_code=:ver
-//				LIMIT 1";
+		$sql = "UPDATE users
+				SET verified=0
+				WHERE UserID=:user
+				AND ver_code=:ver
+				LIMIT 1";
 		try
 		{
 			$stmt = $this->_db->prepare($sql);
@@ -281,20 +281,22 @@ Content-Type: text/plain;
 MESSAGE;
 
 		$msg = <<<EMAIL
-You have a new account at Total Finance!
+You have a new account at Colored Lists!
 
-To get started, please activate your account by following the link below.
+To get started, please activate your account and choose a
+password by following the link below.
 
 Your Username: $email
 
-Activate your account: http://totalfinance.herokuapp.com/accountVerify.php?v=$ver&e=$e
+Activate your account: http://coloredlists.com/accountVerify.php?v=$ver&e=$e
 
-If you have any questions, please contact help@total.com.
+If you have any questions, please contact help@coloredlists.com.
 
 --
 Thanks!
 
-www.TotalFinance.com
+Chris and Jason
+www.ColoredLists.com
 EMAIL;
 
 		return mail($to, $subject, $msg, $headers);
@@ -312,10 +314,10 @@ EMAIL;
 		$e = sha1($email); // For verification purposes
 		$to = trim($email);
 	
-		$subject = "[Total Finance] Request to Reset Your Password";
+		$subject = "[Colored Lists] Request to Reset Your Password";
 
 		$headers = <<<MESSAGE
-From: Total Finance <donotreply@totalFinance.Herokuapp.com>
+From: Colored Lists <donotreply@coloredlists.com>
 Content-Type: text/plain;
 MESSAGE;
 
@@ -324,15 +326,15 @@ We just heard you forgot your password! Bummer! To get going again,
 head over to the link below and choose a new password.
 
 Follow this link to reset your password:
-http://totalFinance.herokuapp.com/resetpassword.php?v=$ver&e=$e
+http://coloredlists.com/resetpassword.php?v=$ver&e=$e
 
 If you have any questions, please contact help@coloredlists.com.
 
 --
 Thanks!
 
-Total Finance Team
-www.TotalFinance.Herokuapp.com
+Chris and Jason
+www.ColoredLists.com
 EMAIL;
 
 		return mail($to, $subject, $msg, $headers);
