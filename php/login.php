@@ -1,9 +1,9 @@
 <?php
 	include_once "php/common/base.php";
 
-	if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])):
+	if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['userName'])):
 ?>
-
+		<!--Make this a popup inside current modal class-->
 		<p>You are currently <strong>logged in.</strong></p>
 		<p><a href="/logout.php">Log out</a></p>
 	
@@ -16,54 +16,27 @@
 			&& !empty($_POST['password'])
 		):
 		include_once 'php/inc/class.users.inc.php';
-		$users = new FinanceUsers($db);
+		$users = new TotalFinanceUsers($db);
 		if($users->accountLogin()===TRUE):
 			header("Location: /");
 			exit;
 		else:
-			//include_once "common/header.php";
 ?>
-		    	
-		<h2>Login Failed&mdash;Try Again?</h2>
-		<form method="post" action="login.php" name="loginform" id="loginform">
-			<div>
-				<input type="text" name="username" id="username" />
-				<label for="username">Email</label>
-				<br /><br />
-				<input type="password" name="password" id="password" />
-				<label for="password">Password</label>
-				<br /><br />
-				<input type="submit" name="login" id="login" value="Login" class="button" />
-				<input type="hidden" name="token"
-					value="<?php echo $_SESSION['token']; ?>" />
+			<div id="login" class="w3-modal">
+				<div class="w3-modal-content form">
+					<h2>Login Failed&mdash;Try Again?</h2>
+					<form class="login-form" action="php/login.php" method="POST">
+						<input id="email" type="text" name="userEmail" placeholder="Email"/>
+						<input id="password" type="password" name="userPW" placeholder="Password"/>
+						<button type="button" class="w3-button w3-black" id="signin_return">login</button>
+						<p><a href="/php/password.php">Did you forget your password?</a></p>
+						<p class="message">Not registered? <a href="#login">Create an account</a></p>
+						<input type="hidden" name="token" value="<?php echo $_SESSION['token']; ?>" />
+					</form>
+				</div>
 			</div>
-		</form>
-		<p><a href="/php/password.php">Did you forget your password?</a></p>
 <?php
 		endif;
-	else:
-		//include_once "common/header.php";
-?>
-		      
-		<form method="post" action="login.php" name="loginform" id="loginform">
-			<div>
-				<input type="text" name="username" id="username" />
-				<label for="username">Email</label>
-				<br /><br />
-				<input type="password" name="password" id="password" />
-				<label for="password">Password</label>
-				<br /><br />
-				<input type="submit" name="login" id="login" value="Login" class="button" />
-				<input type="hidden" name="token"
-					value="<?php echo $_SESSION['token']; ?>" />
-			</div>
-		</form><br /><br />
-		<p><a href="/password.php">Did you forget your password?</a></p>
-<?php
-	endif;
-?>
 
-		<div style="clear: both;"></div>
-<?php
 	include_once "php/common/close.php";
 ?>
