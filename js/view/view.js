@@ -35,8 +35,8 @@ LCB.view = (function() {
       
       if (user === null) {
         $('a.toLogin').text('LOG IN/SIGN UP');
-        $('#myNavbar div a:first-child').hide();
-        $('#mySidebar a:nth-child(2)').hide();
+        $('#myNavbar div a:first-child').show();
+        $('#mySidebar a:nth-child(2)').show();
       
       } else {
         $('a.toLogin').text('LOG OUT');
