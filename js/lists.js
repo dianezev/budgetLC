@@ -1,20 +1,4 @@
 // PLUGIN TO CALL TO CYCLE COLOR
-jQuery.fn.nextColor = function() {
-
-    // This would be subject to breakage if ever added multiple classes...
-    var curColor = $(this).attr("class");
-
-    if (curColor == "colorBlue") {
-        $(this).removeClass("colorBlue").addClass("colorYellow").attr("color","2");
-    } else if (curColor == "colorYellow") {
-        $(this).removeClass("colorYellow").addClass("colorRed").attr("color","3");
-    } else if (curColor == "colorRed") {
-        $(this).removeClass("colorRed").addClass("colorGreen").attr("color","4");
-    } else {
-        $(this).removeClass("colorGreen").addClass("colorBlue").attr("color","1");
-    };
-};
-
 function saveListOrder(itemID, itemREL){
 	var i = 1,
 		currentListID = $('#current-list').val();
@@ -36,7 +20,7 @@ function saveListOrder(itemID, itemREL){
 
 			$.ajax({
 				type: "POST",
-				url: "db-interaction/lists.php",
+				url: "php/db-interaction/lists.php",
 				data: postURL,
 				success: function(msg) {
 	        		// Resets the rel attribute to reflect current positions
@@ -62,7 +46,7 @@ function bindAllTabs(editableTarget) {
     
     // CLICK-TO-EDIT on list items
 	var token = $('#token').val();
-    $(editableTarget).editable("db-interaction/lists.php", {
+    $(editableTarget).editable("php/db-interaction/lists.php", {
         id        : 'listItemID',
         indicator : 'Saving...',
         tooltip   : 'Double-click to edit...',
@@ -128,7 +112,7 @@ function initialize() {
         
             $.ajax({
     			type: "POST",
-    			url: "db-interaction/lists.php",
+    			url: "php/db-interaction/lists.php",
     			data: "action=add&list=" + forList
     				+ "&text=" + URLtext
     				+ "&pos=" + newListItemRel
