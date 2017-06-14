@@ -26,7 +26,7 @@
       <a href="#m_expenses" class="swap w3-bar-item w3-button">EXPENSES</a>
       <a href="#m_budget" class="swap w3-bar-item w3-button">BUDGET</a>
       <a href="#m_settings" class="swap w3-bar-item w3-button" style="display: none">
-	      <i class="fa fa-cog"></i><span> SETTINGS</span></a>
+	      <i class="fa fa-cog"></i><span>ACCOUNT</span></a>
     </div>
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
@@ -42,7 +42,7 @@
   <a href="#login" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
   <a href="#m_expenses" class="swap w3-bar-item w3-button">EXPENSES</a>
   <a href="#m_budget" class="swap w3-bar-item w3-button">BUDGET</a>
-  <a href="#m_settings" class="swap w3-bar-item w3-button"><i class="fa fa-cog"></i><span> SETTINGS</span></a>
+  <a href="#m_account" class="swap w3-bar-item w3-button"><i class="fa fa-cog"></i><span>ACCOUNT</span></a>
 </nav>
 
 <!-- Header with full-height image -->
@@ -80,8 +80,14 @@
       <input id="email" type="text" name="userEmail" placeholder="Email"/>
       <input id="password" type="password" name="userPW" placeholder="Password"/>
       <button type="button" class="w3-button w3-black" id="signin_return">login</button>
+      <p><a href="#reset">Did you forget your password?</a></p>
       <p class="message">Not registered? <a href="#login">Create an account</a></p>
     </form>
+	  <!-- RESET PASSWORD -->
+	<form class="pw-form" action="/password.php" method="POST">
+		<input id="email" type="text" name="userEmail" placeholder="Email"/>
+		<button type="button" class"w3-button w3-black" id="reset_password">Reset Password</button>
+	</form>
   </div>
 </div>  
 
@@ -607,11 +613,10 @@
         </div>
       </div>
       
-      <p class="w3-center">
+    <p class="w3-center">
         <button class="w3-button w3-black" type="submit" action="/php/account.php">SAVE USER SETTINGS</button>
-	<button class="w3-button w3-black" type="submit" action="/php/deleteaccount.php">DELETE ACCOUNT</button>
-        <button class="w3-button w3-black" type="submit">SAVE USER SETTINGS</button>
-      </p>
+		<button class="w3-button w3-black" type="submit" action="/php/deleteaccount.php">DELETE ACCOUNT</button>
+	</p>
     </form>
 
     <div class="w3-container w3-deep-orange w3-large" style="height: 2em"></div>
@@ -621,7 +626,7 @@
 <!-- About Section -->
 <!--  TBD: Change some of the grey text to colors - think grayscale needs adjustment-->
 <div class="w3-container w3-dark-gray" style="padding:128px 16px" id="about">
-  <h3 class="w3-center">ABOUT (app name...)</h3>
+  <h3 class="w3-center">ABOUT TOTAL FINANCE</h3>
   <p class="w3-center w3-large">A message here about the app...</p>
   <br>
   <h3 class="w3-center">DEVELOPERS</h3>
