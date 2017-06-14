@@ -68,17 +68,17 @@
   <div class="w3-modal-content form">
     <span class="w3-button w3-display-topright">&times;</span>
 	  <!-- REGISTER -->
-    <form class="register-form" action="signup.php" method="POST">
-      <input id="name_set" type="text" name="registerName" placeholder="Name"/>
-      <input id="password_set" type="password" name="registerPW" placeholder="Password"/>
-      <input id="email_set" type="text" name="registerEmail" placeholder="Email address"/>
-      <button type="button" class="w3-button w3-black" id="signin_first">create</button>
+    <form class="register-form" action="php/signup.php" method="POST">
+      <input id="name_set" type="text" name="userName" placeholder="Name"/>
+      <!--<input id="password_set" type="password" name="userPW" placeholder="Password"/>-->
+      <input id="email_set" type="text" name="userEmail" placeholder="Email address"/>
+      <button type="button" class="w3-button w3-black" id="signin_first">register</button>
       <p class="message">Already registered? <a href="#login">Sign In</a></p>
     </form>
 	  <!-- LOGIN -->
-    <form class="login-form" action="login.php" method="POST">
-      <input id="email" type="text" name="loginEmail" placeholder="Email"/>
-      <input id="password" type="password" name="loginPW" placeholder="Password"/>
+    <form class="login-form" action="php/login.php" method="POST">
+      <input id="email" type="text" name="userEmail" placeholder="Email"/>
+      <input id="password" type="password" name="userPW" placeholder="Password"/>
       <button type="button" class="w3-button w3-black" id="signin_return">login</button>
       <p class="message">Not registered? <a href="#login">Create an account</a></p>
     </form>
