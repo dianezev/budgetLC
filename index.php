@@ -640,7 +640,7 @@
               <i class="fa fa-linkedin w3-hover-opacity"></i>
             </a>
 	    <a target="_blank" href="http://pacifictech.us">
-		<i class="fa fa-personal w3-hover-opacity"></i>
+		<i class="fa fa-external-link w3-hover-opacity"></i>
 	    </a>
           </div>
         </div>
