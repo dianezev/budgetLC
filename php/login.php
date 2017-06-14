@@ -1,7 +1,7 @@
 <?php
 	include_once "php/common/base.php";
 
-	if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['userName'])):
+	if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['userEmail'])):
 ?>
 		<!--Make this a popup inside current modal class-->
 		<p>You are currently <strong>logged in.</strong></p>
