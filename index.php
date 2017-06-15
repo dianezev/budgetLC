@@ -528,7 +528,7 @@
     <div class="w3-container w3-deep-orange">
       <h3 class="w3-center">USER ACCOUNT</h3>
     </div>
-    <form action="" target="_blank">
+    <form action="php/account.php" target="_blank" method="POST">
       <div class="w3-container w3-border-top">
       
         <!-- Preferences, part 1 -->
@@ -542,7 +542,7 @@
         <!-- Preferences, part 2 -->
         <div class="w3-half w3-margin-bottom snug" style="padding:16px 16px">
           <h3 class="w3-center">Additional Information</h3>
-		<p><a href="/whyneeded">Why are you asking for this?</a></p>
+		<p><a href="#whyneeded">Why are you asking for this?</a></p>
             <h4>I File My Taxes As...</h4>
 		<p><input type="radio" name="pay_per" id="hourly"><span>Single</span></p>
 		<p><input type="radio" name="pay_per" id="weekly"><span>Head of Household</span></p>
