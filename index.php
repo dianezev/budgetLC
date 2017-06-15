@@ -25,7 +25,7 @@
       <a href="#login" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
       <a href="#m_expenses" class="swap w3-bar-item w3-button">EXPENSES</a>
       <a href="#m_budget" class="swap w3-bar-item w3-button">BUDGET</a>
-      <a href="#m_settings" class="swap w3-bar-item w3-button" style="display: none">
+      <a href="#m_account" class="swap w3-bar-item w3-button" style="display: none">
 	      <i class="fa fa-cog"></i><span>ACCOUNT</span></a>
     </div>
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
@@ -80,13 +80,13 @@
       <input id="email" type="text" name="userEmail" placeholder="Email"/>
       <input id="password" type="password" name="userPW" placeholder="Password"/>
       <button type="button" class="w3-button w3-black" id="signin_return">login</button>
-      <p><a href="#reset">Did you forget your password?</a></p>
+      <p><a href="#login">Did you forget your password?</a></p>
       <p class="message">Not registered? <a href="#login">Create an account</a></p>
     </form>
-	  <!-- RESET PASSWORD -->
-	<form class="pw-form" action="/password.php" method="POST">
-		<input id="email" type="text" name="userEmail" placeholder="Email"/>
-		<button type="button" class"w3-button w3-black" id="reset_password">Reset Password</button>
+	  <!-- RESET PASSWORD // This should be in the same modal window after the "did yo...sword?" is clicked -->
+    <form class="pw-form" action="php/password.php" method="POST">
+	<input id="email" type="text" name="userEmail" placeholder="Email"/>
+    <button type="button" class"w3-button w3-black" id="reset_password">Reset Password</button>
 	</form>
   </div>
 </div>  
@@ -146,7 +146,7 @@
       <h3 class="w3-center">HOUSEHOLD EXPENSES</h3>
     </div>
 <!--    <div class="w3-container">-->
-<!--      <div class="w3-top">-->
+<!--    <div class="w3-top">-->
       <div class="subMenu w3-bar w3-white w3-card-2" id="navCateg">
         <div class="w3-center">
           <a href="#" class="w3-bar-item w3-button">Household</a>
