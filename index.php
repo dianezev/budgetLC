@@ -25,7 +25,8 @@
       <a href="#login" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
       <a href="#m_expenses" class="swap w3-bar-item w3-button">EXPENSES</a>
       <a href="#m_budget" class="swap w3-bar-item w3-button">BUDGET</a>
-      <a href="#m_account" class="swap w3-bar-item w3-button" style="display: none">
+      <a href="#m_account" class="swap w3-bar-item w3-button">
+	<!-- style="display: none"> -->
 	      <i class="fa fa-cog"></i><span>ACCOUNT</span></a>
     </div>
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
