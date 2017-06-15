@@ -1,5 +1,5 @@
 <?php
-    include_once "common/base.php";
+    //include_once "common/base.php";
     if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn']==1):
         include_once 'inc/class.users.inc.php';
         $users = new TotalFinanceUsers($db);
