@@ -30,6 +30,11 @@ $('#login button').on('click', function(e) {
     userInfo.email = $('#email').val();
     userInfo.pw = $('#password').val();
   }
+  else if (id === "forgot_pw") {
+    userInfo.name = '';
+    userInfo.email = $('#email').val();
+    userInfo.pw = '';
+  }
 
   LCB.controller.signin(userInfo);
 });
