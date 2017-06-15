@@ -533,7 +533,7 @@
         <!-- Preferences, part 1 -->
         <div class="w3-half w3-margin-bottom" style="padding:16px 16px">
           <h3 class="w3-center">Account Preferences</h3>
-		<p>Account Email: <?php echo $_POST["useremail"]; ?></p>
+		<p>Account Email: <?php echo $_POST["userEmail"]; ?></p>
 		   <a href="/php/newemail.php">Add New Email</a>
 		<p>Password:<a href="/php/password.php">Change Password</a></p>
         </div>
