@@ -13,6 +13,15 @@ $('#login span').on('click', function() {
   $('#login').toggle();
 });
 
+// Close user msg window
+$('#userMsg span').on('click', function() {
+  $('#userMsg').toggle();
+});
+// Close user msg window (TBD: consolidate with above)
+$('#userMsg button').on('click', function() {
+  $('#userMsg').toggle();
+});
+
 // Create account or signin
 // DMZ question: not sure if pw should be hashed here or if plain
 // pw should be passed to model for hashing...
@@ -20,12 +29,12 @@ $('#login button').on('click', function(e) {
   var id = this.id;
   var userInfo = {};
 
-  if (id === "signin_first") {
+  if (id === "signin_now") {
     userInfo.name = $('#name_set').val();
-    userInfo.pw = $('#password_set').val();
+    //userInfo.pw = $('#password_set').val();
     userInfo.email = $('#email_set').val();
 
-  } else if (id === "signin_return") {
+  } else if (id === "login_now") {
     userInfo.name = '';
     userInfo.email = $('#email').val();
     userInfo.pw = $('#password').val();
