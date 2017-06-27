@@ -10,6 +10,11 @@ LCB.view = (function() {
   //
   //
   
+    // Displays message in modal window
+  function showMsg(msg) {
+      $('#userMsg p').text(msg);
+      $('#userMsg').show();  
+  }
   
   // Public vars & functions here
   var publicAPI = {
@@ -35,10 +40,10 @@ LCB.view = (function() {
       
       if (user === null) {
         $('a.toLogin').text('LOG IN/SIGN UP');
-        $('#myNavbar div a:first-child').show();
-        $('#mySidebar a:nth-child(2)').show();
+        $('#myNavbar div a:first-child').hide();
+        $('#mySidebar a:nth-child(2)').hide();
       
-      } else {
+      } else if (typeof result.name !== "undefined") {
         $('a.toLogin').text('LOG OUT');
         $('#myNavbar div a:first-child span').text(' ' + user.name);
         $('#mySidebar a:nth-child(2) span').text(' ' + user.name);
@@ -47,12 +52,25 @@ LCB.view = (function() {
         //$('#myNavbar div a:nth-child(3)').text('myAccount');
         //$('#mySidebar a:nth-child(3)').text('myAccount');
       }
+      // If error occurred during login, display modal window
+      } else {
+        showMsg(result.err_msg);
+      }      
       
     },
+            /*
     userVerify: function(user) {
 
       // TBD: display should prompt user to check email & complete verification
       alert("Please check your email for a verification link");
+    }
+    */
+    userVerify: function(result) {
+      var msg = (typeof result.err_msg === "undefined")
+                ? result.success_msg
+                : result.err_msg;
+      
+      showMsg(msg);
     }
   };
   return publicAPI;
