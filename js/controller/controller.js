@@ -23,13 +23,13 @@ LCB.controller = (function() {
       // If FIRST time to sign-in,
       // check input and send email verification
       if (info.name !== '') {
-        model.signinFirst(info, function (data) {
+        model.signup(info, function (data) {
           view.userVerify(data);
         });
         
       // Otherwise verify email & hashed pw in db
       } else {
-        model.signinReturn(info, function (data) {
+        model.login(info, function (data) {
           view.userAcct(data);
         });      
       }
