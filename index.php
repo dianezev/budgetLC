@@ -22,7 +22,7 @@
     <a href="#m_home" class="swap w3-bar-item w3-button w3-wide">TOTAL FINANCE</a>
     <!-- Right-sided navbar links -->
     <div class="w3-right w3-hide-small">
-      <a href="#login" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
+      <a href="#m_settings" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
       <a href="#m_expenses" class="swap w3-bar-item w3-button">EXPENSES</a>
       <a href="#m_budget" class="swap w3-bar-item w3-button">BUDGET</a>
       <a href="#m_account" class="swap w3-bar-item w3-button">
@@ -65,22 +65,24 @@
 </header>
 
 <!-- Log In/Sign Up Section -->
-<div id="login" class="w3-modal">
+<div id="m_register" class="w3-modal">
   <div class="w3-modal-content form">
     <span class="w3-button w3-display-topright">&times;</span>
 	  <!-- REGISTER -->
-    <form class="register-form" action="php/signup.php" method="POST">
+    <form class="register-form">
+	  <!--action="php/signup.php" method="POST">-->
       <input id="name_set" type="text" name="userName" placeholder="Name"/>
       <!--<input id="password_set" type="password" name="userPW" placeholder="Password"/>-->
       <input id="email_set" type="text" name="userEmail" placeholder="Email address"/>
-      <button type="button" class="w3-button w3-black" id="signin_first">register</button>
+      <button type="button" class="w3-button w3-black" id="signin_now">register</button>
       <p class="message">Already registered? <a href="#login">Sign In</a></p>
     </form>
 	  <!-- LOGIN -->
-    <form class="login-form" action="php/login.php" method="POST">
+    <form class="login-form">
+	    <!--action="php/login.php" method="POST">-->
       <input id="email" type="text" name="userEmail" placeholder="Email"/>
       <input id="password" type="password" name="userPW" placeholder="Password"/>
-      <button type="button" class="w3-button w3-black" id="signin_return">login</button>
+      <button type="button" class="w3-button w3-black" id="login_now">login</button>
       <p><a href="#login">Did you forget your password?</a></p>
       <p class="message">Not registered? <a href="#login">Create an account</a></p>
     </form>
@@ -90,7 +92,32 @@
     <button type="button" class"w3-button w3-black" id="reset_password">Reset Password</button>
 	</form>
   </div>
-</div>  
+</div>
+	
+<!-- Get Password Section -->
+<div id="password_prompt" class="w3-modal">
+  <div class="w3-modal-content form">
+    <span class="w3-button w3-display-topright">&times;</span>
+    
+    <!--    Get & confirm password -->
+    <form class="password-form">
+      <input id="password1" type="password" placeholder="Password"/>
+      <input id="password2" type="password" placeholder="Confirm password"/>
+      <button type="button" class="w3-button w3-black" id="password_set">Submit</button>
+    </form>
+    
+  </div>
+</div>
+	
+<!-- User Message Section -->
+<div id="userMsg" class="w3-modal">
+  <div class="w3-modal-content form">
+    <span class="w3-button w3-display-topright">&times;</span>
+
+    <p></p>
+    <button type="button" class="w3-button w3-black" id="close_msg">close</button>
+  </div>
+</div>
 
 <!-- Income Section
 <div class="w3-row-padding w3-text-blue w3-grey" style="padding:128px 16px" id="m_income">
@@ -528,7 +555,7 @@
     <div class="w3-container w3-deep-orange">
       <h3 class="w3-center">USER ACCOUNT</h3>
     </div>
-    <form action="php/account.php" target="_blank" method="POST">
+    <form target="_blank">
       <div class="w3-container w3-border-top">
       
         <!-- Preferences, part 1 -->
@@ -704,7 +731,10 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="js/helpers/getAllUrlParams.js"></script>
+<script src="js/templates/template.js"></script>
 <script src="js/model/model.js"></script>
 <script src="js/view/view.js"></script>
 <script src="js/controller/controller.js"></script>
