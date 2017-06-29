@@ -1,57 +1,41 @@
-// Display login modal window
+// Display Login/Sign in/Sign Out
 $('.toLogin').on('click', function() {
 
   if (this.text === "LOG OUT") {
-    LCB.controller.signout();
+    LCB.controller.logout();
   } else {
-    $('#login').toggle();
+    $('#m_register').toggle();
+    $('#m_register button').focus();
   }
 });
 
-// Close login window
-$('#login span').on('click', function() {
-  $('#login').toggle();
+// Close login/signup window
+$('#m_register span').on('click', function() {
+  $('#m_register').hide();
 });
 
-// Close user msg window
+// Close user msg window - click 'x'
 $('#userMsg span').on('click', function() {
-  $('#userMsg').toggle();
+  $('#userMsg').hide();
 });
-// Close user msg window (TBD: consolidate with above)
+// Close user msg window - click button
 $('#userMsg button').on('click', function() {
-  $('#userMsg').toggle();
+  $('#userMsg').hide();
 });
 
-// Create account or signin
-// DMZ question: not sure if pw should be hashed here or if plain
-// pw should be passed to model for hashing...
-$('#login button').on('click', function(e) {
-  var id = this.id;
-  var userInfo = {};
-
-  if (id === "signin_now") {
-    userInfo.name = $('#name_set').val();
-    //userInfo.pw = $('#password_set').val();
-    userInfo.email = $('#email_set').val();
-
-  } else if (id === "login_now") {
-    userInfo.name = '';
-    userInfo.email = $('#email').val();
-    userInfo.pw = $('#password').val();
-  }
-  else if (id === "reset_pw") {
-    userInfo.name = '';
-    userInfo.email = $('#email').val();
-    userInfo.pw = '';
-  }
-
-  LCB.controller.signin(userInfo);
+//Login or Signup
+$('#m_register button').on('click', function(e) {
+  LCB.controller.register(this.id);
 });
 
+// Establish or reset password for account
+$('#password_prompt button').on('click', function() {
+    LCB.controller.setPassword();
+});
 
 // For login - toggling between Sign Up and Log In
 $('.message a').click(function(){
-   $('#login form').animate({height: "toggle", opacity: "toggle"}, "slow");
+   $('#m_register form').animate({height: "toggle", opacity: "toggle"}, "slow");
 });
 
 // Toggle between showing and hiding the sidebar when clicking the menu icon
@@ -65,6 +49,7 @@ $('#mySidebar a').on('click', function() {
 });
 
 // Call fcn to hide/display correct page (home, income, budget...)
-$('.swap').on('click', function(e) {
-  LCB.view.togglePages(e.target.hash);
+$('.swap, .swap i, .swap span').on('click', function(e) {
+  console.log(e);
+  LCB.view.togglePages(e.currentTarget.hash);
 });
