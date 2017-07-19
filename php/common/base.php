@@ -7,14 +7,14 @@
 	session_start();
 
 	// Include site constants
-	include_once "inc/constants.inc.php";
-
+	include_once "php/inc/constants.inc.php";
+/*
 	// FirePHP logging
-	require_once('inc/FirePHPCore/FirePHP.class.php');
-	require_once('inc/FirePHPCore/fb.php');
+	require_once('php/inc/FirePHPCore/FirePHP.class.php');
+	require_once('php/inc/FirePHPCore/fb.php');
 	FB::log("FirePHP successfully loaded.");
 	FB::setEnabled(FALSE); // Only set to true if debugging
-
+*/
 	if ( !isset($_SESSION['token']) || time()-$_SESSION['token_time']>=300 )
 	{
 		$_SESSION['token'] = md5(uniqid(rand(), TRUE));

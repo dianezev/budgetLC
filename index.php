@@ -22,11 +22,12 @@
     <a href="#m_home" class="swap w3-bar-item w3-button w3-wide">TOTAL FINANCE</a>
     <!-- Right-sided navbar links -->
     <div class="w3-right w3-hide-small">
-      <a href="#login" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
+      <a href="#m_settings" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
       <a href="#m_expenses" class="swap w3-bar-item w3-button">EXPENSES</a>
       <a href="#m_budget" class="swap w3-bar-item w3-button">BUDGET</a>
-      <a href="#m_settings" class="swap w3-bar-item w3-button" style="display: none">
-	      <i class="fa fa-cog"></i><span> SETTINGS</span></a>
+      <a href="#m_account" class="swap w3-bar-item w3-button">
+	<!-- style="display: none"> -->
+	      <i class="fa fa-cog"></i><span>ACCOUNT</span></a>
     </div>
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
@@ -42,7 +43,7 @@
   <a href="#login" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
   <a href="#m_expenses" class="swap w3-bar-item w3-button">EXPENSES</a>
   <a href="#m_budget" class="swap w3-bar-item w3-button">BUDGET</a>
-  <a href="#m_settings" class="swap w3-bar-item w3-button"><i class="fa fa-cog"></i><span> SETTINGS</span></a>
+  <a href="#m_account" class="swap w3-bar-item w3-button"><i class="fa fa-cog"></i><span>ACCOUNT</span></a>
 </nav>
 
 <!-- Header with full-height image -->
@@ -64,26 +65,59 @@
 </header>
 
 <!-- Log In/Sign Up Section -->
-<div id="login" class="w3-modal">
+<div id="m_register" class="w3-modal">
   <div class="w3-modal-content form">
     <span class="w3-button w3-display-topright">&times;</span>
 	  <!-- REGISTER -->
-    <form class="register-form" action="signup.php" method="POST">
-      <input id="name_set" type="text" name="registerName" placeholder="Name"/>
-      <input id="password_set" type="password" name="registerPW" placeholder="Password"/>
-      <input id="email_set" type="text" name="registerEmail" placeholder="Email address"/>
-      <button type="button" class="w3-button w3-black" id="signin_first">create</button>
+    <form class="register-form">
+	  <!--action="php/signup.php" method="POST">-->
+      <input id="name_set" type="text" name="userName" placeholder="Name"/>
+      <!--<input id="password_set" type="password" name="userPW" placeholder="Password"/>-->
+      <input id="email_set" type="text" name="userEmail" placeholder="Email address"/>
+      <button type="button" class="w3-button w3-black" id="signin_now">register</button>
       <p class="message">Already registered? <a href="#login">Sign In</a></p>
     </form>
 	  <!-- LOGIN -->
-    <form class="login-form" action="login.php" method="POST">
-      <input id="email" type="text" name="loginEmail" placeholder="Email"/>
-      <input id="password" type="password" name="loginPW" placeholder="Password"/>
-      <button type="button" class="w3-button w3-black" id="signin_return">login</button>
+    <form class="login-form">
+	    <!--action="php/login.php" method="POST">-->
+      <input id="email" type="text" name="userEmail" placeholder="Email"/>
+      <input id="password" type="password" name="userPW" placeholder="Password"/>
+      <button type="button" class="w3-button w3-black" id="login_now">login</button>
+      <p><a href="#login">Did you forget your password?</a></p>
       <p class="message">Not registered? <a href="#login">Create an account</a></p>
     </form>
+	  <!-- RESET PASSWORD // This should be in the same modal window after the "did yo...sword?" is clicked -->
+    <form class="pw-form" action="php/password.php" method="POST">
+	<input id="email" type="text" name="userEmail" placeholder="Email"/>
+    <button type="button" class"w3-button w3-black" id="reset_password">Reset Password</button>
+	</form>
   </div>
-</div>  
+</div>
+	
+<!-- Get Password Section -->
+<div id="password_prompt" class="w3-modal">
+  <div class="w3-modal-content form">
+    <span class="w3-button w3-display-topright">&times;</span>
+    
+    <!--    Get & confirm password -->
+    <form class="password-form">
+      <input id="password1" type="password" placeholder="Password"/>
+      <input id="password2" type="password" placeholder="Confirm password"/>
+      <button type="button" class="w3-button w3-black" id="password_set">Submit</button>
+    </form>
+    
+  </div>
+</div>
+	
+<!-- User Message Section -->
+<div id="userMsg" class="w3-modal">
+  <div class="w3-modal-content form">
+    <span class="w3-button w3-display-topright">&times;</span>
+
+    <p></p>
+    <button type="button" class="w3-button w3-black" id="close_msg">close</button>
+  </div>
+</div>
 
 <!-- Income Section
 <div class="w3-row-padding w3-text-blue w3-grey" style="padding:128px 16px" id="m_income">
@@ -140,7 +174,7 @@
       <h3 class="w3-center">HOUSEHOLD EXPENSES</h3>
     </div>
 <!--    <div class="w3-container">-->
-<!--      <div class="w3-top">-->
+<!--    <div class="w3-top">-->
       <div class="subMenu w3-bar w3-white w3-card-2" id="navCateg">
         <div class="w3-center">
           <a href="#" class="w3-bar-item w3-button">Household</a>
@@ -521,13 +555,13 @@
     <div class="w3-container w3-deep-orange">
       <h3 class="w3-center">USER ACCOUNT</h3>
     </div>
-    <form action="" target="_blank">
+    <form target="_blank">
       <div class="w3-container w3-border-top">
       
         <!-- Preferences, part 1 -->
         <div class="w3-half w3-margin-bottom" style="padding:16px 16px">
           <h3 class="w3-center">Account Preferences</h3>
-		<p>Account Email: <?php echo $_POST["useremail"]; ?></p>
+		<p>Account Email: <?php echo $_POST["userEmail"]; ?></p>
 		   <a href="/php/newemail.php">Add New Email</a>
 		<p>Password:<a href="/php/password.php">Change Password</a></p>
         </div>
@@ -535,7 +569,7 @@
         <!-- Preferences, part 2 -->
         <div class="w3-half w3-margin-bottom snug" style="padding:16px 16px">
           <h3 class="w3-center">Additional Information</h3>
-		<p><a href="/whyneeded">Why are you asking for this?</a></p>
+		<p><a href="#whyneeded">Why are you asking for this?</a></p>
             <h4>I File My Taxes As...</h4>
 		<p><input type="radio" name="pay_per" id="hourly"><span>Single</span></p>
 		<p><input type="radio" name="pay_per" id="weekly"><span>Head of Household</span></p>
@@ -607,11 +641,10 @@
         </div>
       </div>
       
-      <p class="w3-center">
+    <p class="w3-center">
         <button class="w3-button w3-black" type="submit" action="/php/account.php">SAVE USER SETTINGS</button>
-	<button class="w3-button w3-black" type="submit" action="/php/deleteaccount.php">DELETE ACCOUNT</button>
-        <button class="w3-button w3-black" type="submit">SAVE USER SETTINGS</button>
-      </p>
+		<button class="w3-button w3-black" type="submit" action="/php/deleteaccount.php">DELETE ACCOUNT</button>
+	</p>
     </form>
 
     <div class="w3-container w3-deep-orange w3-large" style="height: 2em"></div>
@@ -621,7 +654,7 @@
 <!-- About Section -->
 <!--  TBD: Change some of the grey text to colors - think grayscale needs adjustment-->
 <div class="w3-container w3-dark-gray" style="padding:128px 16px" id="about">
-  <h3 class="w3-center">ABOUT (app name...)</h3>
+  <h3 class="w3-center">ABOUT TOTAL FINANCE</h3>
   <p class="w3-center w3-large">A message here about the app...</p>
   <br>
   <h3 class="w3-center">DEVELOPERS</h3>
@@ -640,7 +673,7 @@
               <i class="fa fa-linkedin w3-hover-opacity"></i>
             </a>
 	    <a target="_blank" href="http://pacifictech.us">
-		<i class="fa fa-personal w3-hover-opacity"></i>
+		<i class="fa fa-external-link w3-hover-opacity"></i>
 	    </a>
           </div>
         </div>
@@ -698,7 +731,10 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="js/helpers/getAllUrlParams.js"></script>
+<script src="js/templates/template.js"></script>
 <script src="js/model/model.js"></script>
 <script src="js/view/view.js"></script>
 <script src="js/controller/controller.js"></script>

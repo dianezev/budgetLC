@@ -1,16 +1,16 @@
 <?php
-  // called by AJAX in model.login
+  // called by AJAX in model.checkUrl
   
   include_once "../include/class.users.php";
 
   include_once "../common/base.php";
   
-  $email = $_POST["email"];
-  $password = $_POST["password"];
+  $e = $_POST["e"];
+  $v = $_POST["v"];
 
   $userObj = new Users($db);
 
-  $logObj = $userObj->accountLogin();
+  $logObj = $userObj->verifyAccount();
 
   echo JSON_encode($logObj);
 

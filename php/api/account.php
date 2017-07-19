@@ -1,9 +1,8 @@
 <?php
-    include_once "common/base.php";
+    //include_once "common/base.php";
     if(isset($_SESSION['LoggedIn']) && $_SESSION['LoggedIn']==1):
-        $pageTitle = "Your Account";
         include_once 'inc/class.users.inc.php';
-        $users = new Users($db);
+        $users = new TotalFinanceUsers($db);
  
         if(isset($_GET['email']) && $_GET['email']=="changed")
         {
@@ -37,7 +36,7 @@
 ?>
  
         <h2>Your Account</h2>
-        <form method="post" action="db-interaction/users.php">
+        <form method="post" action="php/db-interaction/users.php">
             <div>
                 <input type="hidden" name="userid"
                     value="<?php echo $userID ?>" />
