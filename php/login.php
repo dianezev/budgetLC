@@ -1,9 +1,7 @@
 <?php
 	include_once "php/common/base.php";
-	$pageTitle = "Log In";
 
 	if(!empty($_SESSION['LoggedIn']) && !empty($_SESSION['Username'])):
-	//	include_once "common/header.php";
 ?>
 
 		<p>You are currently <strong>logged in.</strong></p>
@@ -25,9 +23,9 @@
 		else:
 			//include_once "common/header.php";
 ?>
-
+		    	
 		<h2>Login Failed&mdash;Try Again?</h2>
-		<form method="post" action="php/login.php" name="loginform" id="loginform">
+		<form method="post" action="login.php" name="loginform" id="loginform">
 			<div>
 				<input type="text" name="username" id="username" />
 				<label for="username">Email</label>
@@ -46,7 +44,8 @@
 	else:
 		//include_once "common/header.php";
 ?>
-		<form method="post" action="php/login.php" name="loginform" id="loginform">
+		      
+		<form method="post" action="login.php" name="loginform" id="loginform">
 			<div>
 				<input type="text" name="username" id="username" />
 				<label for="username">Email</label>
@@ -58,7 +57,8 @@
 				<input type="hidden" name="token"
 					value="<?php echo $_SESSION['token']; ?>" />
 			</div>
-		</form>
+		</form><br /><br />
+		<p><a href="/password.php">Did you forget your password?</a></p>
 <?php
 	endif;
 ?>

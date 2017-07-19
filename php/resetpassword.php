@@ -22,6 +22,7 @@
 	}
 
 	$pageTitle = "Reset Your Password";
+	include_once "php/common/header.php";
 
 	if(isset($ret[0])):
 		echo isset($ret[1]) ? $ret[1] : NULL;
@@ -44,6 +45,7 @@
 			</div>
 		</form>
 </center>
+
 <?php
 		endif;
 	else:

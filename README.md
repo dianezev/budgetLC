@@ -1,2 +1,4 @@
-##Budget Application ##
-By Daniel Clough, Michael Park and Diane Zevenbergen
+## Budget Application
+## By Daniel Clough, Michael Park and Diane Zevenbergen
+
+mp was here.

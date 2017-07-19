@@ -11,8 +11,8 @@
 			<div>
 				<input type="hidden" name="action"
 					value="resetpassword" />
-				<label for="username">Email</label>
-				<input type="text" name="username" id="username" /><br /><br />
+				<input type="text" name="username" id="username" />
+				<label for="username">Email</label><br /><br />
 				<input type="submit" name="reset" id="reset"
 					value="Reset Password" class="button" />
 				<input type="hidden" name="token"
