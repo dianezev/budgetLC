@@ -11,11 +11,19 @@
 
 $(document).ready(function() {
 
-  // call any LCB.view or LCB.model methods needed to initialize...
+  // If url contains hashed email, check if valid and
+  // if so prompt user for password creation/reset
+  LCB.controller.checkUrl();
+  LCB.controller.setDateRg();
+  
+  console.log(LCB);
   
   // Hide worksheets so only start screen displays
   LCB.view.togglePages('#m_home');
   LCB.view.defDate();
   LCB.view.userAcct(null);
+  
+  LCB.view.makeActiveCateg(1);
+  
   
 });

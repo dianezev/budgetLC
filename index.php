@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Raleway" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
+<link rel="stylesheet" type="text/css" href="css/charts.css" />
 <link rel="stylesheet" type="text/css" href="css/w3pro.css" />
 <link rel="stylesheet" type="text/css" href="css/style.css" />
 <link rel="stylesheet" type="text/css" href="css/colors.css" />
@@ -17,18 +18,20 @@
 <body>
 
 <!-- Navbar (sit on top) -->
+<!--
+  TBD: As window gets narrower, switch text in menu bar to icons so that it doesn't
+  double in height & block other stuff - or other fix
+-->
 <div class="w3-top">
   <div class="w3-bar w3-white w3-card-2" id="myNavbar">
-    <a href="#m_home" class="swap w3-bar-item w3-button w3-wide">APP NAME</a>
+    <a href="#m_home" class="swap w3-bar-item w3-button w3-wide">TOTAL FINANCE</a>
     <!-- Right-sided navbar links -->
     <div class="w3-right w3-hide-small">
-      <a href="#login" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
-      <!--<a href="#m_income" class="swap w3-bar-item w3-button">INCOME</a>-->
-      <a href="#m_expenses" class="swap w3-bar-item w3-button">EXPENSES</a>
-      <!--<a href="#m_accounts" class="swap w3-bar-item w3-button">ACCOUNTS</a>-->
-      <a href="#m_budget" class="swap w3-bar-item w3-button">BUDGET</a>
-      <a href="php/account.php" class="swap w3-bar-item w3-button">ACCOUNT</a>
-      <!--<a href="#about" class="w3-bar-item w3-button">ABOUT</a>-->
+      <a href="#m_settings" class="swap w3-bar-item w3-button" style="display: none" id="gotoSettings"><i class="fa fa-cog"></i><span> SETTINGS</span></a>
+      <a href="#m_actual" class="swap w3-bar-item w3-button" id="gotoActual">ACTUAL</a>
+      <a href="#m_budget" class="swap w3-bar-item w3-button" id="gotoBudget">BUDGET</a>
+      <a href="#m_summary" class="swap w3-bar-item w3-button" id="gotoSummary">SUMMARY</a>
+      <a href="#register" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
     </div>
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
 
@@ -36,18 +39,21 @@
       <i class="fa fa-bars"></i>
     </a>
   </div>
+<!--
+  <div>
+  <canvas id="myChart" width="400" height="400"></canvas>
+  </div>
+-->
 </div>
 
 <!-- Sidebar on small screens when clicking the menu icon -->
 <nav class="w3-sidebar w3-bar-block w3-black w3-card-2 w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
   <a href="javascript:void(0)" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
-  <a href="#login" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
-  <!--<a href="#m_income" class="swap w3-bar-item w3-button">INCOME</a>-->
-  <a href="#m_expenses" class="swap w3-bar-item w3-button">EXPENSES</a>
-  <!--<a href="#m_accounts" class="swap w3-bar-item w3-button">ACCOUNTS</a>-->
+  <a href="#m_settings" class="swap w3-bar-item w3-button"><i class="fa fa-cog"></i><span> SETTINGS</span></a>
+  <a href="#m_actual" class="swap w3-bar-item w3-button">ACTUAL</a>
   <a href="#m_budget" class="swap w3-bar-item w3-button">BUDGET</a>
-  <a href="php/account.php" class="swap w3-bar-item w3-button">ACCOUNT</a>
-  <!--<a href="#about" class="w3-bar-item w3-button">ABOUT</a>-->
+  <a href="#m_summary" class="swap w3-bar-item w3-button">SUMMARY</a>
+  <a href="#register" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
 </nav>
 
 <!-- Header with full-height image -->
@@ -56,6 +62,9 @@
     <span class="w3-jumbo w3-hide-small">Track your Finances</span><br>
     <span class="w3-xxlarge w3-hide-large w3-hide-medium">Track your Finances</span><br>
     <span class="w3-xlarge">and make your money go further</span>
+<!--    TBD: I don't think href="#login" anywhere does anything
+... cuz js references class .toLogin
+...check before changing to href="#"-->
     <p><a href="#login" class="toLogin w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Log In or Sign Up</a></p>
   </div> 
   <div class="w3-display-bottomleft w3-text-grey w3-xxlarge" style="padding:24px 48px">
@@ -68,107 +77,110 @@
   </div>
 </header>
 
-<!-- Log In/Sign Up Section -->
-<div id="login" class="w3-modal">
+<!-- Modal: Log In/Sign Up -->
+<div id="register" class="w3-modal">
   <div class="w3-modal-content form">
     <span class="w3-button w3-display-topright">&times;</span>
-	  <!--REGISTER-->
-    <form class="register-form" action="login.php" method="post">
-      <input type="text" name="regname" placeholder="Name"/>
-      <input type="password" name="regPW" placeholder="Password"/>
-      <input type="text" name="regemail" placeholder="Email address"/>
-      <button class="w3-button w3-black" id="signin_first" a href="/php/register.php">create</button>
-      <p class="message">Already registered? <a href="#login">Sign In</a></p>
-    </form>
-	  <!--LOGIN-->
-    <form class="login-form">
-      <input type="text" name="loginemail" placeholder="Email"/>
-      <input type="password" name="loginpw" placeholder="Password"/>
-      <button class="w3-button w3-black" id="signin_return" a href="/php/login.php">login</button><br/><br/>
-	<p class="message"><a href="/php/password.php">Did you forget your password?</a></p>
-        <p class="message">Not registered? <a href="#login">Create an account</a></p>
-    </form>
-  </div>
-</div>
-  
-<!-- Income Section -->
-<div class="w3-row-padding w3-text-blue w3-grey" style="padding:128px 16px" id="m_income">
-  <div class="w3-card w3-light-grey">
-    <div class="w3-container w3-blue">
-      <h3 class="w3-center">INCOME</h3>
-    </div>
-    <form action="" target="_blank">
-      <div class="w3-container w3-border-top snug">
-<h2>TBD: discuss how to incorporate dates for both monthly &amp; variable $$ (same with Expenses, Savings &amp; Budget sections)</h2>
-        <!-- Income -->
-        <div class="w3-half w3-margin-bottom" style="padding:16px 16px">
-          <h3 class="w3-center">Monthly Income &amp;Deductions</h3>
-          <h4>Wages/salary:</h4>
-          <p><input class="w3-input w3-border" type="number" min="0" name="sal_inc" id="sal_inc"></p>
-          <h4>401K:</h4>
-          <p><input class="w3-input w3-border" type="number" min="0" name="opd_vpmt" id="opd_vpmt"></p>
-          <!-- are we adding employer match info -->
-          <h4>FICA/Social Security/Medicare:</h4>
-          <p><input class="w3-input w3-border" type="number" min="0" name="cRep_vpmt" id="cRep_vpmt"></p>
-          <h4>State &amp; local taxes:</h4>
-          <p><input class="w3-input w3-border" type="number" min="0" name="hRep_vpmt" id="hRep_vpmt"></p>
-          <h4>Federal income tax:</h4>
-          <p><input class="w3-input w3-border" type="number" min="0" name="cloth_vpmt" id="cloth_vpmt"></p>
-        </div>
-
-      <!-- Deductions -->
-        <div class="w3-half w3-margin-bottom" style="padding:16px 16px">
-          <h3 class="w3-center">Variable Income &amp;Deductions</h3>
-          <h4>Dividends:</h4>
-          <p><input class="w3-input w3-border" type="number" min="0" name="div_inc" id="div_inc"></p>
-          <h4>Interest:</h4>
-          <p><input class="w3-input w3-border" type="number" min="0" name="int_inc" id="int_inc"></p>
-          <h4>Other earnings:</h4>
-          <p><input class="w3-input w3-border" type="number" min="0" name="oth_inc" id="oth_inc"></p>
-        </div>
-      </div>
-      
-      <p class="w3-center">
-        <button class="w3-button w3-black" type="submit">SAVE INCOME INFORMATION</button>
-      </p>
+    
+    <!--    Register-->
+    <form class="register-form">
+<!--    <div class="register-form">-->
+      <input id="name_set" type="text" placeholder="Name"/>
+      <input id="email_set" type="text" placeholder="Email address"/>
+      <button type="button" class="w3-button w3-black" id="signup_now">Sign up</button>
+      <p id="gotoLogin" class="message">Already registered? <a href="#login">Log In</a></p>
+<!--    </div>-->
     </form>
     
-    <div class="w3-container w3-blue w3-large" style="height: 2em"></div>
+    <!--    Log in-->
+    <form class="login-form">
+<!--    <div class="login-form">-->
+      <input id="email" type="text" placeholder="Email"/>
+      <input id="password" type="password" placeholder="Password"/>
+      <button type="button" class="w3-button w3-black" id="login_now">login</button>
+      <p id="gotoSignin" class="message">Not registered? <a href="#login">Sign up now</a></p>
+      <p id="requestPasswordReset" class="message">Forgot password? <a href="#login">Reset password</a></p>
+<!--    </div>-->
+    </form>
   </div>
-</div>
+</div>  
 
-<!-- Expenses Section -->
-<!-- TBD: Add template to make this dynamic for all expense categories-->
-<!--  TBD: Expenses & Budget may be similar enough to just use one template-->
-<div class="results w3-row-padding w3-text-indigo w3-grey" style="padding:128px 16px" id="m_expenses">
+<!-- Modal: prompt user for email, in order to send reset pw link -->
+<!--
+  TBD: might be better to incorporate within the <div id="register"... section above - 
+  but not sure since we may also have this option in user settings
+-->
+<div id="getEmail" class="w3-modal">
+  <div class="w3-modal-content form">
+    <span class="w3-button w3-display-topright">&times;</span>
+    
+    <!--    Get email-->
+    <form class="login-form">
+      <p class="message">Please provide the email address you used to register with Total Finance. We'll send you an activation link so you can set a new password.</p>
+      <input id="email_ver" type="text" placeholder="Email"/>
+      <button type="button" class="w3-button w3-black" id="reqNewPW_now">submit</button>
+    </form>
+  </div>
+</div>  
+
+  
+<!-- Modal: prompt user for new password -->
+<div id="password_prompt" class="w3-modal">
+  <div class="w3-modal-content form">
+    <span class="w3-button w3-display-topright">&times;</span>
+    
+    <!--    Get & confirm password -->
+    <form class="password-form">
+      <input id="password1" type="password" placeholder="Password"/>
+      <input id="password2" type="password" placeholder="Confirm password"/>
+      <button type="button" class="w3-button w3-black" id="password_set">CREATE PASSWORD</button>
+    </form>
+    
+  </div>
+</div>  
+
+  
+<!-- User Message Section -->
+<div id="userMsg" class="w3-modal">
+  <div class="w3-modal-content form">
+    <span class="w3-button w3-display-topright">&times;</span>
+
+    <p></p>
+    <button type="button" class="w3-button w3-black" id="close_msg">close</button>
+  </div>
+</div>  
+
+  
+<!-- Actual Section -->
+<!-- TBD: Add template to make this dynamic for all categories-->
+<!--  TBD: Actual & Budgeted Expenses may be similar enough to just use one template-->
+<!--<div class="results w3-row-padding w3-text-indigo w3-grey" style="padding:64px 16px" id="m_actual">-->
+<div class="results actual w3-row-padding w3-text-indigo w3-grey" id="m_actual">
   <div class="w3-card w3-light-grey">
-    <div class="w3-container w3-indigo">
-      <!-- template will make the category dynamic...-->
-      <h3 class="w3-center">HOUSEHOLD EXPENSES</h3>
-    </div>
-<!--    <div class="w3-container">-->
-<!--      <div class="w3-top">-->
-      <div class="subMenu w3-bar w3-white w3-card-2" id="navCateg">
-        <div class="w3-center">
+      <div class="subMenu w3-bar w3-indigo w3-card-2">
+        <div class="w3-center" id="s_actual">
           <a href="#" class="w3-bar-item w3-button">Household</a>
-          <a href="#" class="w3-bar-item w3-button">Car/Bus</a>
+          <a href="#" class="w3-bar-item w3-button">Car/Transit</a>
           <a href="#" class="w3-bar-item w3-button">Food</a>
           <a href="#" class="w3-bar-item w3-button">Health</a>
           <a href="#" class="w3-bar-item w3-button">Utilities</a>
-          <a href="#" class="w3-bar-item w3-button">Childcare</a>
-          <a href="#" class="w3-bar-item w3-button">Educ/Prof</a>
           <a href="#" class="w3-bar-item w3-button">Clothing/Pers</a>
           <a href="#" class="w3-bar-item w3-button">Charity</a>
-          <a href="#" class="w3-bar-item w3-button">Fun/Travel</a>
-          <a href="#" class="w3-bar-item w3-button">Gifts</a>
+          <a href="#" class="w3-bar-item w3-button">Leisure</a>
           <a href="#" class="w3-bar-item w3-button">Taxes</a>
           <a href="#" class="w3-bar-item w3-button">Accounts</a>
           <a href="#" class="w3-bar-item w3-button">Misc</a>
         </div>
       </div>
 <!--    </div>-->
-    <form action="" target="_blank">
-      <div class="w3-container" style="margin-top:32px">
+    <form action="">
+      <div class="w3-container w3-hide-small">
+        <div class="dateSel">
+          <p>Show actual expenses for:</p>
+          <select id="date_actual">
+<!--        completed by template-->
+          </select>
+        </div>
 
 <!--
         Note: The reason the table headers are outside
@@ -177,147 +189,52 @@
         screen size is very small, headers are not aligned with data.
         It might work to drop the horiz scroll bar and hide overflow?
 -->
-        <table>
+        <table class="w3-text-indigo">
           <thead>
             <tr>
-              <th colspan="1">Household Expenses</th>
+              <th colspan="1">Item</th>
               <th colspan="1">Date</th>
-              <th colspan="1">Amount</th>
+              <th colspan="1">Actual</th>
               <th colspan="1">Details</th>
             </tr>
           </thead>
         </table>
       </div>
-      <div class="w3-center scrollit">
-        <table>
-          <tbody class="addColor" id="qryResults">
-
-            <!--TBD: Use JS & template to populate this -->
-            <!-- Also add jquery to scroll to bottom
-            so that user can see most recent entries: $('#qryResults').scrollTop(d.prop("scrollHeight"))
-            so that user sees their last entry -->
-            <tr>
-              <td>Mortgage payment</td>
-              <td>01/01/2017</td>
-              <td>$1,200.00</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Mortgage payment</td>
-              <td>02/01/2017</td>
-              <td>$1,200.00</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Maintenance/Repairs</td>
-              <td>02/11/2017</td>
-              <td>$35.56</td>
-              <td>New faucet</td>
-            </tr>
-
-            <tr>
-              <td>Mortgage payment</td>
-              <td>03/01/2017</td>
-              <td>$1,200.00</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Mortgage payment</td>
-              <td>04/01/2017</td>
-              <td>$1,200.00</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Home improvement</td>
-              <td>04/11/2017</td>
-              <td>$425.12</td>
-              <td>Tile backsplash</td>
-            </tr>
-            <tr>
-              <td>Mortgage payment</td>
-              <td>01/01/2017</td>
-              <td>$1,200.00</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Mortgage payment</td>
-              <td>02/01/2017</td>
-              <td>$1,200.00</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Maintenance/Repairs</td>
-              <td>02/11/2017</td>
-              <td>$35.56</td>
-              <td>New faucet</td>
-            </tr>
-            <tr>
-              <td>Mortgage payment</td>
-              <td>01/01/2017</td>
-              <td>$1,200.00</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Mortgage payment</td>
-              <td>02/01/2017</td>
-              <td>$1,200.00</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Maintenance/Repairs</td>
-              <td>02/11/2017</td>
-              <td>$35.56</td>
-              <td>New faucet</td>
-            </tr>
-
-          </tbody>
-        </table>
+      <div class="w3-center scrollit_y w3-hide-small categ" id="list_actual">
+<!--          template used here -->
       </div>
         
       <div class="entry w3-row-padding">
         <div class="w3-quarter">        
 
-          <p>Add a household expense:</p>
-          <select name="hshld" id="subCat">
-            <option value="HS_01">Rent/Mortgage payment</option>
-            <option value="HS_02">Maintenance/Repairs</option>
-            <option value="HS_03">Renters/Homeowners insurance</option>
-            <option value="HS_04">Household goods/Furniture</option>
-            <option value="HS_05">Home improvement</option>
-            <option value="HS_06">Yard care</option>
-            <option value="HS_07">Other</option>
+          <p>Add actual expense:</p>
+          <select name="hshld">
+            <option value="hous_01">Mortgage/Rent</option>
+            <option value="hous_02">Maintenance</option>
+            <option value="hous_03">Home Improvement</option>
+            <option value="hous_04">Home Insurance</option>
+            <option value="hous_05">Household Goods</option>
+            <option value="hous_06">Other</option>
           </select>
         </div>
 
-        <div class="w3-half">        
+        <div class="w3-quarter">        
+          <p>Date:</p><input class="w3-input w3-border dateOpt" type="date">
+        </div>
 
-          <div class="w3-third">        
-            <p>Date:</p><input class="dateOpt" type="date">
-          </div>
-
-          <div class="w3-third">        
-            <p>Amount:</p>
-            <p><input class="w3-input w3-border" type="number" min="0" id="exp_amt"></p>
-          </div>
-          <div class="w3-third">        
-            <p>Recurring:</p>
-            <select name="housing" id="subCat">
-              <option value="rec_01">No</option>
-<!--              TBD: Make text here dynamic depending on date selected-->
-              <option value="rec_02">Monthly, through 12/2017</option>
-            </select>
-          </div>
-
+        <div class="w3-quarter">        
+          <p><span>Actual</span> Amount:</p>
+          <input id="amt_actual" class="w3-input w3-border" type="number" min="0" step=".01" placeholder="0.00">
         </div>
 
         <div class="w3-quarter">        
           <p>Details:</p>
-          <p><input class="w3-input w3-border" type="text" placeholder="optional..." id="exp_amt"></p>
+          <input id="det_actual" class="w3-input w3-border" type="text" placeholder="optional...">
         </div>
       </div>        
       
       <p class="w3-center">
-        <button class="w3-button w3-black" type="submit">SAVE HOUSEHOLD EXPENSES</button>
+        <button class="w3-button w3-black" type="submit" name="actual">SAVE ACTUAL EXPENSE</button>
       </p>
     </form>
     
@@ -326,160 +243,64 @@
 </div>
 
   
-<!-- Savings Section -->
-<div class="w3-row-padding w3-text-deep-purple w3-grey" style="padding:128px 16px" id="m_accounts">
-  <div class="w3-card w3-light-grey">
-    <div class="w3-container w3-deep-purple">
-      <h3 class="w3-center">ACCOUNTS</h3>
-    </div>
-    <form action="" target="_blank">
-      <div class="w3-container w3-border-top snug">
-
-        <!-- Accounts - part 1 -->
-        <div class="w3-half w3-margin-bottom" style="padding:16px 16px">
-          <h3 class="w3-center">Accounts (maybe monthly stuff...)</h3>
-          <h4>Additional 401K deposits (in addition to automatic deposit of $___):</h4>
-          <p><input class="w3-input w3-border" type="number" min="0" name="add401k_sav" id="add401k_sav"></p>
-          <h4>IRA deposits:</h4>
-          <p><input class="w3-input w3-border" type="number" min="0" name="ira_sav" id="ira_sav"></p>
-          <h4>Educational IRA deposits:</h4>
-          <p><input class="w3-input w3-border" type="number" min="0" name="edira_sav" id="edira_sav"></p>
-          <h4>Savings/checking/money market:</h4>
-          <p><input class="w3-input w3-border" type="number" min="0" name="basic_sav" id="basic_sav"></p>
-          <h4>Other investments:</h4>
-          <p><input class="w3-input w3-border" type="number" min="0" name="inv_sav" id="inv_sav"></p>
-        </div>
-
-        <!-- Accounts - part 2 (if needed) -->
-        <div class="w3-half w3-margin-bottom" style="padding:16px 16px">
-          <h3 class="w3-center">Accounts (maybe variable stuff)</h3>
-          <h4>What else:</h4>
-          <p><input class="w3-input w3-border" type="number" min="0" name="blah1_sav" id="blah1_sav"></p>
-          <h4>What else:</h4>
-          <p><input class="w3-input w3-border" type="number" min="0" name="blah2_sav" id="blah2_sav"></p>
-        </div>
-      </div>
-      
-      <p class="w3-center">
-        <button class="w3-button w3-black" type="submit">SAVE ACCOUNT INFORMATION</button>
-      </p>
-    </form>
-    
-    <div class="w3-container w3-deep-purple w3-large" style="height: 2em"></div>
-  </div>
-</div>
-
-  
 <!-- Budget Section -->
 <!-- template will make the category dynamic...-->
-<div class="results w3-row-padding w3-text-teal w3-grey" style="padding:128px 16px" id="m_budget">
+<div class="results budget w3-row-padding w3-text-teal w3-grey" id="m_budget">
   <div class="w3-card w3-light-grey">
-    <div class="w3-container w3-teal">
-      <!-- template will make the category dynamic...-->
-      <h3 class="w3-center">HOUSEHOLD BUDGET</h3>
-    </div>
-<!--    <div class="w3-container">-->
-<!--      <div class="w3-top">-->
-      <div class="subMenu w3-bar w3-white w3-card-2" id="navCateg">
-        <div class="w3-center">
+
+    <div class="subMenu w3-bar w3-teal w3-card-2">
+        <div class="w3-center" id="s_budget">
+<!--          ideally add template for this-->
           <a href="#" class="w3-bar-item w3-button">Household</a>
-          <a href="#" class="w3-bar-item w3-button">Car/Bus</a>
+          <a href="#" class="w3-bar-item w3-button">Car/Transit</a>
           <a href="#" class="w3-bar-item w3-button">Food</a>
           <a href="#" class="w3-bar-item w3-button">Health</a>
           <a href="#" class="w3-bar-item w3-button">Utilities</a>
-          <a href="#" class="w3-bar-item w3-button">Childcare</a>
-          <a href="#" class="w3-bar-item w3-button">Educ/Prof</a>
           <a href="#" class="w3-bar-item w3-button">Clothing/Pers</a>
           <a href="#" class="w3-bar-item w3-button">Charity</a>
-          <a href="#" class="w3-bar-item w3-button">Fun/Travel</a>
-          <a href="#" class="w3-bar-item w3-button">Gifts</a>
+          <a href="#" class="w3-bar-item w3-button">Leisure</a>
           <a href="#" class="w3-bar-item w3-button">Taxes</a>
           <a href="#" class="w3-bar-item w3-button">Accounts</a>
           <a href="#" class="w3-bar-item w3-button">Misc</a>
         </div>
       </div>
-<!--    </div>-->
-    <form action="" target="_blank">
-      <div class="w3-container" style="margin-top:32px">
+    
+
+    
+    <form action="">
+      <div class="w3-container w3-hide-small">
+        <div class="dateSel">
+          <p>Show budgeted expenses for:</p>
+          <select id="date_budget">
+<!--        completed by template-->
+          </select>
+        </div>
 
 <!--
         Note: The reason the table headers are outside
         of scroll div is that the headers scroll out of view
-        when they are included. The tradeoff is that when
-        screen size is very small, headers are not aligned with data.
-        It might work to drop the horiz scroll bar and hide overflow?
+        when they are included.
 -->
-        <table>
+        <table class="w3-text-teal">
           <thead>
             <tr>
-              <th colspan="1">Household Budget</th>
+              <th colspan="1">Item</th>
               <th colspan="1">Date</th>
-              <th colspan="1">Amount</th>
+              <th colspan="1">Budget</th>
               <th colspan="1">Details</th>
             </tr>
           </thead>
         </table>
       </div>
-      <div class="w3-center scrollit">
-        <table>
-          <tbody class="addColor" id="qryResults">
-
-            <!--TBD: Use JS & template to populate this -->
-            <!-- Also add jquery to scroll to bottom
-            so that user can see most recent entries: $('#qryResults').scrollTop(d.prop("scrollHeight"))
-            so that user sees their last entry -->
-            <tr>
-              <td>Mortgage payment</td>
-              <td>01/01/2017</td>
-              <td>$1,200.00</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Maintenance/Repairs</td>
-              <td>02/01/2017</td>
-              <td>$75.00</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Mortgage payment</td>
-              <td>02/01/2017</td>
-              <td>$1,200.00</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Maintenance/Repairs</td>
-              <td>02/01/2017</td>
-              <td>$75.00</td>
-              <td></td>
-            </tr>
-
-            <tr>
-              <td>Other</td>
-              <td>03/01/2017</td>
-              <td>$300.00</td>
-              <td>New trees</td>
-            </tr>
-            <tr>
-              <td>Mortgage payment</td>
-              <td>04/01/2017</td>
-              <td>$1,200.00</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Home improvement</td>
-              <td>05/01/2017</td>
-              <td>$500</td>
-              <td>Summer project</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="w3-center scrollit_y w3-hide-small categ" id="list_budget">
+<!--        template used here-->
       </div>
         
       <div class="entry w3-row-padding">
         <div class="w3-quarter">        
 
-          <p>Add a budget item:</p>
-          <select name="hshld" id="subCat">
+          <p>Add budget expense:</p>
+          <select name="hshld">
             <option value="HS_01">Rent/Mortgage payment</option>
             <option value="HS_02">Maintenance/Repairs</option>
             <option value="HS_03">Renters/Homeowners insurance</option>
@@ -490,35 +311,23 @@
           </select>
         </div>
 
-        <div class="w3-half">        
+        <div class="w3-quarter">        
+          <p>Date:</p><input class="w3-input w3-border dateOpt" type="date">
+        </div>
 
-          <div class="w3-third">        
-            <p>Date:</p><input class="dateOpt" type="date">
-          </div>
-
-          <div class="w3-third">        
-            <p>Amount:</p>
-            <p><input class="w3-input w3-border" type="number" min="0" id="exp_amt"></p>
-          </div>
-          <div class="w3-third">        
-            <p>Recurring:</p>
-            <select name="housing" id="subCat">
-              <option value="rec_01">No</option>
-<!--              TBD: Make text here dynamic depending on date selected-->
-              <option value="rec_02">Monthly, through 12/2017</option>
-            </select>
-          </div>
-
+        <div class="w3-quarter">        
+          <p><span>Budgeted</span> Amount:</p>
+          <input id="amt_budget" class="w3-input w3-border" type="number" min="0" step=".01" placeholder="0.00">
         </div>
 
         <div class="w3-quarter">        
           <p>Details:</p>
-          <p><input class="w3-input w3-border" type="text" placeholder="optional..." id="exp_amt"></p>
+          <input id="det_budget" class="w3-input w3-border" type="text" placeholder="optional...">
         </div>
       </div>        
       
       <p class="w3-center">
-        <button class="w3-button w3-black" type="submit">SAVE HOUSEHOLD BUDGET</button>
+        <button class="w3-button w3-black" type="submit" name="budget">SAVE BUDGETED EXPENSE</button>
       </p>
     </form>
     
@@ -527,34 +336,90 @@
 </div>
   
 
-  
-<!-- Account Section -->
-<div class="w3-row-padding w3-text-teal w3-grey" style="padding:128px 16px" id="m_account">
+<!-- Summary Section -->
+<!-- TBD: Add template to make this dynamic-->
+<div class="summary w3-row-padding w3-text-blue-gray w3-grey" id="m_summary">
   <div class="w3-card w3-light-grey">
-    <div class="w3-container w3-deep-orange">
-      <h3 class="w3-center">USER ACCOUNT</h3>
+      <div class="subMenu w3-bar w3-blue-gray w3-card-2">
+        <div class="w3-center" id="s_summary">
+<!--          ideally add template for this-->
+          <a href="#" class="w3-bar-item w3-button">Household</a>
+          <a href="#" class="w3-bar-item w3-button">Car/Transit</a>
+          <a href="#" class="w3-bar-item w3-button">Food</a>
+          <a href="#" class="w3-bar-item w3-button">Health</a>
+          <a href="#" class="w3-bar-item w3-button">Utilities</a>
+          <a href="#" class="w3-bar-item w3-button">Clothing/Pers</a>
+          <a href="#" class="w3-bar-item w3-button">Charity</a>
+          <a href="#" class="w3-bar-item w3-button">Leisure</a>
+          <a href="#" class="w3-bar-item w3-button">Taxes</a>
+          <a href="#" class="w3-bar-item w3-button">Accounts</a>
+          <a href="#" class="w3-bar-item w3-button">Misc</a>
+        </div>
+      </div>
+
+    <div class="w3-container w3-blue-gray w3-large" style="height: 2em"></div>
+  </div>
+</div>
+  
+
+<!--    experimenting with chart.js-->
+        <!--  canvas element / chart01.js -->  
+<!--
+        <div style="height: 500px; width: 500px">
+          <canvas id="myChart" width="400" height="400"></canvas>
+        </div>
+-->
+
+        <!-- line chart canvas element / chart03.js -->
+<!--        <canvas id="buyers" width="600" height="400"></canvas>-->
+        <!-- pie chart canvas element -->
+<!--        <canvas id="countries" width="600" height="400"></canvas>-->
+        <!-- bar chart canvas element -->
+<!--        <canvas id="income" width="600" height="400"></canvas>-->
+    
+        <!-- canvas element / chart04.js -->
+        <div class="container">
+          <h2>Chart.js Responsive Bar Chart Demo</h2>
+          <div>
+            <canvas id="canvas"></canvas>
+          </div>
+        </div>  
+    
+    
+    
+  
+
+  
+  
+<!-- Settings Section -->  
+<div class="settings w3-row-padding w3-text-blue-gray w3-grey" id="m_settings">
+  <div class="w3-card w3-light-grey">
+    <div class="w3-container w3-blue-gray">
+      <h5 class="w3-center">USER SETTINGS</h5>
     </div>
-    <form action="" target="_blank">
+    <form action="">
       <div class="w3-container w3-border-top">
       
         <!-- Preferences, part 1 -->
         <div class="w3-half w3-margin-bottom" style="padding:16px 16px">
-          <h3 class="w3-center">Account Preferences</h3>
-		<p>Account Email: <?php echo $_POST["useremail"]; ?></p>
-		   <a href="/php/newemail.php">Add New Email</a>
-		<p>Password:<a href="/php/password.php">Change Password</a></p>
+          <h3 class="w3-center">User Preferences</h3>
+            <p><input class="w3-input w3-border" type="text" placeholder="stuff"></p>
+            <p><input class="w3-input w3-border" type="email" placeholder="stuff"></p>
+            <p><input class="w3-input w3-border" type="password" placeholder="stuff"></p>
+            <p><input class="w3-input w3-border" type="password" placeholder="stuff"></p>
         </div>
 
         <!-- Preferences, part 2 -->
         <div class="w3-half w3-margin-bottom snug" style="padding:16px 16px">
-          <h3 class="w3-center">Additional Information</h3>
-		<p><a href="/whyneeded">Why are you asking for this?</a></p>
-            <h4>I File My Taxes As...</h4>
-		<p><input type="radio" name="pay_per" id="hourly"><span>Single</span></p>
-		<p><input type="radio" name="pay_per" id="weekly"><span>Head of Household</span></p>
-              <p><input type="radio" name="pay_per" id="monthly"><span>Married Filing Separately</span></p>
-              <p><input type="radio" name="pay_per" id="yearly"><span>Married Filing Jointly</span><br></p>
-            <h4>I reside in...</h4>
+          <h3 class="w3-center">More Preferences</h3>
+            <h4>Sample radio button:</h4>
+            <p>
+              <input type="radio" name="pay_per" id="hourly"><span>Hourly&nbsp;&nbsp;&nbsp;</span>
+              <input type="radio" name="pay_per" id="weekly"><span>Weekly&nbsp;&nbsp;&nbsp;</span>
+              <input type="radio" name="pay_per" id="monthly"><span>Monthly&nbsp;&nbsp;&nbsp;</span>
+              <input type="radio" name="pay_per" id="yearly"><span>Yearly&nbsp;&nbsp;&nbsp;</span>
+            </p>
+            <h4>Sample drop-down:</h4>
             <select name="state" id="state">
               <option value="AL">Alabama</option>
               <option value="AK">Alaska</option>
@@ -617,21 +482,26 @@
               <option value="AP">Armed Forces Pacific</option>
               <option value="AE">Armed Forces Others</option>		
             </select>				
+			
+            <h4>Sample numeric input:</h4>
+            <p><input class="w3-input w3-border" type="number" min="0" name="junk1" id="junk1"></p>
+            <h4>Sample text input:</h4>
+            <p><input class="w3-input w3-border" type="text" placeholder="Comment goes here..." min="0" name="junk1" id="junk1"></p>
         </div>
       </div>
+      
       <p class="w3-center">
-        <button class="w3-button w3-black" type="submit" action="/php/account.php">SAVE USER SETTINGS</button>
-	<button class="w3-button w3-black" type="submit" action="/php/deleteaccount.php">DELETE ACCOUNT</button>
+        <button class="w3-button w3-black" type="submit">SAVE USER SETTINGS</button>
       </p>
     </form>
 
-    <div class="w3-container w3-deep-orange w3-large" style="height: 2em"></div>
+    <div class="w3-container w3-blue-gray w3-large" style="height: 2em"></div>
   </div>
 </div>
 
 <!-- About Section -->
 <!--  TBD: Change some of the grey text to colors - think grayscale needs adjustment-->
-<div class="w3-container w3-dark-gray" style="padding:128px 16px" id="about">
+<div class="w3-container w3-dark-gray" style="padding:64px 16px" id="about">
   <h3 class="w3-center">ABOUT (app name...)</h3>
   <p class="w3-center w3-large">A message here about the app...</p>
   <br>
@@ -647,12 +517,9 @@
             <a target="_blank"  href="#">
               <i class="fa fa-github w3-hover-opacity"></i>
             </a>
-            <a target="_blank" href="https://github.com/danielalanclough">
+            <a target="_blank" href="https://github.com/">
               <i class="fa fa-linkedin w3-hover-opacity"></i>
             </a>
-		   <a target="_blank" href="http://pacifictech.us">
-			   <i class="fa fa-personal w3-hover-opacity"></i>
-		   </a>
           </div>
         </div>
       </div>
@@ -696,7 +563,7 @@
   
 <!-- Footer -->
 <footer class="w3-center w3-black w3-padding-64">
-  <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+  <a href="#m_home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
   <div class="w3-xxlarge w3-section">
     <a target="_blank"  href="https://github.com/">
       <i class="fa fa-github w3-hover-opacity"></i>
@@ -707,14 +574,47 @@
   </div>
 </footer>
 
+<!--
+
+for now, I moved initialization stuff to script.js where other initialization 
+stuff happens. It was just easier for me to follow the logic if all php files 
+were within php folder...(no objection to changing it back if preferable)
+
+-->
+
+  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+<!--  note this is the chart script that works with chart01.js-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>-->
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>-->
+
+<!--  note this is the chart script that works with chart03.js and chart04.js-->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+  
+
+  <script src="js/helpers/getAllUrlParams.js"></script>
+
+<!--this ref is temporary, until JSON data returned by php-->
+<script type="text/javascript" src="js/model/testData.json"></script>
+  
+
+<script src="js/templates/template.js"></script>
 <script src="js/model/model.js"></script>
+<script src="js/model/constants.js"></script>
 <script src="js/view/view.js"></script>
 <script src="js/controller/controller.js"></script>
 <script src="js/script.js"></script>
 <script src="js/events/events.js"></script>
+  
+<!--  <script src="js/charts/chart01.js"></script>-->
+<!--  <script src="js/charts/chart03.js"></script>-->
+  <script src="js/charts/chart04.js"></script>
 
   
 </body>

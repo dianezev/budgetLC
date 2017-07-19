@@ -1,56 +1,103 @@
-// Display login modal window
+/****************************************************
+ * Notes on events.js: 
+ * 1) Some events need to access or change the database
+ *    and then make updates to the DOM that reflect those 
+ *    results. This kind of event will call a method
+ *    in controller.js.
+ * 2) Any events that only update
+ *    the DOM will call a method in view.js.
+ ****************************************************/
+
+// Log in/Sign up/Log out
 $('.toLogin').on('click', function() {
-
+  
   if (this.text === "LOG OUT") {
-    LCB.controller.signout();
+    LCB.controller.logout();
   } else {
-    $('#login').toggle();
+    LCB.view.showModal('#register');
   }
 });
 
-// Close login window
-$('#login span').on('click', function() {
-  $('#login').toggle();
+// Close login/signup window - click 'x'
+$('#register span').on('click', function() {
+  LCB.view.hideModal('#register');
+});
+// Close reset PW window - click 'x'
+$('#getEmail span').on('click', function() {
+  LCB.view.hideModal('#getEmail');
+});
+// Close reset PW window - click 'x'
+$('#password_prompt span').on('click', function() {
+  LCB.view.hideModal('#password_prompt');
 });
 
-// Create account or signin
-// DMZ question: not sure if pw should be hashed here or if plain
-// pw should be passed to model for hashing...
-$('#login button').on('click', function(e) {
-  var id = this.id;
-  var userInfo = {};
-
-  if (id === "signin_first") {
-    userInfo.name = $('#name_set').val();
-    userInfo.pw = $('#password_set').val();
-    userInfo.email = $('#email_set').val();
-
-  } else if (id === "signin_return") {
-    userInfo.name = '';
-    userInfo.email = $('#email').val();
-    userInfo.pw = $('#password').val();
-  }
-
-  LCB.controller.signin(userInfo);
+// Close user msg window - click 'x'
+$('#userMsg span, #userMsg button').on('click', function() {
+  LCB.view.hideModal('#userMsg');
 });
 
+// Log in or Sign up
+$('#register button').on('click', function(e) {
+  LCB.controller.register(this.id);
+});
+
+// Get user email, so that re-activation link can be sent
+$('#getEmail button').on('click', function(e) {
+  LCB.controller.requestReset();
+});
+
+// Establish or reset password for account
+$('#password_prompt button').on('click', function() {
+    LCB.controller.setPassword();
+});
+
+// Submit actual expense
+$('#m_actual button').on('click', function(e) {
+  e.preventDefault();
+  LCB.controller.sendExpense(this.name);
+});
 
 // For login - toggling between Sign Up and Log In
-$('.message a').click(function(){
-   $('#login form').animate({height: "toggle", opacity: "toggle"}, "slow");
+// TBD: incorporate the change password stuff into this
+$('[id^="goto"]').click(function(){
+  LCB.view.animateModal('#register form');
+});
+
+// To reset password if user forgot
+$('#requestPasswordReset a').click(function(){
+    LCB.view.hideModal('#register');
+    LCB.view.showModal('#getEmail');
 });
 
 // Toggle between showing and hiding the sidebar when clicking the menu icon
-$('#menu_icon').on('click', function() {
-  $('#mySidebar').toggle();
+// Also hide sidebar if user clicks on any sidebar option (incl 'close')
+$('#menu_icon, #mySidebar a').on('click', function() {
+  LCB.view.toggleItem('#mySidebar');
 });
 
-// Hide sidebar if user clicks on any sidebar option (incl 'close')
-$('#mySidebar a').on('click', function() {
-  $('#mySidebar').hide();
+// Click on main menu - calls fcn to hide/display correct page (home, actual, budget...)
+$('.swap, .swap i, .swap span').on('click', function(e) {
+  LCB.view.togglePages(e.currentTarget.hash);
 });
 
-// Call fcn to hide/display correct page (home, income, budget...)
-$('.swap').on('click', function(e) {
-  LCB.view.togglePages(e.target.hash);
+// Click on sub-menu  under 'Actual', 'Budget' or 'Summary' pages
+// Note: make them work in sync - clicking on 'Food' under 'Actual' changes the
+// active option to 'Food' under 'Budget' & 'Summary' as well
+$('.subMenu a').on('click', function(e) {
+  LCB.controller.chooseCategory(this);
+});
+
+$('footer a').on('click', function() {
+  LCB.view.toTop();
+});
+
+// For drop down of detailed actual & budget data
+$('.categ').on('click', 'li', function() {
+    LCB.controller.handleDetail(this.id);
+});
+
+// Change date selection
+$('[id^="date_"]').bind('change', function(e) {
+  console.log($(e.target).val());
+  LCB.controller.changeDate($(e.target).val());
 });

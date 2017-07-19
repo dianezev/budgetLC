@@ -41,30 +41,59 @@ body, html {
 
 a, a:hover,
 a:focus {
-  text-decoration-line: none
+  text-decoration-line: none;
 }
+.active {
+  background-color: #f1f1f1;
+  color: black;
+}
+.w3-top .active {
+  background-color: #dbdada;
+  color: black;
+}
+.categ li {
+    list-style: none;
+}
+.subcat td {
+  font-weight: bold;
+}
+.hide { display: none; }
+/*
+.subMenu a:focus,.subMenu a:hover {
+  background-color: #f1f1f1;
+  color: black;
+}
+*/
 .snug p {
-  margin: 0
+  margin: 0;
 }
 .snug h4 {
-  margin-bottom: 0
+  margin-bottom: 0;
 }
 .snug p:last-of-type {
-  margin-bottom: 10px
+  margin-bottom: 10px;
 }
 button:hover {
-  text-decoration: none
+  text-decoration: none;
 }
-
+.subMenu a {
+  font-size: 12px;
+  line-height: .2;
+  padding: 8px;
+}
+table.detail {
+  background-color: #e3e3e3;
+  color: grey;
+}
 .results {
   font-size: 15px;
-  margin-top: 10px;
+  margin-top: 0;
 }
-.results table, .scrollit {
+.results table, .scrollit_y {
   max-width: 800px;
   width: 100%;  
 }
-.results table {
+.results table, .results p {
   line-height: 1.2;
   margin: auto;
 }
@@ -93,31 +122,43 @@ button:hover {
 .results th { 
   text-align: center;
 }
+.results th:last-child { 
+  text-align: left;
+}
 td {
-  border: 1px solid darkgrey;
+/*  border: 1px solid darkgrey;*/
   border-collapse: collapse;
 }
-.scrollit {
+.scrollit_y {
   border: 1px solid darkgrey;
-/*  overflow-x:hidden;*/
-/*  overflow-y:scroll;*/
-  overflow:scroll;
-  height:115px;
+  background-color: #fffefe;
+  height:240px;
   margin: 0 auto;
+  overflow-x:hidden;
+  overflow-y:scroll;
+}
+
+.actual a:hover,.actual a:focus, .actual p {
+  color: rgb(63, 81, 181);
+}
+.budget a:hover, .budget a:focus, .budget p {
+  color: rgb(0, 150, 136);
+}
+.scrollit_y a, .categ h3 {
+  color:darkgrey;
 }
 .entry p {
   margin-bottom: 0;
 }
+.results button {
+  margin-bottom: 10px;
+}
 .entry select, .entry input {
   width: 100%;
-  padding: 0;
+  padding: 0 2px;
 }
 
-/*
-.w3-third {
-  padding:0 8px;
-}
-*/
+
 .w3-third p {
     display: inline;
 }
@@ -128,8 +169,30 @@ td {
   padding-right: 0;
 }
 .entry {
-  margin: 32px 0;
+  margin: 20px 0;
 }
-.subMenu {
-  line-height: .5;
+.actual p, .budget p {
+  margin: 4px 3px 0 3px;
+  font-weight: bold;
+}
+
+.results, .summary, .settings {
+  padding: 56px 0;
+}
+.w3-top {
+  font-size: .9em;
+}
+
+/*turn off spinner in number inputs*/
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.dateSel {
+  margin: 15px 0;
+  display:inline-flex;
+}
+select {
+  font-size: 80%;
 }
