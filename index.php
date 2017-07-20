@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<title>Total Finance(!!!)</title>
+<title>Total Finance</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -24,7 +24,7 @@
 -->
 <div class="w3-top">
   <div class="w3-bar w3-white w3-card-2" id="myNavbar">
-    <a href="#m_home" class="swap w3-bar-item w3-button w3-wide">TOTAL FINANCE</a>
+    <a href="#m_home" class="swap w3-bar-item w3-button w3-wide">TOTAL FINANCE!</a>
     <!-- Right-sided navbar links -->
     <div class="w3-right w3-hide-small">
       <a href="#m_settings" class="swap w3-bar-item w3-button" style="display: none" id="gotoSettings"><i class="fa fa-cog"></i><span> SETTINGS</span></a>
