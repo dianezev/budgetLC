@@ -189,7 +189,7 @@ LCB.model = (function() {
       $.ajax({
         method: "POST",
         data: {email, password},
-        url: "/test/php/api/login.php",
+        url: "php/api/login.php",
         success: function(result){
           // TBD Modify AJAX call to also return actual & budget data in JSON format as part of result - result.act and result.bud if possible
           console.log('RESULT FROM LOGIN');
