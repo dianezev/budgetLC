@@ -16,9 +16,27 @@
 	}
 	
 	// Create a database object
+	$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
+	if ($url['path'] != '') {
+	    $server = $url["host"];
+	    $username = $url["user"];
+	    $password = $url["pass"];
+	    $db_name = substr($url["path"], 1);
+	} else {
+	    $server = DB_HOST;
+	    $username = DB_USER;
+	    $password = DB_PASS;
+	    $db_name = DB_NAME;
+	}
+
+	$dsn = "mysql:host=".$server.";dbname=".$db_name;
+	$db = new PDO($dsn, $username, $password);
+
+
 	try {
-		$dsn = "mysql:host=".DB_HOST.";dbname=".DB_NAME;
-		$db = new PDO($dsn, DB_USER, DB_PASS);
+		$dsn = "mysql:host=".$server.";dbname=".$db_name;
+		$db = new PDO($dsn, $username, $password);
 	} catch (PDOException $e) {
 		echo 'Connection failed: ' . $e->getMessage();
 		exit;
