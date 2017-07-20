@@ -94,8 +94,10 @@ LCB.controller = (function() {
 
         // If login is successful, get user data and update view
         model.login(userInfo, function (result) {
+          console.log('JJJJJJJJJJJJJJJJJJ');
+          console.log(result);
           view.userAcct(result);
-          model.updateData("actual", function (actSubtotals, date) {
+          model.updateData("actual", result.user.userId, function (actSubtotals, date) {
             view.refreshDetail(actSubtotals, "actual", date);
 
             /*
@@ -104,7 +106,7 @@ LCB.controller = (function() {
              * then it will work to call view.refreshSummary which uses both
              */
             // TBD: change "actual" here to "budget" when url for budget is in place
-            model.updateData("budget", function (budSubtotals, date) {
+            model.updateData("budget", result.user.userId, function (budSubtotals, date) {
               view.refreshDetail(budSubtotals, "budget", date);
               view.refreshSummary(actSubtotals, budSubtotals);        
             });

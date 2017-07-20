@@ -25,7 +25,7 @@ CREATE TABLE `users` (
   `email` varchar(50) NOT NULL,
   `hashedPW` varchar(100) NOT NULL,
   `ver_code` varchar(100) NOT NULL,
-  'verified' int(11) NOT NULL
+  `verified` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 QUERY;
 
@@ -36,7 +36,7 @@ if($stmt = $db->prepare($sql))
 echo 'blah blah';
 
 $sql = <<<QUERY
-INSERT INTO `users` (`userId`, `name`, `email`, `hashedPW`, `ver_code`, 'verified') VALUES
+INSERT INTO `users` (`userId`, `name`, `email`, `hashedPW`, `ver_code`, `verified`) VALUES
 (1, 'Tom', 'tom@comcast.net', md5('tom'), 'd26d2b8ec72b5a68fb6ffe7d6e1cf3b351401103', 1),
 (2, 'Michael', 'mp__@hotmail.com', md5('test'), '112dd7a73c8cf54bcd566de0cc3a488fb6c29e88', 1);
 QUERY;

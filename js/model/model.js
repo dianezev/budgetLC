@@ -181,6 +181,7 @@ LCB.model = (function() {
     login: function(userInfo, cb) {
       var email = userInfo.email;
       var password = userInfo.password;
+      
       var that = this;
 
       cb = cb || function () {};
@@ -191,6 +192,7 @@ LCB.model = (function() {
         url: "/test/php/api/login.php",
         success: function(result){
           // TBD Modify AJAX call to also return actual & budget data in JSON format as part of result - result.act and result.bud if possible
+          console.log('RESULT FROM LOGIN');
           console.log(result);
 
           // Update variables if login was successful
@@ -199,6 +201,7 @@ LCB.model = (function() {
             
             user = result.user;
             categSel = 0;
+            
                         
             // Right now this code just refs a local JSON file. 
             // TBD: drop the parse once Michael is returning actual & budget data with login ajax call
@@ -222,8 +225,10 @@ LCB.model = (function() {
 //            // Update subtotals for current date
 //            actSubtotals = that.calcSubtotals(act);
 //            budSubtotals = that.calcSubtotals(bud);
+            cb({user, categSel});
+          } else {
+            console.log('error with log in');
           }
-          cb({user, categSel});
         },
         error: function(xhr, status, error) {
           alert('ajax ERROR: ' + error);
@@ -322,13 +327,13 @@ LCB.model = (function() {
         }
       });      
     },
-    updateData: function(dtype, cb) {
+    updateData: function(dtype, user, cb) {
       var that = this;
       //TBD adapt to use user id from var user.userID
       
       $.ajax({
         method: "GET",
-        url: "http://totalfinance-api.herokuapp.com/api/v1/" + dtype + "/1",
+        url: "http://totalfinance-api.herokuapp.com/api/v1/" + dtype + "/" + user ,
         success: function(result){
           console.log(result);
 
