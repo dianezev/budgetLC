@@ -87,10 +87,10 @@ LCB.view = (function() {
       console.log(detailHTML);
       
       
-      // If any template data returned, append
+      // Append html results & set date
       if (detailHTML !== '') {
         $(id).empty().append(detailHTML);
-        $('[id^="date_' + dtype + '"]').val(date);
+        this.setDate(dtype, date);
       }
     },
 
@@ -99,6 +99,9 @@ LCB.view = (function() {
       // TBD
     },
     
+    setDate: function(dtype, date) {
+      $('[id^="date_' + dtype + '"]').val(date);
+    },
     
     showModal: function(id) {
       $(id).show();

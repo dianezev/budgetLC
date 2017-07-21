@@ -31,13 +31,12 @@ LCB.controller = (function() {
     
     // Called when user changes date selector
     changeDate: function(date) {
-      console.log(date);
-        model.changeDate(date, function (result) {
-          
-          // Show actual & budget detail for user
-          view.refreshDetail(result.actSubByCat, "actual", date);
-          view.refreshDetail(result.budSubByCat, "budget", date);          
-        });      
+      model.changeDate(date, function (result) {
+
+        // Show actual & budget detail for user
+        view.refreshDetail(result.actSubByCat, "actual", date);
+        view.refreshDetail(result.budSubByCat, "budget", date);          
+      });      
     },
     
     // Called during intialization by script.js
@@ -69,6 +68,14 @@ LCB.controller = (function() {
       
       // view.refreshDetail(actSubtotals, "actual");
     },
+    
+    // Set dates in date selectors and initialize data arrays (empty)
+    initialize: function() {
+      model.initialize(function(dateArray, date) {
+        view.fillDateRg(dateArray, date);
+      });
+    },
+    
     logout: function() {  
       model.logout();
       view.userAcct(null);
@@ -91,11 +98,10 @@ LCB.controller = (function() {
         // TBD: add validation - not working when user fails to provide email/name
         userInfo.email = $('#email').val();
         userInfo.password = $('#password').val();
+        $('#password').val('');
 
         // If login is successful, get user data and update view
         model.login(userInfo, function (result) {
-          console.log('JJJJJJJJJJJJJJJJJJ');
-          console.log(result);
           view.userAcct(result);
           model.updateData("actual", result.user.userId, function (actSubtotals, date) {
             view.refreshDetail(actSubtotals, "actual", date);
@@ -129,9 +135,6 @@ LCB.controller = (function() {
     
     // Called when user submits expense data
     sendExpense: function(dtype) {
-      console.log('in sendExpense');
-      console.log(dtype);
-      
       var id = '#m_' + dtype;
       var subCode = $(id + ' .entry select').val();
       var date = $(id + ' input.dateOpt').val();
@@ -151,13 +154,6 @@ LCB.controller = (function() {
 //        }
         // change to refresh detail
         //view.userMsg(result);
-      });
-    },
-    
-    // Set dates in date selectors
-    setDateRg: function() {
-      model.getDateRg(function(dateArray, date) {
-        view.fillDateRg(dateArray, date);
       });
     },
     

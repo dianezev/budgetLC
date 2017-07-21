@@ -14,7 +14,7 @@ $(document).ready(function() {
   // If url contains hashed email, check if valid and
   // if so prompt user for password creation/reset
   LCB.controller.checkUrl();
-  LCB.controller.setDateRg();
+  LCB.controller.initialize();
   
   console.log(LCB);
   
