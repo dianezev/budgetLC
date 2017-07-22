@@ -52,19 +52,13 @@ LCB.view = (function() {
                          '-' + ('0' + (date.getMonth() + 1).toString()).slice(-2) +
                          '-' + ('0' + date.getDate().toString()).slice(-2));
     },
-    fillDateRg: function(arr, date) {
+    fillDateRg: function(arr) {
       var datesHTML = template.getDatesHTML(arr);
 
       // If any template data returned, append
       if (datesHTML !== '') {
           $("[id^='date_']").empty().append(datesHTML);
-      }
-      
-      // Use date param for default selection
-      //$("[id^='date_']").val(date);
-      console.log(date);
-      $('#date_actual').val('3');
-      
+      }      
     },
     hideModal: function(id) {
       $(id).hide();
@@ -83,24 +77,19 @@ LCB.view = (function() {
       var id = "#list_" + dtype;
       var detailHTML = template.getDetailHTML(data, dtype);
       
-      console.log('returned html is:');
-      console.log(detailHTML);
-      
-      
       // Append html results & set date
       if (detailHTML !== '') {
         $(id).empty().append(detailHTML);
-        this.setDate(dtype, date);
       }
     },
 
     // Gets summary info
-    refreshSummary: function(obj) {
+    refreshSummary: function(data) {
       // TBD
     },
     
-    setDate: function(dtype, date) {
-      $('[id^="date_' + dtype + '"]').val(date);
+    setDate: function(date) {
+      $('[id^="date_"]').val(date);
     },
     
     showModal: function(id) {
@@ -186,10 +175,6 @@ LCB.view = (function() {
         // Update selector in submenus
         this.makeActiveCateg(res.categSel + 1);
         
-//        // Show actual & budget detail for user
-//        this.refreshDetail(res.actSubByCat, "actual");
-//        this.refreshDetail(res.budSubByCat, "budget");
-        
       // If error occurred during login, display modal window
       } else {
         showMsg(res.err_msg);
@@ -198,7 +183,9 @@ LCB.view = (function() {
     userMsg: function(result) {
       var msg = (result.hasOwnProperty('msg'))
                 ? result.msg
-                : result.err_msg;
+                : (result.hasOwnProperty('err_msg')) 
+                   ? result.err_msg 
+                   : result;
       $('#register').hide();
       
       showMsg(msg);

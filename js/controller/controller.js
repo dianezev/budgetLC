@@ -5,8 +5,8 @@
  *
  * Note that generally the 'view.___()' methods
  * are passed in as callback functions because
- * the AJAX calls in 'model.___()' methods need
- * to return results to view.___.
+ * the AJAX calls made in 'model.___()' returns
+ * results to view.___.
  ****************************************************/
 
 LCB = window.LCB || {};
@@ -31,11 +31,13 @@ LCB.controller = (function() {
     
     // Called when user changes date selector
     changeDate: function(date) {
-      model.changeDate(date, function (result) {
+      model.changeDate(date, function (categSubtotals) {
 
         // Show actual & budget detail for user
-        view.refreshDetail(result.actSubByCat, "actual", date);
-        view.refreshDetail(result.budSubByCat, "budget", date);          
+        view.setDate(date);
+        view.refreshDetail(categSubtotals.actual, "actual");
+        view.refreshDetail(categSubtotals.budget, "budget");
+        view.refreshSummary(categSubtotals);
       });      
     },
     
@@ -56,23 +58,22 @@ LCB.controller = (function() {
       var parent_id = $(that).parent().attr("id");
       var categories = $('#' + parent_id + ' a');
       var index = categories.index(that);
-
-      model.filterData(index, function (result) {
-        console.log('filterData returns:');
-        console.log(result);
-        view.makeActiveCateg(index + 1);
-        view.refreshDetail(result.actSubByCat, "actual", result.date);
-        view.refreshDetail(result.budSubByCat, "budget", result.date);
-        view.refreshSummary(result);
-      });
       
-      // view.refreshDetail(actSubtotals, "actual");
+      model.filterData(index, function (categSubtotals) {
+        console.log('filterData returns:');
+        console.log(categSubtotals);
+        view.makeActiveCateg(index + 1);
+        view.refreshDetail(categSubtotals.actual, "actual");
+        view.refreshDetail(categSubtotals.budget, "budget");
+        view.refreshSummary(categSubtotals);
+      });
     },
     
     // Set dates in date selectors and initialize data arrays (empty)
     initialize: function() {
       model.initialize(function(dateArray, date) {
-        view.fillDateRg(dateArray, date);
+        view.fillDateRg(dateArray);
+        view.setDate(date);
       });
     },
     
@@ -103,18 +104,18 @@ LCB.controller = (function() {
         // If login is successful, get user data and update view
         model.login(userInfo, function (result) {
           view.userAcct(result);
-          model.updateData("actual", result.user.userId, function (actSubtotals, date) {
-            view.refreshDetail(actSubtotals, "actual", date);
+          view.setDate(result.date);
+          model.getData("actual", function (categSubtotals) {
+            view.refreshDetail(categSubtotals.actual, "actual");
 
             /*
              * Nest this call to update budget data so that when it completes
              * we are sure that actual data (above) is also complete -
-             * then it will work to call view.refreshSummary which uses both
+             * then call view.refreshSummary which uses both
              */
-            // TBD: change "actual" here to "budget" when url for budget is in place
-            model.updateData("budget", result.user.userId, function (budSubtotals, date) {
-              view.refreshDetail(budSubtotals, "budget", date);
-              view.refreshSummary(actSubtotals, budSubtotals);        
+            model.getData("budget", function (categSubtotals) {
+              view.refreshDetail(categSubtotals.budget, "budget");
+              view.refreshSummary(categSubtotals);        
             });
           });
         });
@@ -138,23 +139,26 @@ LCB.controller = (function() {
       var id = '#m_' + dtype;
       var subCode = $(id + ' .entry select').val();
       var date = $(id + ' input.dateOpt').val();
-      var amt = $('#amt_' + dtype).val();
+      var amt = parseFloat($('#amt_' + dtype).val()).toFixed(2);
       var detail = $('#det_' + dtype).val();
-      var expenseData = {subCode, date, amt, detail};
+      var expenseData = {subCode, date, amt, detail, dtype};
+      
+      // If amount entered is invalid, alert user
+      if ((amt === "NaN") || (amt === "0.00")) {
+        view.userMsg("The amount is not valid. Please try again.");
+      
+      // Otherwise submit expense data
+      } else {
+      
+        model.sendExpense(expenseData, function (result) {
+          // maybe improve later: instead of getExpenses, could just add a new object to the actual or budget array, then recalc subtotals, etc.
 
-      model.sendExpense(expenseData, function (result) {
-        // maybe improve later: instead of getExpenses, could just add a new object to the actual or budget array, then recalc subtotals, etc.
-  
-
-// LEFT OFF HERE: check back with Michael on this - were we going to nest a model
-        // cb within model and then nest a view cb?
-// revise to make second model call before refresh
-//        model.getExpenses( sdf, fcn() {
-//          view.refresh();
-//        }
-        // change to refresh detail
-        //view.userMsg(result);
-      });
+          model.getData(dtype, function (categSubtotals) {
+            view.refreshDetail(categSubtotals[dtype], dtype);
+            view.refreshSummary(categSubtotals);
+          });
+        });
+      }
     },
     
     // Called when user confirms a new password

@@ -51,10 +51,16 @@ $('#password_prompt button').on('click', function() {
     LCB.controller.setPassword();
 });
 
-// Submit actual expense
-$('#m_actual button').on('click', function(e) {
+// Submit expense
+$('#m_actual button, #m_budget button').on('click', function(e) {
   e.preventDefault();
   LCB.controller.sendExpense(this.name);
+});
+
+// Change user settings 
+$('#m_settings').on('click', function(e) {
+  e.preventDefault();
+  // TBD
 });
 
 // For login - toggling between Sign Up and Log In

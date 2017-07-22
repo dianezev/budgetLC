@@ -17,14 +17,15 @@ LCB.model = (function() {
   'use strict';
   
   // Private vars here
-  var actSubtotals;
-  var budSubtotals;
+  //var actSubtotals;
+  //var budSubtotals;
+  var subtotals = [];
   
   var dateReset = ''  
   var date = ''; // initialized to current year & mo but user can change
   
   var categSel = 0; // def to 1st category; changes with submenu selection
-  var user = {email: '', name: '', e:'', v:'', userID: ''};
+  var user = {email: '', name: '', e:'', v:'', userId: ''};
   var bud;
   var act;
 
@@ -127,16 +128,22 @@ LCB.model = (function() {
       var subtotals = [];
 
       for (var i = 0, l = CAT.length; i < l ; i++) {  
+        subtotals[i] = {actual:{}, budget: {}};
 
         // Get category totals
-        subtotals[i] = getSubtotals(arr, CAT[i].code, 
+        subtotals[i].actual = getSubtotals(act, CAT[i].code, 
+                        CAT[i].name, date, false);
+        subtotals[i].budget = getSubtotals(bud, CAT[i].code, 
                         CAT[i].name, date, false);
 
         // Get Sub-category totals:
-        subtotals[i].sub = [];
+        subtotals[i].actual.sub = [];
+        subtotals[i].budget.sub = [];
 
         for (var j = 0, k = CAT[i].sub.length; j < k ; j++) {
-          subtotals[i].sub[j] = getSubtotals(arr, CAT[i].sub[j].code,
+          subtotals[i].actual.sub[j] = getSubtotals(act, CAT[i].sub[j].code,
+                                CAT[i].sub[j].name, date, true);
+          subtotals[i].budget.sub[j] = getSubtotals(bud, CAT[i].sub[j].code,
                                 CAT[i].sub[j].name, date, true);
         }
       }
@@ -147,11 +154,10 @@ LCB.model = (function() {
       date = dateSel;
 
       // Update subtotals for current date
-      actSubtotals = this.calcSubtotals(act);
-      budSubtotals = this.calcSubtotals(bud);
+      subtotals = this.calcSubtotals();
 
       // Callback refreshes data detail for selected date
-      cb({actSubByCat: actSubtotals[categSel], budSubByCat: budSubtotals[categSel]});
+      cb(subtotals[categSel]);
     },
     
     checkUrl: function(urlInfo, cb) {
@@ -180,12 +186,12 @@ LCB.model = (function() {
 
     filterData: function(index, cb) {
       categSel = index;
-      cb({actSubByCat: actSubtotals[categSel], budSubByCat: budSubtotals[categSel], date});
+      cb(subtotals[categSel]);
     },
     
     initialize: function (cb) {
       
-      // Get current date & range for selector and default date
+      // Get range of dates for selector and initialize 'date' to cur mo & yr
       var date_rg = getDateRg();
       
       // Initialize data arrays to empty
@@ -193,14 +199,12 @@ LCB.model = (function() {
       bud = initData();
       
       // Initialize subtotals
-      actSubtotals = this.calcSubtotals(act);
-      budSubtotals = this.calcSubtotals(bud);
+      subtotals = this.calcSubtotals();
       
-      cb(date_rg, this.date);
+      cb(date_rg, date);
     },
       
-    // TBD: I think we decided that we will also return actual and budget data 
-    // in the 'result' object that AJAX returns for login 
+    // If login is successful, return user info (userId, name...)
     login: function(userInfo, cb) {
       var email = userInfo.email;
       var password = userInfo.password;
@@ -226,7 +230,7 @@ LCB.model = (function() {
             user = result.user;
             categSel = 0;
             
-            cb({user, categSel});
+            cb({user, categSel, date});
 
           } else {
             console.log('error with log in');
@@ -238,15 +242,14 @@ LCB.model = (function() {
       });      
     },
     logout: function() {
-      user = {email: '', name: '', e:'', v:'', userID: ''}
+      user = {email: '', name: '', e:'', v:'', userId: ''}
       
       // Initialize data arrays to empty
       act = initData();
       bud = initData();
       
       // Initialize subtotals
-      actSubtotals = this.calcSubtotals(act);
-      budSubtotals = this.calcSubtotals(bud);
+      subtotals = this.calcSubtotals();
 
       // TBD: other db/backend processing?
     },
@@ -271,14 +274,18 @@ LCB.model = (function() {
     },
     sendExpense: function(expenseData, cb) {
       cb = cb || function () {};
-      expenseData.userID = user.userID;
+      var userId = user.userId;
+      var dtype = expenseData.dtype;
+      
+      // Add userId to expenseData obj
+      expenseData.userId = userId;
 
       // TBD: continue with cb fcn when php returns updated actual or budget data
       // need to update view
       $.ajax({
         method: "POST",
         data: expenseData,
-        url: "http://totalfinance-api.herokuapp.com/api/v1/actual/1",
+        url: "http://totalfinance-api.herokuapp.com/api/v1/" + dtype + "/" + userId,
         success: function(result){
           console.log(result);
           cb(result);
@@ -327,16 +334,14 @@ LCB.model = (function() {
         }
       });      
     },
-    updateData: function(dtype, user, cb) {
+    getData: function(dtype, cb) {
       var that = this;
-      //TBD adapt to use user id from var user.userID
+      var userId = user.userId;
       
       $.ajax({
         method: "GET",
-        url: "http://totalfinance-api.herokuapp.com/api/v1/" + dtype + "/" + user ,
+        url: "http://totalfinance-api.herokuapp.com/api/v1/" + dtype + "/" + userId,
         success: function(result){
-          var catSubtotals = {};
-          
           console.log(result);
 
           if (dtype === "actual") {
@@ -348,13 +353,6 @@ LCB.model = (function() {
               // If result is null, re-initialize variable
               act = initData();            
             }
-
-            // Update subtotals for current date
-            actSubtotals = that.calcSubtotals(act);
-
-            // Get subtotals for currently selected category
-            catSubtotals = actSubtotals[categSel];
-
           } else if (dtype === "budget") {
             if (result !== null) {
               bud = result;
@@ -364,16 +362,15 @@ LCB.model = (function() {
               // If result is null, re-initialize variable
               bud = initData();            
             }
-
-            // Update subtotals for current date
-            budSubtotals = that.calcSubtotals(bud);
-
-            // Get subtotals for currently selected category
-            catSubtotals = budSubtotals[categSel];
           }
           
+          // Update subtotals for current date
+          // TBD: Could pass add'l arg so it only updates based on 'dtype'
+          // instead of updating both the actual & budget
+          subtotals = that.calcSubtotals();
+
           // Pass subtotals for current category to callback
-          cb(catSubtotals, date);
+          cb(subtotals[categSel], date);
         },
         error: function () {
           console.log('error');

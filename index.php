@@ -301,13 +301,12 @@
 
           <p>Add budget expense:</p>
           <select name="hshld">
-            <option value="HS_01">Rent/Mortgage payment</option>
-            <option value="HS_02">Maintenance/Repairs</option>
-            <option value="HS_03">Renters/Homeowners insurance</option>
-            <option value="HS_04">Household goods/Furniture</option>
-            <option value="HS_05">Home improvement</option>
-            <option value="HS_06">Yard care</option>
-            <option value="HS_07">Other</option>
+            <option value="hous_01">Mortgage/Rent</option>
+            <option value="hous_02">Maintenance</option>
+            <option value="hous_03">Home Improvement</option>
+            <option value="hous_04">Home Insurance</option>
+            <option value="hous_05">Household Goods</option>
+            <option value="hous_06">Other</option>
           </select>
         </div>
 
