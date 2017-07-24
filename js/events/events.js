@@ -10,7 +10,6 @@
 
 // Log in/Sign up/Log out
 $('.toLogin').on('click', function() {
-  
   if (this.text === "LOG OUT") {
     LCB.controller.logout();
   } else {
@@ -22,10 +21,12 @@ $('.toLogin').on('click', function() {
 $('#register span').on('click', function() {
   LCB.view.hideModal('#register');
 });
+
 // Close reset PW window - click 'x'
 $('#getEmail span').on('click', function() {
   LCB.view.hideModal('#getEmail');
 });
+
 // Close reset PW window - click 'x'
 $('#password_prompt span').on('click', function() {
   LCB.view.hideModal('#password_prompt');

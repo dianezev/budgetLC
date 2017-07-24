@@ -63,10 +63,19 @@ LCB.view = (function() {
     hideModal: function(id) {
       $(id).hide();
     },
-    makeActiveCateg: function(i) {
-      
+    
+    makeActiveCateg: function(i, subCodeInfo) {
+      console.log(subCodeInfo);
+      var subCategoriesHTML = template.getSubCatHTML(subCodeInfo);
+
+      // If any template data returned, append
+      if (subCategoriesHTML !== '') {
+          $("[id^='input_'] select").empty().append(subCategoriesHTML);
+      }    
+
+      // Highlight category option on submenu
       $("[id^='s_'] a").removeClass('active');
-      $("[id^='s_'] a:nth-child(" + i + ")").addClass('active');      
+      $("[id^='s_'] a:nth-child(" + i + ")").addClass('active');
     },
     
     // Gets subtotal info for 'Actual' and 'Budget'
@@ -172,9 +181,6 @@ LCB.view = (function() {
         $('#myNavbar div a:first-child').show();
         $('#mySidebar a:nth-child(2)').show();        
       
-        // Update selector in submenus
-        this.makeActiveCateg(res.categSel + 1);
-        
       // If error occurred during login, display modal window
       } else {
         showMsg(res.err_msg);

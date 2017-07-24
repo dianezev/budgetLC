@@ -62,7 +62,7 @@ LCB.controller = (function() {
       model.filterData(index, function (categSubtotals) {
         console.log('filterData returns:');
         console.log(categSubtotals);
-        view.makeActiveCateg(index + 1);
+        view.makeActiveCateg(index + 1, categSubtotals.actual.sub);
         view.refreshDetail(categSubtotals.actual, "actual");
         view.refreshDetail(categSubtotals.budget, "budget");
         view.refreshSummary(categSubtotals);

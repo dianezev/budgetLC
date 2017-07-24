@@ -175,26 +175,34 @@
 <!--    </div>-->
     <form action="">
       <div class="w3-container w3-hide-small">
+<!--
         <div class="dateSel">
           <p>Show actual expenses for:</p>
           <select id="date_actual">
+-->
 <!--        completed by template-->
+<!--
           </select>
         </div>
+-->
 
 <!--
-        Note: The reason the table headers are outside
-        of scroll div is that the headers scroll out of view
+        Note: The table headers are outside
+        of scroll div because the headers scroll out of view
         when they are included. The tradeoff is that when
-        screen size is very small, headers are not aligned with data.
+        screen size is very small, headers are not aligned with data very well.
         It might work to drop the horiz scroll bar and hide overflow?
 -->
         <table class="w3-text-indigo">
           <thead>
             <tr>
               <th colspan="1">Item</th>
-              <th colspan="1">Date</th>
-              <th colspan="1">Actual</th>
+              <th colspan="1">History for:<br>
+                <select id="date_actual">
+      <!--        completed by template-->
+                </select>
+              </th>
+              <th colspan="1">Actual<br>Amount</th>
               <th colspan="1">Details</th>
             </tr>
           </thead>
@@ -204,17 +212,12 @@
 <!--          template used here -->
       </div>
         
-      <div class="entry w3-row-padding">
+      <div id="input_actual" class="entry w3-row-padding">
         <div class="w3-quarter">        
 
           <p>Add actual expense:</p>
-          <select name="hshld">
-            <option value="hous_01">Mortgage/Rent</option>
-            <option value="hous_02">Maintenance</option>
-            <option value="hous_03">Home Improvement</option>
-            <option value="hous_04">Home Insurance</option>
-            <option value="hous_05">Household Goods</option>
-            <option value="hous_06">Other</option>
+          <select>
+<!--          template used here -->
           </select>
         </div>
 
@@ -223,7 +226,7 @@
         </div>
 
         <div class="w3-quarter">        
-          <p><span>Actual</span> Amount:</p>
+          <p><span>Actual</span> amount:</p>
           <input id="amt_actual" class="w3-input w3-border" type="number" min="0" step=".01" placeholder="0.00">
         </div>
 
@@ -250,7 +253,7 @@
 
     <div class="subMenu w3-bar w3-teal w3-card-2">
         <div class="w3-center" id="s_budget">
-<!--          ideally add template for this-->
+<!--          could add template for this-->
           <a href="#" class="w3-bar-item w3-button">Household</a>
           <a href="#" class="w3-bar-item w3-button">Car/Transit</a>
           <a href="#" class="w3-bar-item w3-button">Food</a>
@@ -286,7 +289,7 @@
             <tr>
               <th colspan="1">Item</th>
               <th colspan="1">Date</th>
-              <th colspan="1">Budget</th>
+              <th colspan="1">Budgeted<br>Amount</th>
               <th colspan="1">Details</th>
             </tr>
           </thead>
@@ -296,17 +299,12 @@
 <!--        template used here-->
       </div>
         
-      <div class="entry w3-row-padding">
+      <div id="input_budget" class="entry w3-row-padding">
         <div class="w3-quarter">        
 
           <p>Add budget expense:</p>
-          <select name="hshld">
-            <option value="hous_01">Mortgage/Rent</option>
-            <option value="hous_02">Maintenance</option>
-            <option value="hous_03">Home Improvement</option>
-            <option value="hous_04">Home Insurance</option>
-            <option value="hous_05">Household Goods</option>
-            <option value="hous_06">Other</option>
+          <select>
+<!--          template used here -->
           </select>
         </div>
 
@@ -315,7 +313,7 @@
         </div>
 
         <div class="w3-quarter">        
-          <p><span>Budgeted</span> Amount:</p>
+          <p><span>Budgeted</span> amount:</p>
           <input id="amt_budget" class="w3-input w3-border" type="number" min="0" step=".01" placeholder="0.00">
         </div>
 
@@ -341,7 +339,7 @@
   <div class="w3-card w3-light-grey">
       <div class="subMenu w3-bar w3-blue-gray w3-card-2">
         <div class="w3-center" id="s_summary">
-<!--          ideally add template for this-->
+<!--          could add template for this-->
           <a href="#" class="w3-bar-item w3-button">Household</a>
           <a href="#" class="w3-bar-item w3-button">Car/Transit</a>
           <a href="#" class="w3-bar-item w3-button">Food</a>

@@ -4,9 +4,9 @@ LCB.template = (function() {
     'use strict';   
 
     // Updates dates for drop-down selectors
-    var _tplGetDates = _.template(
+    var _tplSelectList = _.template(
                 '<option value="<%= value %>">' +
-                  '<%= month %>' +
+                  '<%= label %>' +
                 '</option>'
     );
     
@@ -102,12 +102,22 @@ LCB.template = (function() {
             for (var i = 0, l = data.length; i < l; i++) {
 
               // Get html for date drop down
-              datesHTML += _tplGetDates({value: data[i].code, month: data[i].name});
+              datesHTML += _tplSelectList({value: data[i].code, label: data[i].name});
             }
             return datesHTML;            
-        }
-
+        },
       
+        // Fills subcategory list with sub-categories for current category
+        getSubCatHTML: function(data) {
+            var subCatsHTML = '';
+          
+            for (var i = 0, l = data.length; i < l; i++) {
+
+              // Get html for sub-category drop down
+              subCatsHTML += _tplSelectList({value: data[i].code, label: data[i].name});
+            }
+            return subCatsHTML;            
+        }   
     };
 
     return publicAPI;

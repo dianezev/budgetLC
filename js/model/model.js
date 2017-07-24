@@ -19,7 +19,7 @@ LCB.model = (function() {
   // Private vars here
   //var actSubtotals;
   //var budSubtotals;
-  var subtotals = [];
+  //var subtotals = [];
   
   var dateReset = ''  
   var date = ''; // initialized to current year & mo but user can change
@@ -117,13 +117,13 @@ LCB.model = (function() {
   var publicAPI = {
     
     // Public vars here
-    
+    subtotals: [],
 
     // Public functions here  
 
     // Calculates subtotal and detail info, 
     // based on selected date
-    calcSubtotals: function (arr) {
+    calcSubtotals: function () {
       var CAT = this.CAT;
       var subtotals = [];
 
@@ -154,10 +154,10 @@ LCB.model = (function() {
       date = dateSel;
 
       // Update subtotals for current date
-      subtotals = this.calcSubtotals();
+      this.subtotals = this.calcSubtotals();
 
       // Callback refreshes data detail for selected date
-      cb(subtotals[categSel]);
+      cb(this.subtotals[categSel]);
     },
     
     checkUrl: function(urlInfo, cb) {
@@ -186,7 +186,7 @@ LCB.model = (function() {
 
     filterData: function(index, cb) {
       categSel = index;
-      cb(subtotals[categSel]);
+      cb(this.subtotals[categSel]);
     },
     
     initialize: function (cb) {
@@ -199,7 +199,7 @@ LCB.model = (function() {
       bud = initData();
       
       // Initialize subtotals
-      subtotals = this.calcSubtotals();
+      this.subtotals = this.calcSubtotals();
       
       cb(date_rg, date);
     },
@@ -249,7 +249,7 @@ LCB.model = (function() {
       bud = initData();
       
       // Initialize subtotals
-      subtotals = this.calcSubtotals();
+      this.subtotals = this.calcSubtotals();
 
       // TBD: other db/backend processing?
     },
@@ -367,10 +367,10 @@ LCB.model = (function() {
           // Update subtotals for current date
           // TBD: Could pass add'l arg so it only updates based on 'dtype'
           // instead of updating both the actual & budget
-          subtotals = that.calcSubtotals();
+          this.subtotals = that.calcSubtotals();
 
           // Pass subtotals for current category to callback
-          cb(subtotals[categSel], date);
+          cb(this.subtotals[categSel], date);
         },
         error: function () {
           console.log('error');

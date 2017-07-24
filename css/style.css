@@ -9,6 +9,9 @@ body, html {
 .w3-bar .w3-button {
     padding: 16px;
 }
+th {
+  vertical-align: bottom;
+}
 
 /* DMZ added in order to use opacity on background image*/
 .bgimg-1 {
@@ -76,10 +79,20 @@ a:focus {
 button:hover {
   text-decoration: none;
 }
+
+option {
+  background-color: rgb(241, 241, 241);
+}
+.subMenu {
+  margin-bottom: 20px;
+}
 .subMenu a {
   font-size: 12px;
   line-height: .2;
   padding: 8px;
+}
+table select {
+  background-color: transparent;
 }
 table.detail {
   background-color: #e3e3e3;
