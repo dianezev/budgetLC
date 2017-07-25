@@ -4,7 +4,7 @@
 //	define('DB_USER', 'db_user');
 	define('DB_USER', 'root');
 //	define('DB_PASS', 'db_password');
-	define('DB_PASS', 'root');
+	define('DB_PASS', ''); //TBD Diane uses no pw, Michael uses 'root'
 
 //	define('DB_NAME', 'db_name');
     define('DB_NAME', 'totalFinance');
