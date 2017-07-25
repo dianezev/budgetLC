@@ -354,12 +354,6 @@
         </div>
       </div>
         <!--  put chart elements here -->  
-
-    <div class="w3-container w3-blue-gray w3-large" style="height: 2em"></div>
-  </div>
-</div>
-  
-
 <!--    experimenting with chart.js-->
         <!--  canvas element / chart01.js -->  
         <div style="height: 500px; width: 500px">
@@ -367,22 +361,30 @@
         </div>
 
         <!-- line chart canvas element / chart03.js -->
-        <canvas id="buyers" width="600" height="400"></canvas>
+<!--        <canvas id="buyers" width="600" height="400"></canvas>-->
         <!-- pie chart canvas element -->
-        <canvas id="countries" width="600" height="400"></canvas>
+<!--        <canvas id="countries" width="600" height="400"></canvas>-->
         <!-- bar chart canvas element -->
-        <canvas id="income" width="600" height="400"></canvas>
+<!--        <canvas id="income" width="600" height="400"></canvas>-->
     
         <!-- canvas element / chart04.js -->
+<!--
         <div class="container">
           <h2>Chart.js Responsive Bar Chart Demo</h2>
           <div>
             <canvas id="canvas"></canvas>
           </div>
         </div>  
+-->
     
     
     
+    <div class="w3-container w3-blue-gray w3-large" style="height: 2em"></div>
+  </div>
+</div>
+  
+
+
   
 
   
@@ -586,12 +588,12 @@ were within php folder...(no objection to changing it back if preferable)
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
 <!--  note this is the chart script that works with chart01.js-->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
 
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 
 <!--  note this is the chart script that works with chart03.js and chart04.js-->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+<!--<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>-->
   
 
   <script src="js/helpers/getAllUrlParams.js"></script>
@@ -609,8 +611,8 @@ were within php folder...(no objection to changing it back if preferable)
 <script src="js/events/events.js"></script>
   
   <script src="js/charts/chart01.js"></script>
-  <script src="js/charts/chart03.js"></script>
-  <script src="js/charts/chart04.js"></script>
+<!--  <script src="js/charts/chart03.js"></script>-->
+<!--  <script src="js/charts/chart04.js"></script>-->
 
   
 </body>
