@@ -120,7 +120,8 @@ console.log('about to call model.login and userInfo is');
                */
               model.getData("budget", function (categSubtotals) {
                 view.refreshDetail(categSubtotals.budget, "budget");
-                view.refreshSummary(categSubtotals);        
+                view.refreshSummary(categSubtotals); 
+                view.userMsg("Welcome to Total Finance!");
               });
             });
           }
