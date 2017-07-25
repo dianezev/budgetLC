@@ -1,5 +1,4 @@
 $(document).ready(function() {
-  alert('in doc ready');
   var ctx = document.getElementById("myChart").getContext('2d');
   var myChart = new Chart(ctx, {
       type: 'bar',

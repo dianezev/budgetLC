@@ -353,6 +353,7 @@
           <a href="#" class="w3-bar-item w3-button">Misc</a>
         </div>
       </div>
+        <!--  put chart elements here -->  
 
     <div class="w3-container w3-blue-gray w3-large" style="height: 2em"></div>
   </div>
@@ -361,18 +362,16 @@
 
 <!--    experimenting with chart.js-->
         <!--  canvas element / chart01.js -->  
-<!--
         <div style="height: 500px; width: 500px">
           <canvas id="myChart" width="400" height="400"></canvas>
         </div>
--->
 
         <!-- line chart canvas element / chart03.js -->
-<!--        <canvas id="buyers" width="600" height="400"></canvas>-->
+        <canvas id="buyers" width="600" height="400"></canvas>
         <!-- pie chart canvas element -->
-<!--        <canvas id="countries" width="600" height="400"></canvas>-->
+        <canvas id="countries" width="600" height="400"></canvas>
         <!-- bar chart canvas element -->
-<!--        <canvas id="income" width="600" height="400"></canvas>-->
+        <canvas id="income" width="600" height="400"></canvas>
     
         <!-- canvas element / chart04.js -->
         <div class="container">
@@ -609,8 +608,8 @@ were within php folder...(no objection to changing it back if preferable)
 <script src="js/script.js"></script>
 <script src="js/events/events.js"></script>
   
-<!--  <script src="js/charts/chart01.js"></script>-->
-<!--  <script src="js/charts/chart03.js"></script>-->
+  <script src="js/charts/chart01.js"></script>
+  <script src="js/charts/chart03.js"></script>
   <script src="js/charts/chart04.js"></script>
 
   
