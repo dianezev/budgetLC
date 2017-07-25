@@ -220,8 +220,6 @@ LCB.model = (function() {
         data: {email, password},
         url: "php/api/login.php",
         success: function(result){
-          console.log('RESULT FROM LOGIN');
-          console.log(result);
 
           // Update variables if login was successful
           if (result.hasOwnProperty('user')) {
@@ -234,6 +232,7 @@ LCB.model = (function() {
 
           } else {
             console.log('error with log in');
+            cb(result);
           }
         },
         error: function(xhr, status, error) {
@@ -285,7 +284,7 @@ LCB.model = (function() {
       $.ajax({
         method: "POST",
         data: expenseData,
-        url: "http://totalfinance-api.herokuapp.com/api/v1/" + dtype + "/" + userId,
+        url: "php/api/v1/" + dtype + "/" + userId,
         success: function(result){
           console.log(result);
           cb(result);
@@ -340,7 +339,7 @@ LCB.model = (function() {
       
       $.ajax({
         method: "GET",
-        url: "http://totalfinance-api.herokuapp.com/api/v1/" + dtype + "/" + userId,
+        url: "php/api/v1/" + dtype + "/" + userId,
         success: function(result){
           console.log(result);
 

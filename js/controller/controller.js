@@ -80,6 +80,7 @@ LCB.controller = (function() {
     logout: function() {  
       model.logout();
       view.userAcct(null);
+      view.clearEntry();
     },
     
     // Called when user submits login or sign up info
@@ -100,24 +101,29 @@ LCB.controller = (function() {
         userInfo.email = $('#email').val();
         userInfo.password = $('#password').val();
         $('#password').val('');
-
+console.log('about to call model.login and userInfo is');
+        console.log(userInfo);
         // If login is successful, get user data and update view
         model.login(userInfo, function (result) {
-          view.userAcct(result);
-          view.setDate(result.date);
-          model.getData("actual", function (categSubtotals) {
-            view.refreshDetail(categSubtotals.actual, "actual");
+          if (result.pass === false) {   
+            view.userMsg(result);
+          } else {
+            view.userAcct(result);
+            view.setDate(result.date);
+            model.getData("actual", function (categSubtotals) {
+              view.refreshDetail(categSubtotals.actual, "actual");
 
-            /*
-             * Nest this call to update budget data so that when it completes
-             * we are sure that actual data (above) is also complete -
-             * then call view.refreshSummary which uses both
-             */
-            model.getData("budget", function (categSubtotals) {
-              view.refreshDetail(categSubtotals.budget, "budget");
-              view.refreshSummary(categSubtotals);        
+              /*
+               * Nest this call to update budget data so that when it completes
+               * we are sure that actual data (above) is also complete -
+               * then call view.refreshSummary which uses both
+               */
+              model.getData("budget", function (categSubtotals) {
+                view.refreshDetail(categSubtotals.budget, "budget");
+                view.refreshSummary(categSubtotals);        
+              });
             });
-          });
+          }
         });
       }
     },
@@ -146,6 +152,7 @@ LCB.controller = (function() {
       // If amount entered is invalid, alert user
       if ((amt === "NaN") || (amt === "0.00")) {
         view.userMsg("The amount is not valid. Please try again.");
+        view.clearEntry();
       
       // Otherwise submit expense data
       } else {
@@ -154,6 +161,7 @@ LCB.controller = (function() {
           // maybe improve later: instead of getExpenses, could just add a new object to the actual or budget array, then recalc subtotals, etc.
 
           model.getData(dtype, function (categSubtotals) {
+            view.clearEntry();
             view.refreshDetail(categSubtotals[dtype], dtype);
             view.refreshSummary(categSubtotals);
           });

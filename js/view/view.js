@@ -45,6 +45,10 @@ LCB.view = (function() {
     animateModal: function(target) {
       $(target).animate({height: "toggle", opacity: "toggle"}, "slow");
     },
+    clearEntry: function() {
+      $('[id^="amt_"').val('');
+      $('[id^="det_"').val('');
+    },
     defDate: function() {
       var date = new Date();
 
@@ -183,7 +187,7 @@ LCB.view = (function() {
       
       // If error occurred during login, display modal window
       } else {
-        showMsg(res.err_msg);
+        console.log('there was an error in view.userAcct');
       }      
     },
     userMsg: function(result) {
