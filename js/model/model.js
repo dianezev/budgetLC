@@ -161,7 +161,9 @@ LCB.model = (function() {
     },
     
     checkUrl: function(urlInfo, cb) {
-
+      console.log('in m.checkUrl and urlInfo, cb are:');
+console.log(urlInfo);
+      console.log(cb);
       cb = cb || function () {};
       
       $.ajax({
@@ -169,7 +171,8 @@ LCB.model = (function() {
         data: {e: urlInfo.e, v: urlInfo.v},
         url: "php/api/checkUrl.php",
         success: function(result){
-
+console.log('success and result is:')
+          console.log(result);
           // Update variables if login was successful
           if (result.hasOwnProperty('user')) {
             user.email = result.user.email;

@@ -204,7 +204,9 @@ LCB.view = (function() {
     // Note this is called with 
     // email verification link
     userVerify: function(result) {
-
+console.log('in v.userVerify and result is:');
+      console.log(result);
+            
       // Prompt user to create/reset password
       if (result.hasOwnProperty('user')) {
           $('#password_prompt').show();        

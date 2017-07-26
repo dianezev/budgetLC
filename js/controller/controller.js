@@ -44,7 +44,8 @@ LCB.controller = (function() {
     // Called during intialization by script.js
     checkUrl: function() {
       var urlInfo = getAllUrlParams();
-      
+      console.log('in c.checkUrl and urlInfo is:');
+      console.log(urlInfo);
       // If url contains params, verify account & get user info
       if ((urlInfo.hasOwnProperty('e')) && (urlInfo.hasOwnProperty('v'))) {
         model.checkUrl(urlInfo, function (result) {
@@ -121,7 +122,7 @@ console.log('about to call model.login and userInfo is');
               model.getData("budget", function (categSubtotals) {
                 view.refreshDetail(categSubtotals.budget, "budget");
                 view.refreshSummary(categSubtotals); 
-                view.userMsg("Welcome to Total Finance!");
+                view.userMsg("Welcome to Total Finance, " + result.name + "!");
               });
             });
           }
