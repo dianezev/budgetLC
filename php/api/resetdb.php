@@ -58,7 +58,6 @@ if($stmt = $db->prepare($sql))
 
 $sql = <<<QUERY
 ALTER TABLE `users`
-ALTER TABLE `users`
   MODIFY `userId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 QUERY;
 
