@@ -117,8 +117,8 @@ LCB.model = (function() {
   var publicAPI = {
     
     // Public vars here
-//    subtotals: [],
 
+    
     // Public functions here  
 
     // Calculates subtotal and detail info, 
@@ -257,7 +257,6 @@ LCB.model = (function() {
       
       // Initialize subtotals
       subtotals = this.calcSubtotals();
-       alert('initialize called calcSubtotals');
      
       cb(date_rg, date);
     },
@@ -308,7 +307,6 @@ LCB.model = (function() {
       
       // Re-initialize subtotals
       subtotals = this.calcSubtotals();
-      alert('logout called calcSubtotals');
 
       // TBD: other db/backend processing?
     },

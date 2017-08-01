@@ -96,7 +96,7 @@ LCB.view = (function() {
 
     // Gets summary info
     refreshSummary: function(data) {
-      var actualHTML = "blah blah";
+      var actualHTML = data;
       //template.getDetailHTML(data, "actual");
       //var budgetHTML = template.getDetailHTML(data, "budget");
       
@@ -108,6 +108,12 @@ LCB.view = (function() {
     },
     
     showModal: function(id) {
+      
+      // Default to login screen
+      if ($('#register form.login-form').css('display') === 'none') {
+        this.animateModal('#register form');
+      }
+      
       $(id).show();
       $(id + ' button').focus();  
     },

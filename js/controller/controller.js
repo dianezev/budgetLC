@@ -87,6 +87,8 @@ LCB.controller = (function() {
       model.logout();
       view.userAcct(null);
       view.clearEntry();
+      view.togglePages('#m_home');
+      view.makeActiveCateg(1, model.CAT[0].sub);
     },
     
     // Called when user submits login or sign up info
