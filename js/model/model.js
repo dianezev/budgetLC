@@ -398,6 +398,9 @@ LCB.model = (function() {
           alert('ajax ERROR: ' + error);
         }
       });      
+    },
+    updateSummary: function(cb) {
+      return subtotals;
     }
   };
   return publicAPI;

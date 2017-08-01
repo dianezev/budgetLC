@@ -204,6 +204,12 @@ LCB.controller = (function() {
           alert('passwords DO NOT match');
       }      
     },
+    updateSummary: function() {
+      model.updateSummary(function(result) {
+        view.refreshSummary(result);
+      });
+    });
+    },
     handleDetail: function(id) {
       console.log(id);
       view.toggleDetail(id);

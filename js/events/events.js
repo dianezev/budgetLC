@@ -64,6 +64,13 @@ $('#m_settings').on('click', function(e) {
   // TBD
 });
 
+// View summary 
+$('#m_summary').on('click', function(e) {
+  e.preventDefault();
+  LCB.controller.updateSummary();
+  // TBD
+});
+
 // For login - toggling between Sign Up and Log In
 // TBD: incorporate the change password stuff into this
 $('[id^="goto"]').click(function(){

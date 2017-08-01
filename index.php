@@ -370,6 +370,9 @@
 <!--        completed by template-->
           </select>
         </div>
+    <div id="junkdata">
+    
+    </div>
         <!--  put chart elements here -->  
 <!--    experimenting with chart.js-->
         <!--  canvas element / chart01.js -->  
