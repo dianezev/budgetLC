@@ -96,7 +96,8 @@ LCB.view = (function() {
 
     // Gets summary info
     refreshSummary: function(data) {
-      var actualHTML = template.getDetailHTML(data, "actual");
+      var actualHTML = "blah blah";
+      //template.getDetailHTML(data, "actual");
       //var budgetHTML = template.getDetailHTML(data, "budget");
       
       $('#junkdata').empty().append(actualHTML)
