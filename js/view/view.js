@@ -96,7 +96,18 @@ LCB.view = (function() {
 
     // Gets summary info
     refreshSummary: function(data) {
-      var actualHTML = data;
+      var actualHTML = ;
+      
+      actualHTML = '<p> length of "subtotals" array is: ' + data.length + '</p>;
+      actualHTML += '<p>subtotals[0].amt is ' + subtotals[0].amt + '</p>;
+      actualHTML += '<p>subtotals[0].code is ' + subtotals[0].code + '</p>;
+      actualHTML += '<p>subtotals[0].date is ' + subtotals[0].date + '</p>;
+      actualHTML += '<p>subtotals[0].name is ' + subtotals[0].name + '</p>;
+      actualHTML += '<p>subtotals[0].sub is and object that contains all SUB-category detail. See CONSOLE for more info</p>;
+      console.log('THIS SUBTOTAL OBJECT IS RETURNED FOR SUMMARY GRAPH DISPLAYS:');
+      console.log(data);
+
+
       //template.getDetailHTML(data, "actual");
       //var budgetHTML = template.getDetailHTML(data, "budget");
       
