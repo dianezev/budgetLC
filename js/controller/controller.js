@@ -208,7 +208,6 @@ LCB.controller = (function() {
       model.updateSummary(function(result) {
         view.refreshSummary(result);
       });
-    });
     },
     handleDetail: function(id) {
       console.log(id);
