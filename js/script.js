@@ -24,6 +24,6 @@ $(document).ready(function() {
   LCB.view.defDate(); // just for user settings - might not need to keep
   LCB.view.userAcct(null);
   
-  LCB.view.makeActiveCateg(1, LCB.model.CAT.sub);
+  LCB.view.makeActiveCateg(1, LCB.model.CAT[0].sub);
   
 });
