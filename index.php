@@ -361,6 +361,15 @@
           <a href="#" class="w3-bar-item w3-button">Misc</a>
         </div>
       </div>
+    
+    
+        <div class="dateSel">
+          <p>Show summary for:</p>
+          <select id="date_summary">
+
+<!--        completed by template-->
+          </select>
+        </div>
         <!--  put chart elements here -->  
 <!--    experimenting with chart.js-->
         <!--  canvas element / chart01.js -->  
