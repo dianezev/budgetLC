@@ -100,7 +100,7 @@ LCB.view = (function() {
       //template.getDetailHTML(data, "actual");
       //var budgetHTML = template.getDetailHTML(data, "budget");
       
-      $('#junkdata').empty().append(actualHTML)
+      //$('#junkdata').empty().append(actualHTML);
     },
     
     setDate: function(date) {
