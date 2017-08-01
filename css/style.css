@@ -92,7 +92,7 @@ option {
   padding: 8px;
 }
 table select {
-  background-color: transparent;
+  background-color: white;
 }
 table.detail {
   background-color: #e3e3e3;
@@ -123,13 +123,22 @@ table.detail {
 .results td:nth-child(3) {
   text-align: right;
 }
-.results td:nth-child(1), .results th:nth-child(1) { 
+.results td:nth-child(1) { 
   width: 35%;
 }
-.results td:nth-child(2), .results th:nth-child(2) { 
+.results td:nth-child(2) { 
   width: 15%;
 }
-.results td:nth-child(3), .results th:nth-child(3) {
+.results td:nth-child(3) {
+  width: 15%;
+}
+.results th:nth-child(1) { 
+  width: 32%;
+}
+.results th:nth-child(2) { 
+  width: 12%;
+}
+.results th:nth-child(3) {
   width: 15%;
 }
 .results th { 
@@ -207,5 +216,6 @@ input[type=number]::-webkit-outer-spin-button {
   display:inline-flex;
 }
 select {
-  font-size: 80%;
+/*  font-size: 80%;*/
+  line-height: 1;
 }

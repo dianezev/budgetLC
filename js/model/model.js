@@ -203,7 +203,7 @@ LCB.model = (function() {
 
       $.ajax({
         method: "GET",
-        url: "https://totalfinance-api.herokuapp.com/php/api/v1/" + dtype + "/" + userId,
+        url: "php/api/v1/" + dtype + "/" + userId,
 //        url: "php/api/v1/" + dtype + "/" + userId,
         success: function(result){
           console.log('in getData for user: ' + userId + ' type: ' + dtype + ' and result is: ');
@@ -347,7 +347,7 @@ LCB.model = (function() {
       $.ajax({
         method: "POST",
         data: expenseData,
-        url: "https://totalfinance-api.herokuapp.com/php/api/v1/" + dtype + "/" + userId,
+        url: "php/api/v1/" + dtype + "/" + userId,
 //        url: "php/api/v1/" + dtype + "/" + userId,
         success: function(result){
           console.log('success with POSTing expense data and result is:');
