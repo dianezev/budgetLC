@@ -272,12 +272,16 @@
     
     <form action="">
       <div class="w3-container w3-hide-small">
+<!--
         <div class="dateSel">
           <p>Show budgeted expenses for:</p>
           <select id="date_budget">
+-->
 <!--        completed by template-->
+<!--
           </select>
         </div>
+-->
 
 <!--
         Note: The reason the table headers are outside
@@ -288,7 +292,11 @@
           <thead>
             <tr>
               <th colspan="1">Item</th>
-              <th colspan="1">Date</th>
+              <th colspan="1">History for:<br>
+                <select id="date_budget">
+      <!--        completed by template-->
+                </select>
+              </th>
               <th colspan="1">Budgeted<br>Amount</th>
               <th colspan="1">Details</th>
             </tr>

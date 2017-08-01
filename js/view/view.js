@@ -85,8 +85,6 @@ LCB.view = (function() {
     // Gets subtotal info for 'Actual' and 'Budget'
     // pages based on currently selected date & category
     refreshDetail: function(data, dtype, date) {
-      console.log('in refrDetail and data is:');
-      console.log(data);
       var id = "#list_" + dtype;
       var detailHTML = template.getDetailHTML(data, dtype);
       
@@ -204,7 +202,7 @@ LCB.view = (function() {
     // Note this is called with 
     // email verification link
     userVerify: function(result) {
-console.log('in v.userVerify and result is:');
+      console.log('in v.userVerify and result is:');
       console.log(result);
             
       // Prompt user to create/reset password

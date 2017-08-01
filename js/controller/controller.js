@@ -32,6 +32,8 @@ LCB.controller = (function() {
     // Called when user changes date selector
     changeDate: function(date) {
       model.changeDate(date, function (categSubtotals) {
+        console.log('model.changeDate returned date: ' + date + ' and categSubtotals:');
+        console.log(categSubtotals);
 
         // Show actual & budget detail for user
         view.setDate(date);
@@ -46,6 +48,7 @@ LCB.controller = (function() {
       var urlInfo = getAllUrlParams();
       console.log('in c.checkUrl and urlInfo is:');
       console.log(urlInfo);
+      
       // If url contains params, verify account & get user info
       if ((urlInfo.hasOwnProperty('e')) && (urlInfo.hasOwnProperty('v'))) {
         model.checkUrl(urlInfo, function (result) {
@@ -56,12 +59,14 @@ LCB.controller = (function() {
     
     // Called when user chooses a category from sub-menu of actual, budget or summary pages
     chooseCategory: function(that) {
+      console.log('in chooseCategory and that is" ');
+      console.log(that);
       var parent_id = $(that).parent().attr("id");
       var categories = $('#' + parent_id + ' a');
       var index = categories.index(that);
       
       model.filterData(index, function (categSubtotals) {
-        console.log('filterData returns:');
+        console.log('model.filterData returns:');
         console.log(categSubtotals);
         view.makeActiveCateg(index + 1, categSubtotals.actual.sub);
         view.refreshDetail(categSubtotals.actual, "actual");
@@ -102,16 +107,23 @@ LCB.controller = (function() {
         userInfo.email = $('#email').val();
         userInfo.password = $('#password').val();
         $('#password').val('');
-console.log('about to call model.login and userInfo is');
+        
+        console.log('in controller.register & about to call model.login. userInfo is');
         console.log(userInfo);
+        
         // If login is successful, get user data and update view
         model.login(userInfo, function (result) {
+          console.log('model.login returned:');
+          console.log(result);
+          
           if (result.pass === false) {   
             view.userMsg(result);
           } else {
             view.userAcct(result);
             view.setDate(result.date);
             model.getData("actual", function (categSubtotals) {
+              console.log('LOGIN: model.getData for actual returned categSubtotals:');
+              console.log(categSubtotals.actual);
               view.refreshDetail(categSubtotals.actual, "actual");
 
               /*
@@ -120,9 +132,11 @@ console.log('about to call model.login and userInfo is');
                * then call view.refreshSummary which uses both
                */
               model.getData("budget", function (categSubtotals) {
+                console.log('LOGIN: model.getData for budget returned categSubtotals:');
+                console.log(categSubtotals.budget);
                 view.refreshDetail(categSubtotals.budget, "budget");
                 view.refreshSummary(categSubtotals); 
-                view.userMsg("Welcome to Total Finance, " + result.name + "!");
+                view.userMsg("Welcome to Total Finance, " + result.user.name + "!");
               });
             });
           }

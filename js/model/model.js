@@ -19,7 +19,7 @@ LCB.model = (function() {
   // Private vars here
   //var actSubtotals;
   //var budSubtotals;
-  //var subtotals = [];
+  var subtotals = [];
   
   var dateReset = ''  
   var date = ''; // initialized to current year & mo but user can change
@@ -117,7 +117,7 @@ LCB.model = (function() {
   var publicAPI = {
     
     // Public vars here
-    subtotals: [],
+//    subtotals: [],
 
     // Public functions here  
 
@@ -125,44 +125,48 @@ LCB.model = (function() {
     // based on selected date
     calcSubtotals: function () {
       var CAT = this.CAT;
-      var subtotals = [];
+      var subs = [];
 
       for (var i = 0, l = CAT.length; i < l ; i++) {  
-        subtotals[i] = {actual:{}, budget: {}};
+        subs[i] = {actual:{}, budget: {}};
 
         // Get category totals
-        subtotals[i].actual = getSubtotals(act, CAT[i].code, 
+        subs[i].actual = getSubtotals(act, CAT[i].code, 
                         CAT[i].name, date, false);
-        subtotals[i].budget = getSubtotals(bud, CAT[i].code, 
+        subs[i].budget = getSubtotals(bud, CAT[i].code, 
                         CAT[i].name, date, false);
 
         // Get Sub-category totals:
-        subtotals[i].actual.sub = [];
-        subtotals[i].budget.sub = [];
+        subs[i].actual.sub = [];
+        subs[i].budget.sub = [];
 
         for (var j = 0, k = CAT[i].sub.length; j < k ; j++) {
-          subtotals[i].actual.sub[j] = getSubtotals(act, CAT[i].sub[j].code,
+          subs[i].actual.sub[j] = getSubtotals(act, CAT[i].sub[j].code,
                                 CAT[i].sub[j].name, date, true);
-          subtotals[i].budget.sub[j] = getSubtotals(bud, CAT[i].sub[j].code,
+          subs[i].budget.sub[j] = getSubtotals(bud, CAT[i].sub[j].code,
                                 CAT[i].sub[j].name, date, true);
         }
       }
-      return subtotals;
+      console.log('FINISHING calc of SUBTOTALS and actual household subtotals are:');
+      console.log(subs[0].actual);
+      return subs;
     },
     
     changeDate: function(dateSel, cb) {
       date = dateSel;
 
       // Update subtotals for current date
-      this.subtotals = this.calcSubtotals();
+      subtotals = this.calcSubtotals();
+      console.log('in model.changeDate and new subtotals are:');
+      console.log(subtotals);
 
       // Callback refreshes data detail for selected date
-      cb(this.subtotals[categSel]);
+      cb(subtotals[categSel]);
     },
     
     checkUrl: function(urlInfo, cb) {
       console.log('in m.checkUrl and urlInfo, cb are:');
-console.log(urlInfo);
+      console.log(urlInfo);
       console.log(cb);
       cb = cb || function () {};
       
@@ -171,8 +175,8 @@ console.log(urlInfo);
         data: {e: urlInfo.e, v: urlInfo.v},
         url: "php/api/checkUrl.php",
         success: function(result){
-console.log('success and result is:')
-          console.log(result);
+//          console.log('success and result is:')
+//          console.log(result);
           // Update variables if login was successful
           if (result.hasOwnProperty('user')) {
             user.email = result.user.email;
@@ -188,8 +192,58 @@ console.log('success and result is:')
     },
 
     filterData: function(index, cb) {
+      console.log('in model.filterData and subtotals[index] is:');
+      console.log(subtotals[index]);
       categSel = index;
-      cb(this.subtotals[categSel]);
+      cb(subtotals[categSel]);
+    },
+    getData: function(dtype, cb) {
+      var that = this;
+      var userId = user.userId;
+
+      $.ajax({
+        method: "GET",
+        url: "https://totalfinance-api.herokuapp.com/php/api/v1/" + dtype + "/" + userId,
+//        url: "php/api/v1/" + dtype + "/" + userId,
+        success: function(result){
+          console.log('in getData for user: ' + userId + ' type: ' + dtype + ' and result is: ');
+          console.log(result);
+
+          if (dtype === "actual") {
+            if (result !== null) {
+              act = result;
+
+            } else {
+
+              // If result is null, re-initialize variable
+              act = initData();            
+            }
+          } else if (dtype === "budget") {
+            if (result !== null) {
+              bud = result;
+
+            } else {
+
+              // If result is null, re-initialize variable
+              bud = initData();            
+            }
+          }
+          
+          // Update subtotals for current date
+          // TBD: Could pass add'l arg so it only updates based on 'dtype'
+          // instead of updating both the actual & budget
+          subtotals = that.calcSubtotals();
+
+          console.log('in model.getData and subtotals is:');
+          console.log(subtotals); /// HERE it is correct but
+
+          // Pass subtotals for current category to callback
+          cb(subtotals[categSel], date);
+        },
+        error: function () {
+          console.log('error');
+        }
+      });    
     },
     
     initialize: function (cb) {
@@ -202,8 +256,9 @@ console.log('success and result is:')
       bud = initData();
       
       // Initialize subtotals
-      this.subtotals = this.calcSubtotals();
-      
+      subtotals = this.calcSubtotals();
+       alert('initialize called calcSubtotals');
+     
       cb(date_rg, date);
     },
       
@@ -251,8 +306,9 @@ console.log('success and result is:')
       act = initData();
       bud = initData();
       
-      // Initialize subtotals
-      this.subtotals = this.calcSubtotals();
+      // Re-initialize subtotals
+      subtotals = this.calcSubtotals();
+      alert('logout called calcSubtotals');
 
       // TBD: other db/backend processing?
     },
@@ -283,6 +339,9 @@ console.log('success and result is:')
       // Add userId to expenseData obj
       expenseData.userId = userId;
 
+      console.log('in sendExpense and expenseData obj is:');
+      console.log(expenseData);
+      
       // TBD: continue with cb fcn when php returns updated actual or budget data
       // need to update view
       $.ajax({
@@ -291,6 +350,7 @@ console.log('success and result is:')
         url: "https://totalfinance-api.herokuapp.com/php/api/v1/" + dtype + "/" + userId,
 //        url: "php/api/v1/" + dtype + "/" + userId,
         success: function(result){
+          console.log('success with POSTing expense data and result is:');
           console.log(result);
           cb(result);
         },
@@ -307,6 +367,7 @@ console.log('success and result is:')
         data: {v: userInfo.v, password: userInfo.password},
         url: "php/api/setPassword.php",
         success: function(result){
+          console.log('success with setPassword.php and result is:');
           console.log(result);
           cb(result);
         },
@@ -337,50 +398,6 @@ console.log('success and result is:')
           alert('ajax ERROR: ' + error);
         }
       });      
-    },
-    getData: function(dtype, cb) {
-      var that = this;
-      var userId = user.userId;
-      
-      $.ajax({
-        method: "GET",
-        url: "https://totalfinance-api.herokuapp.com/php/api/v1/" + dtype + "/" + userId,
-//        url: "php/api/v1/" + dtype + "/" + userId,
-        success: function(result){
-          console.log(result);
-
-          if (dtype === "actual") {
-            if (result !== null) {
-              act = result;
-
-            } else {
-
-              // If result is null, re-initialize variable
-              act = initData();            
-            }
-          } else if (dtype === "budget") {
-            if (result !== null) {
-              bud = result;
-
-            } else {
-
-              // If result is null, re-initialize variable
-              bud = initData();            
-            }
-          }
-          
-          // Update subtotals for current date
-          // TBD: Could pass add'l arg so it only updates based on 'dtype'
-          // instead of updating both the actual & budget
-          this.subtotals = that.calcSubtotals();
-
-          // Pass subtotals for current category to callback
-          cb(this.subtotals[categSel], date);
-        },
-        error: function () {
-          console.log('error');
-        }
-      });    
     }
   };
   return publicAPI;
