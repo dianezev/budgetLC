@@ -161,7 +161,7 @@ LCB.model = (function() {
       console.log(subtotals);
 
       // Callback refreshes data detail for selected date
-      cb(subtotals[categSel]);
+      cb(subtotals, categSel);
     },
     
     checkUrl: function(urlInfo, cb) {
@@ -195,7 +195,7 @@ LCB.model = (function() {
       console.log('in model.filterData and subtotals[index] is:');
       console.log(subtotals[index]);
       categSel = index;
-      cb(subtotals[categSel]);
+      cb(subtotals, categSel);
     },
     getData: function(dtype, cb) {
       var that = this;

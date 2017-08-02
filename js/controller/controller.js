@@ -31,15 +31,15 @@ LCB.controller = (function() {
     
     // Called when user changes date selector
     changeDate: function(date) {
-      model.changeDate(date, function (categSubtotals) {
-        console.log('model.changeDate returned date: ' + date + ' and categSubtotals:');
-        console.log(categSubtotals);
+      model.changeDate(date, function (subtotals, categ) {
+        console.log('model.changeDate returned date: ' + date + ' and subtotals[categ]:');
+        console.log(subtotals[categ]);
 
         // Show actual & budget detail for user
         view.setDate(date);
-        view.refreshDetail(categSubtotals.actual, "actual");
-        view.refreshDetail(categSubtotals.budget, "budget");
-        view.refreshSummary(categSubtotals);
+        view.refreshDetail(subtotals[categ].actual, "actual");
+        view.refreshDetail(subtotals[categ].budget, "budget");
+        view.refreshSummary(subtotals);
       });      
     },
     
@@ -65,13 +65,13 @@ LCB.controller = (function() {
       var categories = $('#' + parent_id + ' a');
       var index = categories.index(that);
       
-      model.filterData(index, function (categSubtotals) {
+      model.filterData(index, function (subtotals, categ) {
         console.log('model.filterData returns:');
-        console.log(categSubtotals);
-        view.makeActiveCateg(index + 1, categSubtotals.actual.sub);
-        view.refreshDetail(categSubtotals.actual, "actual");
-        view.refreshDetail(categSubtotals.budget, "budget");
-        view.refreshSummary(categSubtotals);
+        console.log(subtotals[categ]);
+        view.makeActiveCateg(index + 1, subtotals[categ].actual.sub);
+        view.refreshDetail(subtotals[categ].actual, "actual");
+        view.refreshDetail(subtotals[categ].budget, "budget");
+        view.refreshSummary(subtotals);
       });
     },
     
