@@ -217,20 +217,24 @@ class Users
                 return $result;
 			}
 
-          // TBD: implement if stmt below to check if sendVeri... returns error
-          // just using $result->misc for debugging
           $note = "You have a new account at Total Finance! To get started, ";
-          $result->misc = $this->sendVerificationEmail($email, $name, $v, $note);
-//			if(!$this->sendVerificationEmail($email, $name, $v, $note)) {
-//              $result->pass = FALSE;
-//				$result->err_msg = "Error: "
-//					. "There was an error sending your"
-//					. " verification email. Please "
-//					. "contact "
-//					. "us for support. We apologize for the "
-//					. "inconvenience.";
-//               return $result;
-//			}
+          
+          // this is temp, until mail server works - just used to return 'misc' property which
+          // is written to console (paste to url to test v & e codes in activ. links)
+//          $result->misc = $this->sendVerificationEmail($email, $name, $v, $note);
+          
+// TBD: implement if stmt below to check if sendVeri... returns error
+// just using $result->misc for debugging          
+			if(!$this->sendVerificationEmail($email, $name, $v, $note)) {
+              $result->pass = FALSE;
+				$result->err_msg = "Error: "
+					. "There was an error sending your"
+					. " verification email. Please "
+					. "contact "
+					. "us for support. We apologize for the "
+					. "inconvenience.";
+               return $result;
+			}
           
 			$stmt->closeCursor();
 		}
