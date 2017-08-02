@@ -376,7 +376,7 @@
         <!--  put chart elements here -->  
 <!--    experimenting with chart.js-->
         <!--  canvas element / chart01.js -->  
-        <div style="height: 500px; width: 500px">
+        <div class="charts" style="height: 500px; width: 500px">
           <canvas id="myChart" width="400" height="400"></canvas>
         </div>
 

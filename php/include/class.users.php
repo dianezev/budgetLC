@@ -408,10 +408,9 @@ TotalFinance.Herokuapp.com
 EMAIL;
 
       //TBD: get mail fcn working & return something
-	//	return mail($to, $subject, $msg, $headers);
+		return mail($to, $subject, $msg, $headers);
       // temp - so I can copy & paste url stuff for debugging
-      return $msg;
-      //return $to;
+//      return $msg;
 	}
 
   

@@ -219,3 +219,6 @@ select {
 /*  font-size: 80%;*/
   line-height: 1;
 }
+.charts {
+  margin: 0 auto;
+}
