@@ -237,8 +237,8 @@ LCB.model = (function() {
           console.log('in model.getData and subtotals is:');
           console.log(subtotals); /// HERE it is correct but
 
-          // Pass subtotals for current category to callback
-          cb(subtotals[categSel], date);
+          // Pass subtotals & current category to callback
+          cb(subtotals, categSel);
         },
         error: function () {
           console.log('error');

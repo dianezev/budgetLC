@@ -123,21 +123,21 @@ LCB.controller = (function() {
           } else {
             view.userAcct(result);
             view.setDate(result.date);
-            model.getData("actual", function (categSubtotals) {
-              console.log('LOGIN: model.getData for actual returned categSubtotals:');
-              console.log(categSubtotals.actual);
-              view.refreshDetail(categSubtotals.actual, "actual");
+            model.getData("actual", function (subtotals, categ) {
+              console.log('LOGIN: model.getData for actual returned subtotals[categ]:');
+              console.log(subtotals[categ].actual);
+              view.refreshDetail(subtotals[categ].actual, "actual");
 
               /*
                * Nest this call to update budget data so that when it completes
                * we are sure that actual data (above) is also complete -
                * then call view.refreshSummary which uses both
                */
-              model.getData("budget", function (categSubtotals) {
-                console.log('LOGIN: model.getData for budget returned categSubtotals:');
-                console.log(categSubtotals.budget);
-                view.refreshDetail(categSubtotals.budget, "budget");
-                view.refreshSummary(categSubtotals); 
+              model.getData("budget", function (subtotals, categ) {
+                console.log('LOGIN: model.getData for budget returned subtotals[categ]:');
+                console.log(subtotals[categ].budget);
+                view.refreshDetail(subtotals[categ].budget, "budget");
+                view.refreshSummary(subtotals); 
                 view.userMsg("Welcome to Total Finance, " + result.user.name + "!");
               });
             });
@@ -178,10 +178,10 @@ LCB.controller = (function() {
         model.sendExpense(expenseData, function (result) {
           // maybe improve later: instead of getExpenses, could just add a new object to the actual or budget array, then recalc subtotals, etc.
 
-          model.getData(dtype, function (categSubtotals) {
+          model.getData(dtype, function (subtotals, categ) {
             view.clearEntry();
-            view.refreshDetail(categSubtotals[dtype], dtype);
-            view.refreshSummary(categSubtotals);
+            view.refreshDetail(subtotals[categ][dtype], dtype);
+            view.refreshSummary(subtotals);
           });
         });
       }
