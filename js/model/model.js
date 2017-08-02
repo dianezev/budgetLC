@@ -398,6 +398,8 @@ LCB.model = (function() {
       });      
     },
     updateSummary: function(cb) {
+      console.log('in updateSummary and returning subtotals:');
+      console.log(subtotals);
       return subtotals;
     }
   };
