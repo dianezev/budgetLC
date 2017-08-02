@@ -52,8 +52,6 @@ LCB.template = (function() {
             
         // Fills detail in Budget and Actual pages
         getDetailHTML: function(data, dtype) {
-          console.log('in getDetailHTML and ' + dtype + ' data is: ');
-          console.log(data);
             var detailHTML = '';
 
             /*

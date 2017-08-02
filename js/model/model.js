@@ -147,8 +147,6 @@ LCB.model = (function() {
                                 CAT[i].sub[j].name, date, true);
         }
       }
-      console.log('FINISHING calc of SUBTOTALS and actual household subtotals are:');
-      console.log(subs[0].actual);
       return subs;
     },
     
@@ -192,8 +190,6 @@ LCB.model = (function() {
     },
 
     filterData: function(index, cb) {
-      console.log('in model.filterData and subtotals[index] is:');
-      console.log(subtotals[index]);
       categSel = index;
       cb(subtotals, categSel);
     },
@@ -234,13 +230,11 @@ LCB.model = (function() {
           // instead of updating both the actual & budget
           subtotals = that.calcSubtotals();
 
-          console.log('in model.getData and subtotals is:');
-          console.log(subtotals); /// HERE it is correct but
-
           // Pass subtotals & current category to callback
           cb(subtotals, categSel);
         },
         error: function () {
+          alert('error: the AJAX call in model.getData for php/api/v1/' + dtype + '/' + userId + ' failed.');
           console.log('error');
         }
       });    
