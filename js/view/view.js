@@ -96,7 +96,7 @@ LCB.view = (function() {
 
     // Gets summary info
     refreshSummary: function(data) {
-      var actualHTML = ;
+      var actualHTML = '';
       
       actualHTML = '<p> length of "subtotals" array is: ' + data.length + '</p>;
       actualHTML += '<p>subtotals[0].amt is ' + subtotals[0].amt + '</p>;
