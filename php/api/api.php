@@ -32,6 +32,8 @@ class MyAPI extends API
      protected function actual($args) {
         if ($this->method == 'GET') {
             $userId = $args[0];
+            $rows = [];
+            
             $sql = "SELECT id, subCode, date, amt, detail
     				FROM actual
     				WHERE userId=:userId";
@@ -69,7 +71,8 @@ class MyAPI extends API
       protected function budget($args) {
          if ($this->method == 'GET') {
              $userId = $args[0];
-            //  $year = $args[1];
+             $rows = [];
+
              $sql = "SELECT id, subCode, date, amt, detail
      				FROM budget
      				WHERE userId=:userId";
