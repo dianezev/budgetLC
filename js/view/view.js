@@ -45,6 +45,11 @@ LCB.view = (function() {
     animateModal: function(target) {
       $(target).animate({height: "toggle", opacity: "toggle"}, "slow");
     },
+    
+    // Calls one of the chart methods, depending on 2nd argument
+    chart: function(sel, chartName, result) {
+      this[chartName](sel, result);
+    },
     clearEntry: function() {
       $('[id^="amt_"').val('');
       $('[id^="det_"').val('');

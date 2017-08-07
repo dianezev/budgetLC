@@ -39,11 +39,6 @@
       <i class="fa fa-bars"></i>
     </a>
   </div>
-<!--
-  <div>
-  <canvas id="myChart" width="400" height="400"></canvas>
-  </div>
--->
 </div>
 
 <!-- Sidebar on small screens when clicking the menu icon -->
@@ -268,8 +263,6 @@
         </div>
       </div>
     
-
-    
     <form action="">
       <div class="w3-container w3-hide-small">
 <!--
@@ -370,35 +363,13 @@
 <!--        completed by template-->
           </select>
         </div>
-    <div id="junkdata">
-    
-    </div>
-        <!--  put chart elements here -->  
-<!--    experimenting with chart.js-->
-        <!--  canvas element / chart01.js -->  
-        <div class="charts" style="height: 500px; width: 500px">
-          <canvas id="myChart" width="400" height="400"></canvas>
-        </div>
 
-        <!-- line chart canvas element / chart03.js -->
-<!--        <canvas id="buyers" width="600" height="400"></canvas>-->
-        <!-- pie chart canvas element -->
-<!--        <canvas id="countries" width="600" height="400"></canvas>-->
-        <!-- bar chart canvas element -->
-<!--        <canvas id="income" width="600" height="400"></canvas>-->
-    
-        <!-- canvas element / chart04.js -->
-<!--
-        <div class="container">
-          <h2>Chart.js Responsive Bar Chart Demo</h2>
-          <div>
-            <canvas id="canvas"></canvas>
-          </div>
-        </div>  
--->
-    
-    
-    
+        <!--  put chart elements here -->  
+<!--    experimenting with D3-->
+<!--        TBD: need to make responsive-->
+        <div class="charts">
+          <svg id="myChart" width="960" height="500"></svg>
+        </div>
     <div class="w3-container w3-blue-gray w3-large" style="height: 2em"></div>
   </div>
 </div>
@@ -445,60 +416,7 @@
               <option value="AR">Arkansas</option>
               <option value="CA">California</option>
               <option value="CO">Colorado</option>
-              <option value="CT">Connecticut</option>
-              <option value="DE">Delaware</option>
-              <option value="DC">District Of Columbia</option>
-              <option value="FL">Florida</option>
-              <option value="GA">Georgia</option>
-              <option value="HI">Hawaii</option>
-              <option value="ID">Idaho</option>
-              <option value="IL">Illinois</option>
-              <option value="IN">Indiana</option>
-              <option value="IA">Iowa</option>
-              <option value="KS">Kansas</option>
-              <option value="KY">Kentucky</option>
-              <option value="LA">Louisiana</option>
-              <option value="ME">Maine</option>
-              <option value="MD">Maryland</option>
-              <option value="MA">Massachusetts</option>
-              <option value="MI">Michigan</option>
-              <option value="MN">Minnesota</option>
-              <option value="MS">Mississippi</option>
-              <option value="MO">Missouri</option>
-              <option value="MT">Montana</option>
-              <option value="NE">Nebraska</option>
-              <option value="NV">Nevada</option>
-              <option value="NH">New Hampshire</option>
-              <option value="NJ">New Jersey</option>
-              <option value="NM">New Mexico</option>
-              <option value="NY">New York</option>
-              <option value="NC">North Carolina</option>
-              <option value="ND">North Dakota</option>
-              <option value="OH">Ohio</option>
-              <option value="OK">Oklahoma</option>
-              <option value="OR">Oregon</option>
-              <option value="PA">Pennsylvania</option>
-              <option value="RI">Rhode Island</option>
-              <option value="SC">South Carolina</option>
-              <option value="SD">South Dakota</option>
-              <option value="TN">Tennessee</option>
-              <option value="TX">Texas</option>
-              <option value="UT">Utah</option>
-              <option value="VT">Vermont</option>
-              <option value="VA">Virginia</option>
-              <option value="WA">Washington</option>
-              <option value="WV">West Virginia</option>
-              <option value="WI">Wisconsin</option>
-              <option value="WY">Wyoming</option>
-              <option value="AS">American Samoa</option>
-              <option value="GU">Guam</option>
-              <option value="MP">Northern Mariana Islands</option>
-              <option value="PR">Puerto Rico</option>
-              <option value="UM">United States Minor Outlying Islands</option>
-              <option value="VI">Virgin Islands</option>
-              <option value="AA">Armed Forces Americas</option>
-              <option value="AP">Armed Forces Pacific</option>
-              <option value="AE">Armed Forces Others</option>		
+              <option value="CT">and so on...</option>
             </select>				
 			
             <h4>Sample numeric input:</h4>
@@ -592,15 +510,6 @@
   </div>
 </footer>
 
-<!--
-
-for now, I moved initialization stuff to script.js where other initialization 
-stuff happens. It was just easier for me to follow the logic if all php files 
-were within php folder...(no objection to changing it back if preferable)
-
--->
-
-  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
@@ -609,28 +518,28 @@ were within php folder...(no objection to changing it back if preferable)
   
 <!--  note this is the chart script that works with chart01.js-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 
 <!--  note this is the chart script that works with chart03.js and chart04.js-->
 <!--<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>-->
   
-
-  <script src="js/helpers/getAllUrlParams.js"></script>
+<script src="js/helpers/getAllUrlParams.js"></script>
 
 <!--this ref is temporary, until JSON data returned by php-->
 <script type="text/javascript" src="js/model/testData.json"></script>
   
+<script src="js/d3.min.js"></script>
 
 <script src="js/templates/template.js"></script>
 <script src="js/model/model.js"></script>
 <script src="js/model/constants.js"></script>
 <script src="js/view/view.js"></script>
-<script src="js/controller/controller.js"></script>
+<script src="js/view/chartBar.js">
+</script><script src="js/controller/controller.js"></script>
 <script src="js/script.js"></script>
 <script src="js/events/events.js"></script>
   
-  <script src="js/charts/chart01.js"></script>
+<!--  <script src="js/charts/chartD3_01.js"></script>-->
 <!--  <script src="js/charts/chart03.js"></script>-->
 <!--  <script src="js/charts/chart04.js"></script>-->
 

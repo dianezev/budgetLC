@@ -11,6 +11,17 @@
  * These methods are called by controller.js.
  ****************************************************/
 
+/***********************************************
+ * TBD: Less redundancy if subtotal object is revised so that code and name are properties at 
+ *      same level as actual & budget. Also better to have date as it's own prop at root of object.
+ *
+ *       subtotals[0] = {actual: {amt: 123, sub: [...]}, budget: {amt: 123, sub: [...]}, 
+ *                      code: "hous", name: "Household", and MAYBE date: "2017-07"}
+ *
+ *       (or even better to move date out of subtotals and work with:
+ *       result = {date: "2017-07", subtotals: [...]}
+ *************************************************/
+
 LCB = window.LCB || {};
 
 LCB.model = (function() {
@@ -192,6 +203,13 @@ LCB.model = (function() {
     filterData: function(index, cb) {
       categSel = index;
       cb(subtotals, categSel);
+    },
+
+    // Return subtotals for use in charts
+    // TBD: might work better to return an object that has
+    // a prop for each chart type - with data sliced as needed
+    getChartSubtotals: function(cb) {
+      cb(subtotals);
     },
     getData: function(dtype, cb) {
       var that = this;

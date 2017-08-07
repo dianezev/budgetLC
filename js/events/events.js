@@ -91,6 +91,9 @@ $('#menu_icon, #mySidebar a').on('click', function() {
 
 // Click on main menu - calls fcn to hide/display correct page (home, actual, budget...)
 $('.swap, .swap i, .swap span').on('click', function(e) {
+  if (e.currentTarget.id = 'gotoSummary') {
+    LCB.controller.chartBar('svg');
+  }
   LCB.view.togglePages(e.currentTarget.hash);
 });
 

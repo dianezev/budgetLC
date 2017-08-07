@@ -43,6 +43,13 @@ LCB.controller = (function() {
       });      
     },
     
+    // Chart fcn in chartBar.js adapted from https://bl.ocks.org/mbostock/3887051
+    chartBar: function(sel) {
+      model.getChartSubtotals(function (result) {
+        view.chart(sel, "chartBar", result);
+      });          
+    },
+    
     // Called during intialization by script.js
     checkUrl: function() {
       var urlInfo = getAllUrlParams();

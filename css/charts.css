@@ -1,3 +1,48 @@
+
+.container {
+/*  width: 80%;*/
+  width: 400px;
+    height: 400px;
+  margin: 20px auto;
+}
+
+.p {
+  text-align: center;
+  font-size: 10px;
+  padding-top: 140px;
+}
+
+/*adapted from D3 example at https://bl.ocks.org/mbostock/3887051*/
+
+.axis .domain {
+  display: none;
+}
+  
+/*Rectangle bar class styling*/
+
+.bar {
+  fill: #0080FF
+}
+
+.bar:hover {
+  fill: #003366
+}
+
+/*not working*/
+/*
+.charts {
+  width: 700px;
+  height: 500px;
+}
+svg {
+  width: 600px;
+  height: 450px;
+}
+*/
+
+
+/*Chart.js stuff...*/
+/*
 		#canvas-holder {
 				width: 100%;
 				margin-top: 50px;
@@ -23,16 +68,4 @@
 			margin-right: 10px;
 		}
 
-
-.container {
-/*  width: 80%;*/
-  width: 400px;
-    height: 400px;
-  margin: 20px auto;
-}
-
-.p {
-  text-align: center;
-  font-size: 10px;
-  padding-top: 140px;
-}
+*/
