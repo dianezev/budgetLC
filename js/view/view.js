@@ -50,7 +50,10 @@ LCB.view = (function() {
     
     // Calls one of the chart methods, depending on 2nd argument
     chart: function(sel, chartName, result) {
-      this[chartName](sel, result);
+      console.log('got to view.chart');
+      console.log(chartName);
+      this.chartBar(sel, result);
+      //view[chartName](sel, result);
     },
     clearEntry: function() {
       $('[id^="amt_"').val('');

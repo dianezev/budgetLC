@@ -11,16 +11,19 @@ LCB = window.LCB || {};
 
 LCB.view = (function() {
   'use strict';
-
   // TBD: pass in "svg" for sel, or figure out if ids will work...
   var chartBar = function(sel, subtotals) {
+console.log('in chartBar and subtotals are:');
+    console.log(subtotals);
     
-    var svg = d3.select(sel),
-              margin = {top: 20, right: 20, bottom: 30, left: 40},
-              width = +svg.attr("width") - margin.left - margin.right,
-              height = +svg.attr("height") - margin.top - margin.bottom,
-              g = svg.empty().append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+    var svg = d3.select(sel);
+    var margin = {top: 20, right: 20, bottom: 30, left: 40};
+    var width = +svg.attr("width") - margin.left - margin.right;
+    var height = +svg.attr("height") - margin.top - margin.bottom;
+    var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    
+console.log('svg is:');
+console.log(svg);
     var x0 = d3.scaleBand()
             .rangeRound([0, width])
             .paddingInner(0.1);
@@ -30,11 +33,15 @@ LCB.view = (function() {
 
     var y = d3.scaleLinear()
             .rangeRound([height, 0]);
+console.log('y is:');
+console.log(y);
 
     var z = d3.scaleOrdinal()
             .range(["#3b6fb7", "#be4868"]);
     
     var keys = ["Budget", "Actual"];
+console.log('keys is:');
+console.log(keys);
 
     var data = [];
 
@@ -45,23 +52,24 @@ LCB.view = (function() {
       data[i].Actual = +subtotals[i].actual.amt;
       data[i].Categ = subtotals[i].budget.name;
     }
-    
+    console.log('data is');
+    console.log(data);
     /***********************
      * for local testing only:
      ************************/
-    var testData = d3.csv("testChart.csv", function(d, i, columns) {
-      for (var j = 1, n = columns.length; j < n; ++j) {
-        console.log('j INSIDE FOR LOOP is ' + j);
-        console.log('columns[j] is ' + columns[j]);
-        console.log('d[columns[j]] is ' + d[columns[j]]);
-        d[columns[j]] = +d[columns[j]]; 
-      }
-
-      return d;   //returns one object for array, ie {Actual:123, Budget: 456, Categ: "household"}
-    });
-    console.log(testData);
-    data = testData;
-    
+//    var testData = d3.csv("testChart.csv", function(d, i, columns) {
+//      for (var j = 1, n = columns.length; j < n; ++j) {
+//        console.log('j INSIDE FOR LOOP is ' + j);
+//        console.log('columns[j] is ' + columns[j]);
+//        console.log('d[columns[j]] is ' + d[columns[j]]);
+//        d[columns[j]] = +d[columns[j]]; 
+//      }
+//
+//      return d;   //returns one object for array, ie {Actual:123, Budget: 456, Categ: "household"}
+//    });
+//    console.log(testData);
+//    data = testData;
+//    
     /***********************
      * end testing
      ************************/
