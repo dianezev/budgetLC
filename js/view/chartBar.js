@@ -17,10 +17,12 @@ console.log('in chartBar and subtotals are:');
     console.log(subtotals);
     
     var svg = d3.select(sel);
+    svg.selectAll("*").remove();
     var margin = {top: 20, right: 20, bottom: 30, left: 40};
     var width = +svg.attr("width") - margin.left - margin.right;
     var height = +svg.attr("height") - margin.top - margin.bottom;
     var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+//    var g = svg.selectAll("*").remove().append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
 console.log('svg is:');
 console.log(svg);
