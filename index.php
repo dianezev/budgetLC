@@ -368,7 +368,7 @@
 <!--        TBD: need to make responsive-->
         <p> Bar chart needs (hovering?) data labels. Needs y-axis labels to not be in 000s. Needs centering, etc. Ideally needs responsive sizing.</p>
         <div class="cBar">
-          <svg width="960" height="200"></svg>
+          <svg width="960" height="400"></svg>
         </div>
         <p> Pie chart needs data labels. Pie chart is currently showing random data, needs to connect to subcategory totals, depending on which category is currently selected. Might show side by side charts for actual vs budget. Needs centering, etc. Ideally needs responsive sizing.</p>
         <div class="cPie">
