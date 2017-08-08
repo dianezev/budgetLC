@@ -43,10 +43,17 @@ LCB.controller = (function() {
       });      
     },
     
-    // Chart fcn in chartBar.js adapted from https://bl.ocks.org/mbostock/3887051
+    // Chart fcn in chartBar.js adapted from examples at https://d3js.org/
+    // TBD: might be better to generate all charts in one call & then
+    // just hide/display charts as user selects options
     chartBar: function(sel) {
       model.getChartSubtotals(function (result) {
         view.chart(sel, "chartBar", result);
+      });          
+    },
+    chartDonut: function(sel) {
+      model.getChartSubtotals(function (result) {
+        view.chart(sel, "chartDonut", result);
       });          
     },
     

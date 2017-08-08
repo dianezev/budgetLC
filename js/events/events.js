@@ -66,9 +66,10 @@ $('#m_settings').on('click', function(e) {
 
 // View summary 
 $('#m_summary').on('click', function(e) {
+
   e.preventDefault();
-  LCB.controller.updateSummary();
-  // TBD
+  LCB.controller.chartBar('svg');
+  LCB.controller.chartDonut();
 });
 
 // For login - toggling between Sign Up and Log In
@@ -91,9 +92,6 @@ $('#menu_icon, #mySidebar a').on('click', function() {
 
 // Click on main menu - calls fcn to hide/display correct page (home, actual, budget...)
 $('.swap, .swap i, .swap span').on('click', function(e) {
-  if (e.currentTarget.id = 'gotoSummary') {
-    LCB.controller.chartBar('svg');
-  }
   LCB.view.togglePages(e.currentTarget.hash);
 });
 
@@ -102,6 +100,10 @@ $('.swap, .swap i, .swap span').on('click', function(e) {
 // active option to 'Food' under 'Budget' & 'Summary' as well
 $('.subMenu a').on('click', function(e) {
   LCB.controller.chooseCategory(this);
+  
+  // temp - just to demo change: til pie chart tied to categories (add all?)
+  LCB.view.Donut3D.transition("salesDonut", LCB.view.randomData(), 130, 100, 30, 0.4);
+  LCB.view.Donut3D.transition("quotesDonut", LCB.view.randomData(), 130, 100, 30, 0);
 });
 
 $('footer a').on('click', function() {

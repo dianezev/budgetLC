@@ -1,19 +1,8 @@
 
-.container {
-/*  width: 80%;*/
-  width: 400px;
-    height: 400px;
-  margin: 20px auto;
-}
+/* chart css adapted from D3 examples at https://d3js.org/ */
 
-.p {
-  text-align: center;
-  font-size: 10px;
-  padding-top: 140px;
-}
-
-/*adapted from D3 example at https://bl.ocks.org/mbostock/3887051*/
-
+/*For bar chart*/
+/*TBD add class to bar chart div to keep css for charts separate?*/
 .axis .domain {
   display: none;
 }
@@ -30,42 +19,35 @@
 
 /*not working*/
 /*
-.charts {
+.cBar {
   width: 700px;
   height: 500px;
 }
-svg {
+.cBar svg {
   width: 600px;
   height: 450px;
 }
 */
 
 
-/*Chart.js stuff...*/
-/*
-		#canvas-holder {
-				width: 100%;
-				margin-top: 50px;
-				text-align: center;
-		}
-		#chartjs-tooltip {
-			opacity: 1;
-			position: absolute;
-			background: rgba(0, 0, 0, .7);
-			color: white;
-			border-radius: 3px;
-			-webkit-transition: all .1s ease;
-			transition: all .1s ease;
-			pointer-events: none;
-			-webkit-transform: translate(-50%, 0);
-			transform: translate(-50%, 0);
-		}
-
-		.chartjs-tooltip-key {
-			display: inline-block;
-			width: 10px;
-			height: 10px;
-			margin-right: 10px;
-		}
-
-*/
+/* For pie chart */
+.cPie {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 960px;
+  height: 500px;
+  position: relative;
+}
+.cPie path.slice{
+	stroke-width:2px;
+}
+.cPie polyline{
+	opacity: .3;
+	stroke: black;
+	stroke-width: 2px;
+	fill: none;
+} 
+.cPie svg text.percent{
+	fill:white;
+	text-anchor:middle;
+	font-size:12px;
+}

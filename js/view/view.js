@@ -17,6 +17,8 @@ LCB.view = (function() {
   var template = LCB.template;
   
   // Private functions here
+
+  
   
   // Clear user data when user logs out
   function clearData() {
@@ -49,6 +51,9 @@ LCB.view = (function() {
     // Calls one of the chart methods, depending on 2nd argument
     chart: function(sel, chartName, result) {
       this[chartName](sel, result);
+    },
+    chartDonut: function(sel, result) {
+      console.log('called view.chartDonut');
     },
     clearEntry: function() {
       $('[id^="amt_"').val('');
@@ -86,6 +91,24 @@ LCB.view = (function() {
       $("[id^='s_'] a").removeClass('active');
       $("[id^='s_'] a:nth-child(" + i + ")").addClass('active');
     },
+    
+    // randomData is temporary - for testing pie chart
+  randomData: function (){
+      // temp, for pie chart testing
+    var salesData=[
+        {label:"Basic", color:"#3366CC"},
+        {label:"Plus", color:"#DC3912"},
+        {label:"Lite", color:"#FF9900"},
+        {label:"Elite", color:"#109618"},
+        {label:"Delux", color:"#990099"}
+    ];
+
+	return salesData.map(function(d){ 
+      return {label:d.label, value:1000*Math.random(), color:d.color};
+    });
+  },
+
+    
     
     // Gets subtotal info for 'Actual' and 'Budget'
     // pages based on currently selected date & category

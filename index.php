@@ -363,13 +363,18 @@
 <!--        completed by template-->
           </select>
         </div>
-
         <!--  put chart elements here -->  
 <!--    experimenting with D3-->
 <!--        TBD: need to make responsive-->
-        <div class="charts">
-          <svg id="myChart" width="960" height="500"></svg>
+        <p> Bar chart needs (hovering?) data labels. Needs y-axis labels to not be in 000s. Needs centering, etc. Ideally needs responsive sizing.</p>
+        <div class="cBar">
+          <svg width="960" height="200"></svg>
         </div>
+        <p> Pie chart needs data labels. Pie chart is currently showing random data, needs to connect to subcategory totals, depending on which category is currently selected. Might show side by side charts for actual vs budget. Needs centering, etc. Ideally needs responsive sizing.</p>
+        <div class="cPie">
+            <!--completed with chartPie.js-->
+        </div>
+
     <div class="w3-container w3-blue-gray w3-large" style="height: 2em"></div>
   </div>
 </div>
@@ -528,21 +533,25 @@
 <!--this ref is temporary, until JSON data returned by php-->
 <script type="text/javascript" src="js/model/testData.json"></script>
   
+<!--  this is current version V4; don't use templates based on V3 due to conflicts-->
 <script src="js/d3.min.js"></script>
 
+  
 <script src="js/templates/template.js"></script>
 <script src="js/model/model.js"></script>
 <script src="js/model/constants.js"></script>
 <script src="js/view/view.js"></script>
-<script src="js/view/chartBar.js">
-</script><script src="js/controller/controller.js"></script>
+<script src="js/view/chartBar.js"></script>
+<script src="js/view/Donut3D.js"></script>
+<script src="js/controller/controller.js"></script>
 <script src="js/script.js"></script>
 <script src="js/events/events.js"></script>
+  
+  
   
 <!--  <script src="js/charts/chartD3_01.js"></script>-->
 <!--  <script src="js/charts/chart03.js"></script>-->
 <!--  <script src="js/charts/chart04.js"></script>-->
-
   
 </body>
 </html>
