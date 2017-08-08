@@ -219,8 +219,8 @@ LCB.controller = (function() {
     
     // Chart fcn in chartBar.js adapted from examples at https://d3js.org/
     // TBD: tie donut to real data; add another chart
-    updateSummary: function() {
-      model.updateSummary(function(result) {
+    updateSummary: function(el) {
+      model.updateSummary(function(subtotals) {
         view.chart("svg", "chartBar", subtotals);
         view.Donut3D.transition("salesDonut", LCB.view.randomData(), 130, 100, 30, 0.4);
         view.Donut3D.transition("quotesDonut", LCB.view.randomData(), 130, 100, 30, 0);
