@@ -59,18 +59,16 @@ $('#m_actual button, #m_budget button').on('click', function(e) {
 });
 
 // Change user settings 
-$('#m_settings').on('click', function(e) {
+$('#m_settings button').on('click', function(e) {
   e.preventDefault();
+  alert('triggered settings button');
   // TBD
 });
 
 // View summary 
-$('#m_summary').on('click', function(e) {
-
-  e.preventDefault();
-  LCB.controller.chartBar('svg');
-  // tbd fix
-  //LCB.controller.chartDonut();
+$('[href="#m_summary"]').on('click', function(e) {
+  //e.preventDefault();
+  LCB.controller.chartUpdate('svg');
 });
 
 // For login - toggling between Sign Up and Log In
@@ -101,10 +99,7 @@ $('.swap, .swap i, .swap span').on('click', function(e) {
 // active option to 'Food' under 'Budget' & 'Summary' as well
 $('.subMenu a').on('click', function(e) {
   LCB.controller.chooseCategory(this);
-  
-  // temp - just to demo change: til pie chart tied to categories (add all?)
-  LCB.view.Donut3D.transition("salesDonut", LCB.view.randomData(), 130, 100, 30, 0.4);
-  LCB.view.Donut3D.transition("quotesDonut", LCB.view.randomData(), 130, 100, 30, 0);
+  LCB.controller.chartUpdate('svg');
 });
 
 $('footer a').on('click', function() {
@@ -120,8 +115,5 @@ $('.categ').on('click', 'li', function() {
 $('[id^="date_"]').bind('change', function(e) {
   console.log($(e.target).val());
   LCB.controller.changeDate($(e.target).val());
-  
-  LCB.view.Donut3D.transition("salesDonut", LCB.view.randomData(), 130, 100, 30, 0.4);
-  LCB.view.Donut3D.transition("quotesDonut", LCB.view.randomData(), 130, 100, 30, 0);
-
+  LCB.controller.chartUpdate('svg');
 });

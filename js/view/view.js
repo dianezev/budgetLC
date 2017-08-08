@@ -52,9 +52,6 @@ LCB.view = (function() {
     chart: function(sel, chartName, result) {
       this[chartName](sel, result);
     },
-    chartDonut: function(sel, result) {
-      console.log('called view.chartDonut');
-    },
     clearEntry: function() {
       $('[id^="amt_"').val('');
       $('[id^="det_"').val('');
