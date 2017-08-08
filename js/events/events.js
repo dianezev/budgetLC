@@ -69,7 +69,8 @@ $('#m_summary').on('click', function(e) {
 
   e.preventDefault();
   LCB.controller.chartBar('svg');
-  LCB.controller.chartDonut();
+  // tbd fix
+  //LCB.controller.chartDonut();
 });
 
 // For login - toggling between Sign Up and Log In
@@ -119,4 +120,8 @@ $('.categ').on('click', 'li', function() {
 $('[id^="date_"]').bind('change', function(e) {
   console.log($(e.target).val());
   LCB.controller.changeDate($(e.target).val());
+  
+  LCB.view.Donut3D.transition("salesDonut", LCB.view.randomData(), 130, 100, 30, 0.4);
+  LCB.view.Donut3D.transition("quotesDonut", LCB.view.randomData(), 130, 100, 30, 0);
+
 });
