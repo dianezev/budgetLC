@@ -118,26 +118,6 @@ LCB.view = (function() {
         $(id).empty().append(detailHTML);
       }
     },
-
-    // Gets summary info
-    refreshSummary: function(subtotals) {
-      var actualHTML = '';
-      
-      actualHTML += '<p> length of "subtotals" array is: ' + subtotals.length + '</p>';
-      actualHTML += '<p>subtotals[0].actual.amt is ' + subtotals[0].actual.amt + '</p>';
-      actualHTML += '<p>subtotals[0].actual.code is ' + subtotals[0].actual.code + '</p>';
-      actualHTML += '<p>subtotals[0].actual.date is ' + subtotals[0].actual.date + '</p>';
-      actualHTML += '<p>subtotals[0].actual.name is ' + subtotals[0].actual.name + '</p>';
-      actualHTML += '<p>subtotals[0].actual.sub is and object that contains all SUB-category detail. See CONSOLE for more info</p>';
-      console.log('THIS SUBTOTAL OBJECT IS RETURNED FOR SUMMARY GRAPH DISPLAYS:');
-      console.log(subtotals);
-
-
-      //template.getDetailHTML(data, "actual");
-      //var budgetHTML = template.getDetailHTML(data, "budget");
-      
-      $('#junkdata').empty().append(actualHTML);
-    },
     
     setDate: function(date) {
       $('[id^="date_"]').val(date);

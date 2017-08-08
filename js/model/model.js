@@ -205,12 +205,6 @@ LCB.model = (function() {
       cb(subtotals, categSel);
     },
 
-    // Return subtotals for use in charts
-    // TBD: might work better to return an object that has
-    // a prop for each chart type - with data sliced as needed
-    getChartSubtotals: function(cb) {
-      cb(subtotals);
-    },
     getData: function(dtype, cb) {
       var that = this;
       var userId = user.userId;
@@ -409,10 +403,12 @@ LCB.model = (function() {
         }
       });      
     },
+
+    // Return subtotals for use in charts
+    // TBD: might work better to return an object that has
+    // a prop for each chart type - with data sliced as needed
     updateSummary: function(cb) {
-      console.log('in updateSummary and returning subtotals:');
-      console.log(subtotals);
-      return subtotals;
+      cb(subtotals);
     }
   };
   return publicAPI;

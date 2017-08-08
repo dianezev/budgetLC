@@ -39,18 +39,10 @@ LCB.controller = (function() {
         view.setDate(date);
         view.refreshDetail(subtotals[categ].actual, "actual");
         view.refreshDetail(subtotals[categ].budget, "budget");
-        view.refreshSummary(subtotals);
-      });      
-    },
-    
-    // Chart fcn in chartBar.js adapted from examples at https://d3js.org/
-    // TBD: tie donut to real data; add another chart
-    chartUpdate: function(sel) {
-      model.getChartSubtotals(function (result) {
-        view.chart(sel, "chartBar", result);
+        view.chart("svg", "chartBar", subtotals);
         view.Donut3D.transition("salesDonut", LCB.view.randomData(), 130, 100, 30, 0.4);
         view.Donut3D.transition("quotesDonut", LCB.view.randomData(), 130, 100, 30, 0);
-      }); 
+      });      
     },
     
     // Called during intialization by script.js
@@ -79,8 +71,15 @@ LCB.controller = (function() {
         view.makeActiveCateg(index + 1, subtotals[categ].actual.sub);
         view.refreshDetail(subtotals[categ].actual, "actual");
         view.refreshDetail(subtotals[categ].budget, "budget");
-        view.refreshSummary(subtotals);
+        view.chart("svg", "chartBar", subtotals);
+        view.Donut3D.transition("salesDonut", LCB.view.randomData(), 130, 100, 30, 0.4);
+        view.Donut3D.transition("quotesDonut", LCB.view.randomData(), 130, 100, 30, 0);
       });
+    },
+
+    handleDetail: function(id) {
+      console.log(id);
+      view.toggleDetail(id);
     },
     
     // Set dates in date selectors and initialize data arrays (empty)
@@ -139,13 +138,14 @@ LCB.controller = (function() {
               /*
                * Nest this call to update budget data so that when it completes
                * we are sure that actual data (above) is also complete -
-               * then call view.refreshSummary which uses both
                */
               model.getData("budget", function (subtotals, categ) {
                 console.log('LOGIN: model.getData for budget returned subtotals[categ]:');
                 console.log(subtotals[categ].budget);
                 view.refreshDetail(subtotals[categ].budget, "budget");
-                view.refreshSummary(subtotals); 
+                view.chart("svg", "chartBar", subtotals);
+                view.Donut3D.transition("salesDonut", LCB.view.randomData(), 130, 100, 30, 0.4);
+                view.Donut3D.transition("quotesDonut", LCB.view.randomData(), 130, 100, 30, 0);
                 view.userMsg("Welcome to Total Finance, " + result.user.name + "!");
               });
             });
@@ -189,7 +189,9 @@ LCB.controller = (function() {
           model.getData(dtype, function (subtotals, categ) {
             view.clearEntry();
             view.refreshDetail(subtotals[categ][dtype], dtype);
-            view.refreshSummary(subtotals);
+            view.chart("svg", "chartBar", subtotals);
+            view.Donut3D.transition("salesDonut", LCB.view.randomData(), 130, 100, 30, 0.4);
+            view.Donut3D.transition("quotesDonut", LCB.view.randomData(), 130, 100, 30, 0);
           });
         });
       }
@@ -214,14 +216,15 @@ LCB.controller = (function() {
           alert('passwords DO NOT match');
       }      
     },
+    
+    // Chart fcn in chartBar.js adapted from examples at https://d3js.org/
+    // TBD: tie donut to real data; add another chart
     updateSummary: function() {
       model.updateSummary(function(result) {
-        view.refreshSummary(result);
+        view.chart("svg", "chartBar", subtotals);
+        view.Donut3D.transition("salesDonut", LCB.view.randomData(), 130, 100, 30, 0.4);
+        view.Donut3D.transition("quotesDonut", LCB.view.randomData(), 130, 100, 30, 0);
       });
-    },
-    handleDetail: function(id) {
-      console.log(id);
-      view.toggleDetail(id);
     }
   };
   return publicAPI;

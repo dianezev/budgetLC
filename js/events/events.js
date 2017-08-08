@@ -66,9 +66,12 @@ $('#m_settings button').on('click', function(e) {
 });
 
 // View summary 
+// TBD maybe this can be dropped because I think summary update is called at 
+// other times (change date, etc) so that it should always be current
 $('[href="#m_summary"]').on('click', function(e) {
   //e.preventDefault();
-  LCB.controller.chartUpdate('svg');
+  
+  //LCB.controller.updateSummary();
 });
 
 // For login - toggling between Sign Up and Log In
