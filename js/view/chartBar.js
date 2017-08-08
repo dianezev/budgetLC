@@ -13,8 +13,6 @@ LCB.view = (function() {
   'use strict';
   // TBD: pass in "svg" for sel, or figure out if ids will work...
   var chartBar = function(sel, subtotals) {
-console.log('in chartBar and subtotals are:');
-    console.log(subtotals);
     
     var svg = d3.select(sel);
     svg.selectAll("*").remove();
@@ -22,10 +20,7 @@ console.log('in chartBar and subtotals are:');
     var width = +svg.attr("width") - margin.left - margin.right;
     var height = +svg.attr("height") - margin.top - margin.bottom;
     var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-//    var g = svg.selectAll("*").remove().append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
-console.log('svg is:');
-console.log(svg);
     var x0 = d3.scaleBand()
             .rangeRound([0, width])
             .paddingInner(0.1);
@@ -35,15 +30,11 @@ console.log(svg);
 
     var y = d3.scaleLinear()
             .rangeRound([height, 0]);
-console.log('y is:');
-console.log(y);
 
     var z = d3.scaleOrdinal()
             .range(["#3b6fb7", "#be4868"]);
     
     var keys = ["Budget", "Actual"];
-console.log('keys is:');
-console.log(keys);
 
     var data = [];
 
@@ -54,8 +45,6 @@ console.log(keys);
       data[i].Actual = +subtotals[i].actual.amt;
       data[i].Categ = subtotals[i].budget.name;
     }
-    console.log('data is');
-    console.log(data);
     /***********************
      * for local testing only:
      ************************/
@@ -76,8 +65,6 @@ console.log(keys);
      * end testing
      ************************/
     
-    console.log('Data for chartBar is:');
-    console.log(data);
 
     x0.domain(data.map(function(d) { return d.Categ; }));
     x1.domain(keys).rangeRound([0, x0.bandwidth()]);
