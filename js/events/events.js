@@ -102,7 +102,7 @@ $('.swap, .swap i, .swap span').on('click', function(e) {
 // active option to 'Food' under 'Budget' & 'Summary' as well
 $('.subMenu a').on('click', function(e) {
   LCB.controller.chooseCategory(this);
-  LCB.controller.chartUpdate('svg');
+  LCB.controller.updateSummary('svg');
 });
 
 $('footer a').on('click', function() {
@@ -118,5 +118,5 @@ $('.categ').on('click', 'li', function() {
 $('[id^="date_"]').bind('change', function(e) {
   console.log($(e.target).val());
   LCB.controller.changeDate($(e.target).val());
-  LCB.controller.chartUpdate('svg');
+  LCB.controller.updateSummary('svg');
 });
