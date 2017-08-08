@@ -19,7 +19,7 @@ LCB.view = (function() {
               margin = {top: 20, right: 20, bottom: 30, left: 40},
               width = +svg.attr("width") - margin.left - margin.right,
               height = +svg.attr("height") - margin.top - margin.bottom,
-              g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+              g = svg.empty().append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     var x0 = d3.scaleBand()
             .rangeRound([0, width])
@@ -45,6 +45,26 @@ LCB.view = (function() {
       data[i].Actual = +subtotals[i].actual.amt;
       data[i].Categ = subtotals[i].budget.name;
     }
+    
+    /***********************
+     * for local testing only:
+     ************************/
+    var testData = d3.csv("testChart.csv", function(d, i, columns) {
+      for (var j = 1, n = columns.length; j < n; ++j) {
+        console.log('j INSIDE FOR LOOP is ' + j);
+        console.log('columns[j] is ' + columns[j]);
+        console.log('d[columns[j]] is ' + d[columns[j]]);
+        d[columns[j]] = +d[columns[j]]; 
+      }
+
+      return d;   //returns one object for array, ie {Actual:123, Budget: 456, Categ: "household"}
+    });
+    console.log(testData);
+    data = testData;
+    
+    /***********************
+     * end testing
+     ************************/
     
     console.log('Data for chartBar is:');
     console.log(data);

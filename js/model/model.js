@@ -27,6 +27,9 @@ LCB = window.LCB || {};
 LCB.model = (function() {
   'use strict';
   
+  // for testing
+  var host = "https://budgetlc.herokuapp.com/";
+  
   // Private vars here
   //var actSubtotals;
   //var budSubtotals;
@@ -182,7 +185,8 @@ LCB.model = (function() {
       $.ajax({
         method: "POST",
         data: {e: urlInfo.e, v: urlInfo.v},
-        url: "php/api/checkUrl.php",
+        url: host + "php/api/checkUrl.php",
+//        url: "php/api/checkUrl.php",
         success: function(result){
 //          console.log('success and result is:')
 //          console.log(result);
@@ -211,8 +215,8 @@ LCB.model = (function() {
 
       $.ajax({
         method: "GET",
-        url: "php/api/v1/" + dtype + "/" + userId,
 //        url: "php/api/v1/" + dtype + "/" + userId,
+        url: host + "php/api/v1/" + dtype + "/" + userId,
         success: function(result){
           console.log('in getData for user: ' + userId + ' type: ' + dtype + ' and result is: ');
           console.log(result);
@@ -277,12 +281,12 @@ LCB.model = (function() {
       date = dateReset;
 
       cb = cb || function () {};
-
+console.log(host + "php/api/login.php");
       $.ajax({
         method: "POST",
         data: {email, password},
-        url: "php/api/login.php",
-//        url: "https://totalfinance-api.herokuapp.com/php/api/login.php",
+//        url: "php/api/login.php",
+        url: host + "php/api/login.php",
         success: function(result){
 
           // Update variables if login was successful
@@ -300,7 +304,10 @@ LCB.model = (function() {
           }
         },
         error: function(xhr, status, error) {
-          alert('ajax ERROR: ' + error);
+          
+          console.log(xhr);
+          console.log(status);
+          alert('ajax ERROR: ' + status);
         }
       });      
     },
@@ -325,7 +332,8 @@ LCB.model = (function() {
       $.ajax({
         method: "POST",
         data: {email},
-        url: "php/api/requestReset.php",
+//        url: "php/api/requestReset.php",
+        url: host + "php/api/requestReset.php",
         success: function(result){
           console.log(result);
           cb(result);
@@ -392,7 +400,8 @@ LCB.model = (function() {
       $.ajax({
         method: "POST",
         data: {email, name},
-        url: "php/api/signup.php",
+//        url: "php/api/signup.php",
+        url: host + "php/api/signup.php",
         success: function(result){
           console.log('success with signup.php and result is:');
           console.log(result);
