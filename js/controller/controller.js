@@ -39,7 +39,7 @@ LCB.controller = (function() {
         view.setDate(date);
         view.refreshDetail(subtotals[categ].actual, "actual");
         view.refreshDetail(subtotals[categ].budget, "budget");
-        view.chart("svg", "chartBar", subtotals);
+        view.chartBar("svg", subtotals);
         view.Donut3D.transition("salesDonut", LCB.view.randomData(), 130, 100, 30, 0.4);
         view.Donut3D.transition("quotesDonut", LCB.view.randomData(), 130, 100, 30, 0);
       });      
@@ -71,7 +71,7 @@ LCB.controller = (function() {
         view.makeActiveCateg(index + 1, subtotals[categ].actual.sub);
         view.refreshDetail(subtotals[categ].actual, "actual");
         view.refreshDetail(subtotals[categ].budget, "budget");
-        view.chart("svg", "chartBar", subtotals);
+        view.chartBar("svg", subtotals);
         view.Donut3D.transition("salesDonut", LCB.view.randomData(), 130, 100, 30, 0.4);
         view.Donut3D.transition("quotesDonut", LCB.view.randomData(), 130, 100, 30, 0);
       });
@@ -143,7 +143,7 @@ LCB.controller = (function() {
                 console.log('LOGIN: model.getData for budget returned subtotals[categ]:');
                 console.log(subtotals[categ].budget);
                 view.refreshDetail(subtotals[categ].budget, "budget");
-                view.chart("svg", "chartBar", subtotals);
+                view.chartBar("svg", subtotals);
                 view.Donut3D.transition("salesDonut", LCB.view.randomData(), 130, 100, 30, 0.4);
                 view.Donut3D.transition("quotesDonut", LCB.view.randomData(), 130, 100, 30, 0);
                 view.userMsg("Welcome to Total Finance, " + result.user.name + "!");
@@ -189,7 +189,7 @@ LCB.controller = (function() {
           model.getData(dtype, function (subtotals, categ) {
             view.clearEntry();
             view.refreshDetail(subtotals[categ][dtype], dtype);
-            view.chart("svg", "chartBar", subtotals);
+            view.chartBar("svg", subtotals);
             view.Donut3D.transition("salesDonut", LCB.view.randomData(), 130, 100, 30, 0.4);
             view.Donut3D.transition("quotesDonut", LCB.view.randomData(), 130, 100, 30, 0);
           });
@@ -224,7 +224,7 @@ LCB.controller = (function() {
       model.updateSummary(function(subtotals) {
         console.log('returns subtotals:');
         console.log(subtotals);
-        view.chart("svg", "chartBar", subtotals);
+        view.chartBar("svg", subtotals);
         view.Donut3D.transition("salesDonut", view.randomData(), 130, 100, 30, 0.4);
         view.Donut3D.transition("quotesDonut", view.randomData(), 130, 100, 30, 0);
       });
