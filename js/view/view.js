@@ -84,24 +84,6 @@ LCB.view = (function() {
       $("[id^='s_'] a:nth-child(" + i + ")").addClass('active');
     },
     
-    // randomData is temporary - for testing pie chart
-  randomData: function (){
-      // temp, for pie chart testing
-    var salesData=[
-        {label:"Basic", color:"#3366CC"},
-        {label:"Plus", color:"#DC3912"},
-        {label:"Lite", color:"#FF9900"},
-        {label:"Elite", color:"#109618"},
-        {label:"Delux", color:"#990099"}
-    ];
-
-	return salesData.map(function(d){ 
-      return {label:d.label, value:1000*Math.random(), color:d.color};
-    });
-  },
-
-    
-    
     // Gets subtotal info for 'Actual' and 'Budget'
     // pages based on currently selected date & category
     refreshDetail: function(data, dtype, date) {

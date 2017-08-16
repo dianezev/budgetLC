@@ -12,13 +12,18 @@ LCB = window.LCB || {};
 LCB.view = (function() {
   'use strict';
   // TBD: pass in "svg" for sel, or figure out if ids will work...
-  var chartBar = function(sel, subtotals) {
+  var chartBar = function(sel, data) {
     
     var svg = d3.select(sel);
     svg.selectAll("*").remove();
     var margin = {top: 20, right: 20, bottom: 30, left: 40};
     var width = +svg.attr("width") - margin.left - margin.right;
     var height = +svg.attr("height") - margin.top - margin.bottom;
+    
+    // TBD Experimenting with tooltips
+    // see for more info: https://bl.ocks.org/alandunning/274bf248fd0f362d64674920e85c1eb7
+    var tooltip = d3.select(".cBar").append("div").attr("class", "toolTip");
+    
     var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
     var x0 = d3.scaleBand()
@@ -32,19 +37,10 @@ LCB.view = (function() {
             .rangeRound([height, 0]);
 
     var z = d3.scaleOrdinal()
-            .range(["#3b6fb7", "#be4868"]);
+            .range(["red", "blue"]);
     
     var keys = ["Budget", "Actual"];
 
-    var data = [];
-
-    // Build data array needed for chart
-    for (var i = 0, l = subtotals.length; i < l; i++) {
-      data[i] = {};
-      data[i].Budget = +subtotals[i].budget.amt; 
-      data[i].Actual = +subtotals[i].actual.amt;
-      data[i].Categ = subtotals[i].budget.name;
-    }
     /***********************
      * for local testing only:
      ************************/
@@ -145,6 +141,8 @@ LCB.view = (function() {
     //           .attr("y", function(d, i) {return 415 - (d * 10)});
 
 
+
+    
   };
  
   var publicAPI = _.extend(LCB.view, {

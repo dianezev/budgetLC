@@ -31,7 +31,7 @@ LCB.controller = (function() {
     
     // Called when user changes date selector
     changeDate: function(date) {
-      model.changeDate(date, function (subtotals, categ) {
+      model.changeDate(date, function (subtotals, categ, chartData) {
         console.log('model.changeDate returned date: ' + date + ' and subtotals[categ]:');
         console.log(subtotals[categ]);
 
@@ -39,9 +39,9 @@ LCB.controller = (function() {
         view.setDate(date);
         view.refreshDetail(subtotals[categ].actual, "actual");
         view.refreshDetail(subtotals[categ].budget, "budget");
-        view.chartBar("svg", subtotals);
-        view.Donut3D.transition("salesDonut", LCB.view.randomData(), 130, 100, 30, 0.4);
-        view.Donut3D.transition("quotesDonut", LCB.view.randomData(), 130, 100, 30, 0);
+        view.chartBar("svg", chartData.bar);
+        view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0.4);
+        view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0);
       });      
     },
     
@@ -67,13 +67,13 @@ LCB.controller = (function() {
       var categories = $('#' + parent_id + ' a');
       var index = categories.index(that);
       
-      model.filterData(index, function (subtotals, categ) {
+      model.filterData(index, function (subtotals, categ, chartData) {
         view.makeActiveCateg(index + 1, subtotals[categ].actual.sub);
         view.refreshDetail(subtotals[categ].actual, "actual");
         view.refreshDetail(subtotals[categ].budget, "budget");
-        view.chartBar("svg", subtotals);
-        view.Donut3D.transition("salesDonut", LCB.view.randomData(), 130, 100, 30, 0.4);
-        view.Donut3D.transition("quotesDonut", LCB.view.randomData(), 130, 100, 30, 0);
+        view.chartBar("svg", chartData.bar);
+        view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0.4);
+        view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0);
       });
     },
 
@@ -130,7 +130,7 @@ LCB.controller = (function() {
           } else {
             view.userAcct(result);
             view.setDate(result.date);
-            model.getData("actual", function (subtotals, categ) {
+            model.getData("actual", function (subtotals, categ, chartData) {
               console.log('LOGIN: model.getData for actual returned subtotals[categ]:');
               console.log(subtotals[categ].actual);
               view.refreshDetail(subtotals[categ].actual, "actual");
@@ -139,13 +139,15 @@ LCB.controller = (function() {
                * Nest this call to update budget data so that when it completes
                * we are sure that actual data (above) is also complete -
                */
-              model.getData("budget", function (subtotals, categ) {
+              model.getData("budget", function (subtotals, categ, chartData) {
                 console.log('LOGIN: model.getData for budget returned subtotals[categ]:');
                 console.log(subtotals[categ].budget);
                 view.refreshDetail(subtotals[categ].budget, "budget");
-                view.chartBar("svg", subtotals);
-                view.Donut3D.transition("salesDonut", LCB.view.randomData(), 130, 100, 30, 0.4);
-                view.Donut3D.transition("quotesDonut", LCB.view.randomData(), 130, 100, 30, 0);
+                view.chartBar("svg", chartData.bar);
+                view.donut3D.draw("actualDonut", chartData.donut.actual, 150, 150, 130, 100, 30, 0.4);
+                view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0.4);
+                view.donut3D.draw("budgetDonut", chartData.donut.budget, 450, 150, 130, 100, 30, 0);
+                view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0);
                 view.userMsg("Welcome to Total Finance, " + result.user.name + "!");
               });
             });
@@ -186,12 +188,12 @@ LCB.controller = (function() {
         model.sendExpense(expenseData, function (result) {
           // maybe improve later: instead of getExpenses, could just add a new object to the actual or budget array, then recalc subtotals, etc.
 
-          model.getData(dtype, function (subtotals, categ) {
+          model.getData(dtype, function (subtotals, categ, chartData) {
             view.clearEntry();
             view.refreshDetail(subtotals[categ][dtype], dtype);
-            view.chartBar("svg", subtotals);
-            view.Donut3D.transition("salesDonut", LCB.view.randomData(), 130, 100, 30, 0.4);
-            view.Donut3D.transition("quotesDonut", LCB.view.randomData(), 130, 100, 30, 0);
+            view.chartBar("svg", chartData.bar);
+            view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0.4);
+            view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0);
           });
         });
       }
@@ -215,20 +217,7 @@ LCB.controller = (function() {
           // TBD: improve ui
           alert('passwords DO NOT match');
       }      
-    },
-    
-    // Chart fcn in chartBar.js adapted from examples at https://d3js.org/
-    // TBD: tie donut to real data; add another chart
-    updateSummary: function(el) {
-      console.log('in c.updateSummary');
-      model.updateSummary(function(subtotals) {
-        console.log('returns subtotals:');
-        console.log(subtotals);
-        view.chartBar("svg", subtotals);
-        view.Donut3D.transition("salesDonut", view.randomData(), 130, 100, 30, 0.4);
-        view.Donut3D.transition("quotesDonut", view.randomData(), 130, 100, 30, 0);
-      });
-    }
+    },    
   };
   return publicAPI;
 })();

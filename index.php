@@ -363,18 +363,22 @@
 <!--        completed by template-->
           </select>
         </div>
+    
         <!--  put chart elements here -->  
-<!--    experimenting with D3-->
 <!--        TBD: need to make responsive-->
-        <p> Bar chart needs (hovering?) data labels. Needs y-axis labels to not be in 000s. Needs centering, etc. Ideally needs responsive sizing.</p>
+
+        <p> Bar chart needs (hovering?) data labels.  Needs centering, etc. Ideally needs responsive sizing.</p>
         <div class="cBar">
           <svg width="960" height="400"></svg>
         </div>
-        <p> Pie chart needs data labels. Pie chart is currently showing random data, needs to connect to subcategory totals, depending on which category is currently selected. Might show side by side charts for actual vs budget. Needs centering, etc. Ideally needs responsive sizing.</p>
-        <div class="cPie">
-            <!--completed with chartPie.js-->
-        </div>
 
+        <p> Pie chart needs data labels.  Needs centering, etc. Ideally needs responsive sizing.</p>
+        <div class="cPie">
+          <svg width="700" height="300">
+            <g id="actualDonut"></g>
+            <g id="budgetDonut"></g>
+          </svg>
+        </div>
     <div class="w3-container w3-blue-gray w3-large" style="height: 2em"></div>
   </div>
 </div>
@@ -542,7 +546,7 @@
 <script src="js/model/constants.js"></script>
 <script src="js/view/view.js"></script>
 <script src="js/view/chartBar.js"></script>
-<script src="js/view/Donut3D.js"></script>
+<script src="js/view/donut3D.js"></script>
 <script src="js/controller/controller.js"></script>
 <script src="js/script.js"></script>
 <script src="js/events/events.js"></script>

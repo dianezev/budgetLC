@@ -11,6 +11,20 @@ LCB = window.LCB || {};
 LCB.model = (function() {
   'use strict';
   
+  // red, blue, rebeccapurple, orange, yellow, lightreen, midnightblue, orangered, mediumpurple, seagreen, hotpink
+  var COLORS = ['#FF0000', 
+                '#0000FF', 
+                '#663399', 
+                '#FFA500', 
+                '#FFFF00', 
+                '#90EE90', 
+                '#191970', 
+                '#FF4500',
+                '#9370DB', 
+                '#2E8B57', 
+                '#FF69B4'
+  ];
+  
   var CAT = [
     {code: "hous",
      name: "Household",
@@ -121,7 +135,8 @@ LCB.model = (function() {
   ];
  
   var publicAPI = _.extend(LCB.model, {
-    CAT: CAT
+    CAT: CAT,
+    COLORS: COLORS
   });
   
   return publicAPI;  

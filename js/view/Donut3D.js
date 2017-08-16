@@ -1,19 +1,18 @@
 /****************************************************
  * Notes on chartPie.js: 
  *
- * This extends view.js to include view.chartPie
+ * This extends view.js to include view.donut3D
  * which is used to create pie chart
  *
  * this chart adapted from http://bl.ocks.org/NPashaP/9994181
  ****************************************************/
 
 LCB = window.LCB || {};
-
+console.log('in d3d');
 LCB.view = (function() {
   'use strict';
 
-  // TBD: pass in "svg" for sel, or figure out if ids will work...
-	var Donut3D={};
+	var donut3D={};
 	
 	function pieTop(d, rx, ry, ir ){
 		if(d.endAngle - d.startAngle == 0 ) return "M 0 0";
@@ -61,53 +60,53 @@ LCB.view = (function() {
 				Math.round(1000*(d.endAngle-d.startAngle)/(Math.PI*2))/10+'%' : '');
 	}	
 	
-	Donut3D.transition = function(id, data, rx, ry, h, ir){
-      console.log('called Donut3D.transition');
-		function arcTweenInner(a) {
-		  var i = d3.interpolate(this._current, a);
-		  this._current = i(0);
-		  return function(t) { return pieInner(i(t), rx+0.5, ry+0.5, h, ir);  };
-		}
-		function arcTweenTop(a) {
-		  var i = d3.interpolate(this._current, a);
-		  this._current = i(0);
-		  return function(t) { return pieTop(i(t), rx, ry, ir);  };
-		}
-		function arcTweenOuter(a) {
-		  var i = d3.interpolate(this._current, a);
-		  this._current = i(0);
-		  return function(t) { return pieOuter(i(t), rx-.5, ry-.5, h);  };
-		}
-		function textTweenX(a) {
-		  var i = d3.interpolate(this._current, a);
-		  this._current = i(0);
-		  return function(t) { return 0.6*rx*Math.cos(0.5*(i(t).startAngle+i(t).endAngle));  };
-		}
-		function textTweenY(a) {
-		  var i = d3.interpolate(this._current, a);
-		  this._current = i(0);
-		  return function(t) { return 0.6*rx*Math.sin(0.5*(i(t).startAngle+i(t).endAngle));  };
-		}
-		
-		var _data = d3.pie().sort(null).value(function(d) {return d.value;})(data);
-		
-		d3.select("#"+id).selectAll(".innerSlice").data(_data)
-			.transition().duration(750).attrTween("d", arcTweenInner); 
-			
-		d3.select("#"+id).selectAll(".topSlice").data(_data)
-			.transition().duration(750).attrTween("d", arcTweenTop); 
-			
-		d3.select("#"+id).selectAll(".outerSlice").data(_data)
-			.transition().duration(750).attrTween("d", arcTweenOuter); 	
-			
-		d3.select("#"+id).selectAll(".percent").data(_data).transition().duration(750)
-			.attrTween("x",textTweenX).attrTween("y",textTweenY).text(getPercent); 	
+	donut3D.transition = function(id, data, rx, ry, h, ir){
+      
+      function arcTweenInner(a) {
+        var i = d3.interpolate(this._current, a);
+        this._current = i(0);
+        return function(t) { return pieInner(i(t), rx+0.5, ry+0.5, h, ir);  };
+      }
+      function arcTweenTop(a) {
+        var i = d3.interpolate(this._current, a);
+        this._current = i(0);
+        return function(t) { return pieTop(i(t), rx, ry, ir);  };
+      }
+      function arcTweenOuter(a) {
+        var i = d3.interpolate(this._current, a);
+        this._current = i(0);
+        return function(t) { return pieOuter(i(t), rx-.5, ry-.5, h);  };
+      }
+      function textTweenX(a) {
+        var i = d3.interpolate(this._current, a);
+        this._current = i(0);
+        return function(t) { return 0.6*rx*Math.cos(0.5*(i(t).startAngle+i(t).endAngle));  };
+      }
+      function textTweenY(a) {
+        var i = d3.interpolate(this._current, a);
+        this._current = i(0);
+        return function(t) { return 0.6*rx*Math.sin(0.5*(i(t).startAngle+i(t).endAngle));  };
+      }
+
+      var _data = d3.pie().sort(null).value(function(d) {return d.value;})(data);
+
+      d3.select("#"+id).selectAll(".innerSlice").data(_data)
+          .transition().duration(750).attrTween("d", arcTweenInner); 
+
+      d3.select("#"+id).selectAll(".topSlice").data(_data)
+          .transition().duration(750).attrTween("d", arcTweenTop); 
+
+      d3.select("#"+id).selectAll(".outerSlice").data(_data)
+          .transition().duration(750).attrTween("d", arcTweenOuter); 	
+
+      d3.select("#"+id).selectAll(".percent").data(_data).transition().duration(750)
+          .attrTween("x",textTweenX).attrTween("y",textTweenY).text(getPercent); 	
 	}
 	
-	Donut3D.draw=function(id, data, x /*center x*/, y/*center y*/, 
+	donut3D.draw=function(id, data, x /*center x*/, y/*center y*/, 
 			rx/*radius x*/, ry/*radius y*/, h/*height*/, ir/*inner radius*/){
-	
-		var _data = d3.pie().sort(null).value(function(d) {return d.value;})(data);
+
+        var _data = d3.pie().sort(null).value(function(d) {return d.value;})(data);
 		
 		var slices = d3.select("#"+id).append("g").attr("transform", "translate(" + x + "," + y + ")")
 			.attr("class", "slices");
@@ -134,10 +133,8 @@ LCB.view = (function() {
 			.text(getPercent).each(function(d){this._current=d;});				
 	}
 	
-//	this.Donut3D = Donut3D;
- 
   var publicAPI = _.extend(LCB.view, {
-    Donut3D: Donut3D
+    donut3D: donut3D
   });
   
   return publicAPI;  

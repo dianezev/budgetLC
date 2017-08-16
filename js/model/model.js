@@ -34,6 +34,7 @@ LCB.model = (function() {
   //var actSubtotals;
   //var budSubtotals;
   var subtotals = [];
+  var chartData = {};
   
   var dateReset = ''  
   var date = ''; // initialized to current year & mo but user can change
@@ -135,6 +136,35 @@ LCB.model = (function() {
     
     // Public functions here  
 
+    // Calculates data needed for various charts, based on 'subtotals' var
+    // TBD: add more name value pairs to the object that gets returned, as
+    // needed for each type of chart
+    calcChartData: function () {
+      var donut = {actual: [], budget: []};
+      var bar = [];
+      var COLORS = this.COLORS;
+
+      // Create object needed for donut chart:
+      for (var i = 0, l = subtotals.length ; i < l ; i++) {
+        donut.actual[i] = { label: subtotals[i].actual.name, 
+                      value: +subtotals[i].actual.amt, 
+                      color: COLORS[i] };
+        donut.budget[i] = { label: subtotals[i].budget.name, 
+                      value: +subtotals[i].budget.amt, 
+                      color: COLORS[i] };
+      }
+
+      // Create array needed for bar chart:
+      for (var i = 0, l = subtotals.length; i < l; i++) {
+        bar[i] = {};
+        bar[i].Budget = +subtotals[i].budget.amt; 
+        bar[i].Actual = +subtotals[i].actual.amt;
+        bar[i].Categ = subtotals[i].budget.name;
+      }
+      return {donut, bar};
+    },
+
+    
     // Calculates subtotal and detail info, 
     // based on selected date
     calcSubtotals: function () {
@@ -169,11 +199,12 @@ LCB.model = (function() {
 
       // Update subtotals for current date
       subtotals = this.calcSubtotals();
+      chartData = this.calcChartData();
       console.log('in model.changeDate and new subtotals are:');
       console.log(subtotals);
 
       // Callback refreshes data detail for selected date
-      cb(subtotals, categSel);
+      cb(subtotals, categSel, chartData);
     },
     
     checkUrl: function(urlInfo, cb) {
@@ -206,7 +237,7 @@ LCB.model = (function() {
 
     filterData: function(index, cb) {
       categSel = index;
-      cb(subtotals, categSel);
+      cb(subtotals, categSel, chartData);
     },
 
     getData: function(dtype, cb) {
@@ -245,9 +276,10 @@ LCB.model = (function() {
           // TBD: Could pass add'l arg so it only updates based on 'dtype'
           // instead of updating both the actual & budget
           subtotals = that.calcSubtotals();
-
+          chartData = that.calcChartData();
+          
           // Pass subtotals & current category to callback
-          cb(subtotals, categSel);
+          cb(subtotals, categSel, chartData);
         },
         error: function () {
           alert('error: the AJAX call in model.getData for php/api/v1/' + dtype + '/' + userId + ' failed.');
@@ -257,17 +289,18 @@ LCB.model = (function() {
     },
     
     initialize: function (cb) {
-      
+
       // Get range of dates for selector and initialize 'date' to cur mo & yr
       var date_rg = getDateRg();
       
       // Initialize data arrays to empty
       act = initData();
       bud = initData();
-      
+
       // Initialize subtotals
       subtotals = this.calcSubtotals();
-     
+      chartData = this.calcChartData();
+
       cb(date_rg, date);
     },
       
@@ -320,6 +353,7 @@ console.log(host + "php/api/login.php");
       
       // Re-initialize subtotals
       subtotals = this.calcSubtotals();
+      chartData = this.calcChartData();
 
       // TBD: other db/backend processing?
     },
@@ -413,12 +447,12 @@ console.log(host + "php/api/login.php");
       });      
     },
 
-    // Return subtotals for use in charts
-    // TBD: might work better to return an object that has
-    // a prop for each chart type - with data sliced as needed
-    updateSummary: function(cb) {
-      cb(subtotals);
-    }
+//    // Return subtotals for use in charts
+//    // TBD: might work better to return an object that has
+//    // a prop for each chart type - with data sliced as needed
+//    updateSummary: function(cb) {
+//      cb(subtotals);
+//    }
   };
   return publicAPI;
 })();
