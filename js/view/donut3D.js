@@ -104,13 +104,22 @@ LCB.view = (function() {
 	}
 	
 	donut3D.draw=function(id, data, x /*center x*/, y/*center y*/, 
-			rx/*radius x*/, ry/*radius y*/, h/*height*/, ir/*inner radius*/){
+			rx/*radius x*/, ry/*radius y*/, h/*height*/, ir/*inner radius*/, COLORS){
 
         var _data = d3.pie().sort(null).value(function(d) {return d.value;})(data);
 		
 		var slices = d3.select("#"+id).append("g").attr("transform", "translate(" + x + "," + y + ")")
 			.attr("class", "slices");
-			
+		
+        var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+      
+        var z = d3.scaleOrdinal()
+            .range(COLORS);
+        var keys = ["Budget", "Actual"];
+        var margin = {top: 20, right: 20, bottom: 30, left: 40};
+        var width = +d3.select("#"+id).attr("width") - margin.left - margin.right;
+
+      
 		slices.selectAll(".innerSlice").data(_data).enter().append("path").attr("class", "innerSlice")
 			.style("fill", function(d) { return d3.hsl(d.data.color).darker(0.7); })
 			.attr("d",function(d){ return pieInner(d, rx+0.5,ry+0.5, h, ir);})
@@ -120,6 +129,14 @@ LCB.view = (function() {
 			.style("fill", function(d) { return d.data.color; })
 			.style("stroke", function(d) { return d.data.color; })
 			.attr("d",function(d){ return pieTop(d, rx, ry, ir);})
+            .on("mousemove", function(d){
+                  tooltip
+                    .style("left", d3.event.pageX - 50 + "px")
+                    .style("top", d3.event.pageY - 70 + "px")
+                    .style("display", "inline-block")
+                    .html((d.data.label) + "<br>" + "$" + (d.data.value));
+                })
+            .on("mouseout", function(d){ tooltip.style("display", "none");})
 			.each(function(d){this._current=d;});
 		
 		slices.selectAll(".outerSlice").data(_data).enter().append("path").attr("class", "outerSlice")
@@ -130,7 +147,32 @@ LCB.view = (function() {
 		slices.selectAll(".percent").data(_data).enter().append("text").attr("class", "percent")
 			.attr("x",function(d){ return 0.6*rx*Math.cos(0.5*(d.startAngle+d.endAngle));})
 			.attr("y",function(d){ return 0.6*ry*Math.sin(0.5*(d.startAngle+d.endAngle));})
-			.text(getPercent).each(function(d){this._current=d;});				
+			.text(getPercent).each(function(d){this._current=d;});		
+      
+      
+        var legend = slices.append("g")
+                    .attr("font-family", "Raleway")
+                    .attr("font-size", 10)
+                    .attr("text-anchor", "end")
+                    .selectAll("g")
+                    .data(keys.slice())
+                    .enter().append("g")
+                    .attr("transform", function(d, i) {
+                      return "translate(0," + i * 20 + ")";
+                    });
+
+        legend.append("rect")
+          .attr("x", width - 19)
+          .attr("width", 19)
+          .attr("height", 19)
+          .attr("fill", z);
+
+        legend.append("text")
+          .attr("x", width - 24)
+          .attr("y", 9.5)
+          .attr("dy", "0.32em")
+          .text(function(d) { return d; });
+
 	}
 	
   var publicAPI = _.extend(LCB.view, {

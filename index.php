@@ -539,7 +539,7 @@
   
 <!--  this is current version V4; don't use templates based on V3 due to conflicts-->
 <script src="js/d3.min.js"></script>
-
+<!--<script src="https://d3js.org/d3.v4.min.js"></script>-->
   
 <script src="js/templates/template.js"></script>
 <script src="js/model/model.js"></script>

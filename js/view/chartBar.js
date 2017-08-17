@@ -22,7 +22,7 @@ LCB.view = (function() {
     
     // TBD Experimenting with tooltips
     // see for more info: https://bl.ocks.org/alandunning/274bf248fd0f362d64674920e85c1eb7
-    var tooltip = d3.select(".cBar").append("div").attr("class", "toolTip");
+    var tooltip = d3.select("body").append("div").attr("class", "toolTip");
     
     var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     
@@ -88,7 +88,17 @@ LCB.view = (function() {
       .attr("y", function(d) { return y(d.value); })  
       .attr("width", x1.bandwidth())
       .attr("height", function(d) { return height - y(d.value); })
-      .attr("fill", function(d) { return z(d.key); });
+      .attr("fill", function(d) { return z(d.key); })
+      .on("mousemove", function(d){
+      console.log(d);
+            tooltip
+              .style("left", d3.event.pageX - 50 + "px")
+              .style("top", d3.event.pageY - 70 + "px")
+              .style("display", "inline-block")
+              .html((d.key) + "<br>" + "$" + (d.value));
+          })
+      .on("mouseout", function(d){ tooltip.style("display", "none");});
+    
 
     g.append("g")
       .attr("class", "axis")
@@ -112,7 +122,7 @@ LCB.view = (function() {
                 .attr("font-size", 10)
                 .attr("text-anchor", "end")
                 .selectAll("g")
-                .data(keys.slice().reverse())
+                .data(keys.slice())
                 .enter().append("g")
                 .attr("transform", function(d, i) {
                   return "translate(0," + i * 20 + ")";

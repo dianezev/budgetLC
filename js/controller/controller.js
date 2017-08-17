@@ -17,6 +17,7 @@ LCB.controller = (function() {
   // Private vars here
   var model = LCB.model;
   var view = LCB.view;
+  var COLORS = model.COLORS;
   
   
   // Public vars & functions here
@@ -40,8 +41,8 @@ LCB.controller = (function() {
         view.refreshDetail(subtotals[categ].actual, "actual");
         view.refreshDetail(subtotals[categ].budget, "budget");
         view.chartBar("svg", chartData.bar);
-        view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0.4);
-        view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0);
+        view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0.4);
+        view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0);
       });      
     },
     
@@ -72,8 +73,8 @@ LCB.controller = (function() {
         view.refreshDetail(subtotals[categ].actual, "actual");
         view.refreshDetail(subtotals[categ].budget, "budget");
         view.chartBar("svg", chartData.bar);
-        view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0.4);
-        view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0);
+        view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0.4);
+        view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0);
       });
     },
 
@@ -144,10 +145,11 @@ LCB.controller = (function() {
                 console.log(subtotals[categ].budget);
                 view.refreshDetail(subtotals[categ].budget, "budget");
                 view.chartBar("svg", chartData.bar);
-                view.donut3D.draw("actualDonut", chartData.donut.actual, 150, 150, 130, 100, 30, 0.4);
-                view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0.4);
-                view.donut3D.draw("budgetDonut", chartData.donut.budget, 450, 150, 130, 100, 30, 0);
-                view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0);
+                view.donut3D.draw("budgetDonut", chartData.donut.budget, 150, 150, 130, 100, 30, 0.4, COLORS);
+                view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0.4);
+                view.donut3D.draw("actualDonut", chartData.donut.actual, 450, 150, 130, 100, 30, 0, COLORS);
+                view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0);
+
                 view.userMsg("Welcome to Total Finance, " + result.user.name + "!");
               });
             });
@@ -192,8 +194,8 @@ LCB.controller = (function() {
             view.clearEntry();
             view.refreshDetail(subtotals[categ][dtype], dtype);
             view.chartBar("svg", chartData.bar);
-            view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0.4);
-            view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0);
+            view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0.4);
+            view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0);
           });
         });
       }
