@@ -219,8 +219,9 @@ select {
 /*  font-size: 80%;*/
   line-height: 1;
 }
-.cBar {
+.cBar, .cPie {
   margin: 0 auto;
+  text-align: center;
 }
 
 /* For chart tool tips*/
