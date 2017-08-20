@@ -101,11 +101,13 @@ LCB.view = (function() {
     
 
     g.append("g")
+      .style("font", "12px Raleway")
       .attr("class", "axis")
       .attr("transform", "translate(0," + height + ")")
       .call(d3.axisBottom(x0));
 
     g.append("g")
+      .style("font", "9px Raleway")
       .attr("class", "axis")
       .call(d3.axisLeft(y).ticks(null))
       .append("text")

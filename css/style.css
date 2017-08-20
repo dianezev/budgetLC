@@ -235,3 +235,12 @@ select {
   padding: 14px;
   text-align: center;
 }
+svg rect:hover, .topSlice:hover, .outerSlice:hover, .innerSlice:hover {
+  fill-opacity: 1;
+}
+svg rect {
+  fill-opacity: .4;
+}
+.topSlice, .innerSlice, .outerSlice {
+  fill-opacity: .6;
+}
