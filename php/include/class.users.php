@@ -82,13 +82,12 @@ class Users
 	    		//$_SESSION['LoggedIn'] = 1;
                 $result->pass = TRUE;
                 $result->user = $row;
-				$token = [
-					'userName' => 'Tom-Tom',
-					'userId' => 11,
+				$payload = [
+					'userId' => $row['userId'],
 					'iat' => time(),
 					'exp' => time() + 60 * 60 * 1 // 1 hr
 				];
-				$result->authToken = JWT::encode($token, getenv("JWT_SECRET"));
+				$result->authToken = JWT::encode($payload, getenv("JWT_SECRET"));
 	    		return $result;              
               }
             }

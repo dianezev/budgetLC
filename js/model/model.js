@@ -45,6 +45,8 @@ LCB.model = (function() {
   var bud;
   var act;
 
+  var authToken;
+  
   // Private functions here
   
   
@@ -249,6 +251,7 @@ LCB.model = (function() {
         method: "GET",
 //        url: "php/api/v1/" + dtype + "/" + userId,
         url: host + "php/api/v1/" + dtype + "/" + userId,
+        headers: {Authorization: 'Bearer ' + authToken},
         success: function(result){
           console.log('in getData for user: ' + userId + ' type: ' + dtype + ' and result is: ');
           console.log(result);
@@ -329,7 +332,7 @@ console.log(host + "php/api/login.php");
             
             user = result.user;
             categSel = 0;
-            const authToken = result.authToken;
+            authToken = result.authToken;
             
             cb({user, categSel, date, authToken});
 
