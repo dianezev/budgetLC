@@ -28,7 +28,8 @@ LCB.model = (function() {
   'use strict';
   
   // for testing
-  var host = "https://budgetlc.herokuapp.com/";
+  // var host = "https://budgetlc.herokuapp.com/";
+  var host = "/";
   
   // Private vars here
   //var actSubtotals;
@@ -328,8 +329,9 @@ console.log(host + "php/api/login.php");
             
             user = result.user;
             categSel = 0;
+            const authToken = result.authToken;
             
-            cb({user, categSel, date});
+            cb({user, categSel, date, authToken});
 
           } else {
             console.log('error with log in');
