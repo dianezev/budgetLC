@@ -11,15 +11,22 @@ LCB = window.LCB || {};
 
 LCB.view = (function() {
   'use strict';
-  // TBD: pass in "svg" for sel, or figure out if ids will work...
+
   var chartBar = function(sel, data) {
+    var availWidth = this.availWidth;
+    var availHeight = availWidth / 2.16;
+    var top = availWidth * .02;
+    var right = availWidth * .02;
+    var bottom = availWidth * .03;
+    var left = availWidth * .04;
     
     var svg = d3.select(sel);
-    svg.selectAll("*").remove();
-    var margin = {top: 20, right: 20, bottom: 30, left: 40};
-    var width = +svg.attr("width") - margin.left - margin.right;
-    var height = +svg.attr("height") - margin.top - margin.bottom;
     
+    svg.selectAll("*").remove();
+    var margin = {top: top, right: right, bottom: bottom, left: left};
+    var width = availWidth - margin.left - margin.right;
+    var height = availHeight - margin.top - margin.bottom;
+
     // TBD Experimenting with tooltips
     // see for more info: https://bl.ocks.org/alandunning/274bf248fd0f362d64674920e85c1eb7
     var tooltip = d3.select("body").append("div").attr("class", "toolTip");
@@ -37,7 +44,7 @@ LCB.view = (function() {
             .rangeRound([height, 0]);
 
     var z = d3.scaleOrdinal()
-            .range(["red", "blue"]);
+            .range(["#009688", "#3f51b5"]);
     
     var keys = ["Budget", "Actual"];
 
@@ -90,7 +97,6 @@ LCB.view = (function() {
       .attr("height", function(d) { return height - y(d.value); })
       .attr("fill", function(d) { return z(d.key); })
       .on("mousemove", function(d){
-      console.log(d);
             tooltip
               .style("left", d3.event.pageX - 50 + "px")
               .style("top", d3.event.pageY - 70 + "px")
@@ -142,19 +148,6 @@ LCB.view = (function() {
       .attr("dy", "0.32em")
       .text(function(d) { return d; });
 
-    // TBD adapt this sample code to add data labels
-      // Select, append to SVG, and add attributes to text
-    //svg.selectAll("text")
-    //    .data(dataArray)
-    //    .enter().append("text")
-    //    .text(function(d) {return d})
-    //           .attr("class", "text")
-    //           .attr("x", function(d, i) {return (i * 60) + 36})
-    //           .attr("y", function(d, i) {return 415 - (d * 10)});
-
-
-
-    
   };
  
   var publicAPI = _.extend(LCB.view, {

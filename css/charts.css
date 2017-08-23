@@ -6,7 +6,39 @@
 .axis .domain {
   display: none;
 }
+ 
+.cBar, .cPie {
+  margin: 1% 5%;
+  text-align: center;
+}
+
+/* For chart tool tips*/
+.toolTip {
+  position: absolute;
+  display: none;
+  min-width: 80px;
+  height: auto;
+  background: none repeat scroll 0 0 #ffffff;
+  border: 1px solid #6F257F;
+  padding: 14px;
+  text-align: center;
+}
+svg rect:hover, .topSlice:hover, .outerSlice:hover, .innerSlice:hover {
+  fill-opacity: 1;
+}
+svg rect {
+  fill-opacity: .4;
+}
+.topSlice, .innerSlice, .outerSlice {
+  fill-opacity: .6;
+}
+.legend {
+  position: fixed!important;
+  left: 0;
+  top: 0;
   
+}
+
 /*Rectangle bar class styling*/
 
 /*

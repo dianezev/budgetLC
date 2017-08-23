@@ -336,13 +336,15 @@
 
 <!-- Summary Section -->
 <!-- TBD: Add template to make this dynamic-->
+<!--<div class="summary w3-row-padding w3-text-blue-gray w3-grey" id="m_summary">-->
 <div class="summary w3-row-padding w3-text-blue-gray w3-grey" id="m_summary">
   <div class="w3-card w3-light-grey">
-      <div class="subMenu w3-bar w3-blue-gray w3-card-2">
+      <div class="subMenu w3-bar w3-black w3-card-2">
         <div class="w3-center" id="s_summary">
 <!--          could add template for this-->
-          <a href="#" class="w3-bar-item w3-button">Household</a>
-          <a href="#" class="w3-bar-item w3-button">Car/Transit</a>
+          <a href="#" class="w3-bar-item w3-button">Bar Chart</a>
+          <a href="#" class="w3-bar-item w3-button">Pie Charts</a>
+<!--
           <a href="#" class="w3-bar-item w3-button">Food</a>
           <a href="#" class="w3-bar-item w3-button">Health</a>
           <a href="#" class="w3-bar-item w3-button">Utilities</a>
@@ -352,6 +354,7 @@
           <a href="#" class="w3-bar-item w3-button">Taxes</a>
           <a href="#" class="w3-bar-item w3-button">Accounts</a>
           <a href="#" class="w3-bar-item w3-button">Misc</a>
+-->
         </div>
       </div>
     
@@ -367,19 +370,18 @@
         <!--  put chart elements here -->  
 <!--        TBD: need to make responsive-->
 
-        <p> Bar chart needs (hovering?) data labels.  Needs centering, etc. Ideally needs responsive sizing.</p>
         <div class="cBar">
-          <svg width="960" height="400"></svg>
+          <svg class="svg_cBar" width="960" height="400"></svg>
         </div>
 
-        <p> Pie chart needs data labels.  Needs centering, etc. Ideally needs responsive sizing.</p>
-        <div class="cPie">
-          <svg width="700" height="300">
+        <div class="cPie hide">
+          <svg class="svg_cPie">
+<!--          <svg class="svg_cPie" width="90%" height="100%">-->
             <g id="actualDonut"></g>
             <g id="budgetDonut"></g>
           </svg>
         </div>
-    <div class="w3-container w3-blue-gray w3-large" style="height: 2em"></div>
+    <div class="w3-container w3-black w3-large" style="height: 2em"></div>
   </div>
 </div>
   
@@ -392,7 +394,7 @@
 <!-- Settings Section -->  
 <div class="settings w3-row-padding w3-text-blue-gray w3-grey" id="m_settings">
   <div class="w3-card w3-light-grey">
-    <div class="w3-container w3-blue-gray">
+    <div class="w3-container w3-black">
       <h5 class="w3-center">USER SETTINGS</h5>
     </div>
     <form action="">
@@ -440,7 +442,7 @@
       </p>
     </form>
 
-    <div class="w3-container w3-blue-gray w3-large" style="height: 2em"></div>
+    <div class="w3-container w3-black w3-large" style="height: 2em"></div>
   </div>
 </div>
 

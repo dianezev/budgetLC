@@ -40,6 +40,7 @@ LCB.view = (function() {
   var publicAPI = {
     
     // Public vars here
+    availWidth: 960,
     
     
 
@@ -96,8 +97,27 @@ LCB.view = (function() {
       }
     },
     
+    // This is used to sort of make charts responsive - not ideal solution
+    // but donut3D needs revision first (donut3D.transition doesn't
+    // redraw in correct location if you let .draw be responsive to window size
+    setAvailWidth: function() {
+      this.availWidth = .8 * Math.min(screen.availWidth, 960);
+      $('.svg_cPie').width(this.availWidth);
+      $('.svg_cPie').height(this.availWidth / 2);
+    },
+
     setDate: function(date) {
       $('[id^="date_"]').val(date);
+    },
+    showChart: function(name) {
+      $("#m_summary [class^='c']").addClass('hide');
+      
+      if (name === "Bar Chart") {
+          $('.cBar').removeClass("hide");
+      } else if (name === "Pie Charts") {
+          $('.cPie').removeClass("hide");
+      }
+      
     },
     
     showModal: function(id) {

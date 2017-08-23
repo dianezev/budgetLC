@@ -101,7 +101,11 @@ $('.swap, .swap i, .swap span').on('click', function(e) {
 // Note: make them work in sync - clicking on 'Food' under 'Actual' changes the
 // active option to 'Food' under 'Budget' & 'Summary' as well
 $('.subMenu a').on('click', function(e) {
-  LCB.controller.chooseCategory(this);
+  if (e.target.parentElement.id === "s_summary") {
+    LCB.view.showChart(e.target.text);
+  } else {
+    LCB.controller.chooseCategory(this);
+  }
 });
 
 $('footer a').on('click', function() {

@@ -41,8 +41,10 @@ LCB.controller = (function() {
         view.refreshDetail(subtotals[categ].actual, "actual");
         view.refreshDetail(subtotals[categ].budget, "budget");
         view.chartBar("svg", chartData.bar);
-        view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0.4);
-        view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0);
+//        view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0.4);
+//        view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0);
+        view.donut3D.transition("budgetDonut", chartData.donut.budget, 0.4);
+        view.donut3D.transition("actualDonut", chartData.donut.actual, 0);
       });      
     },
     
@@ -73,8 +75,10 @@ LCB.controller = (function() {
         view.refreshDetail(subtotals[categ].actual, "actual");
         view.refreshDetail(subtotals[categ].budget, "budget");
         view.chartBar("svg", chartData.bar);
-        view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0.4);
-        view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0);
+//        view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0.4);
+//        view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0);
+        view.donut3D.transition("budgetDonut", chartData.donut.budget, 0.4);
+        view.donut3D.transition("actualDonut", chartData.donut.actual, 0);
       });
     },
 
@@ -88,6 +92,7 @@ LCB.controller = (function() {
       model.initialize(function(dateArray, date) {
         view.fillDateRg(dateArray);
         view.setDate(date);
+        view.setAvailWidth();
       });
     },
     
@@ -141,15 +146,28 @@ LCB.controller = (function() {
                * we are sure that actual data (above) is also complete -
                */
               model.getData("budget", function (subtotals, categ, chartData) {
+//                var availChartWidth = Math.min($('#myNavbar').width(), 960);
+//                  $('.cBar').width(availChartWidth);
+//                  $('.cBar').height(availChartWidth / 2.4);
+//                  $('.cPie').width(availChartWidth);
+//                  $('.cPie').height(availChartWidth / 2.4);
+//                alert(availChartWidth);
                 console.log('LOGIN: model.getData for budget returned subtotals[categ]:');
                 console.log(subtotals[categ].budget);
                 view.refreshDetail(subtotals[categ].budget, "budget");
+                console.log('finished refresh');
                 view.chartBar("svg", chartData.bar);
-                view.donut3D.draw("budgetDonut", chartData.donut.budget, 150, 150, 130, 100, 30, 0.4, COLORS);
-                view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0.4);
-                view.donut3D.draw("actualDonut", chartData.donut.actual, 450, 150, 130, 100, 30, 0, COLORS);
-                view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0);
-
+                console.log('finished chartBar');
+//                view.donut3D.draw("budgetDonut", chartData.donut.budget, 150, 150, 130, 100, 30, 0.4, COLORS);
+                view.donut3D.draw("budgetDonut", chartData.donut.budget, view.availWidth, 1, 0.4, COLORS);
+                console.log('finished draw first donut');
+                view.donut3D.transition("budgetDonut", chartData.donut.budget, 0.4);
+                console.log('finished first transition');
+//                view.donut3D.draw("actualDonut", chartData.donut.actual, 450, 150, 130, 100, 30, 0, COLORS);
+                view.donut3D.draw("actualDonut", chartData.donut.actual, view.availWidth, 2, 0, COLORS);
+                console.log('finished draw second donut');
+                view.donut3D.transition("actualDonut", chartData.donut.actual, 0);
+console.log('finished second transition');
                 view.userMsg("Welcome to Total Finance, " + result.user.name + "!");
               });
             });
@@ -194,8 +212,10 @@ LCB.controller = (function() {
             view.clearEntry();
             view.refreshDetail(subtotals[categ][dtype], dtype);
             view.chartBar("svg", chartData.bar);
-            view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0.4);
-            view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0);
+//            view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0.4);
+//            view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0);
+            view.donut3D.transition("budgetDonut", chartData.donut.budget, 0.4);
+            view.donut3D.transition("actualDonut", chartData.donut.actual, 0);
           });
         });
       }

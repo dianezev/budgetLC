@@ -13,7 +13,30 @@ LCB.view = (function() {
   'use strict';
 
 	var donut3D={};
-	
+    var xCenter1;
+    var y;
+    var rx;
+    var ry;
+    var h;
+    var gapSize;
+
+    function setDimensions(availWidth) {
+      console.log('in setDim and availWidth is ' + availWidth);
+        if (availWidth >= 700 ) {
+          xCenter1 = 150;
+          
+        } else {
+          xCenter1 = Math.floor(availWidth / 5);
+        }
+        y = xCenter1;
+        rx = Math.floor(xCenter1 * .9);
+        ry = Math.floor(xCenter1 * 2/3);
+        h = Math.floor(xCenter1 / 5);
+        gapSize = xCenter1;
+      console.log('xCenter1 is ' + xCenter1);
+      console.log('y is ' + y);
+    }
+  
 	function pieTop(d, rx, ry, ir ){
 		if(d.endAngle - d.startAngle == 0 ) return "M 0 0";
 		var sx = rx*Math.cos(d.startAngle),
@@ -60,7 +83,7 @@ LCB.view = (function() {
 				Math.round(1000*(d.endAngle-d.startAngle)/(Math.PI*2))/10+'%' : '');
 	}	
 	
-	donut3D.transition = function(id, data, rx, ry, h, ir){
+	donut3D.transition = function(id, data, ir){
       
       function arcTweenInner(a) {
         var i = d3.interpolate(this._current, a);
@@ -103,11 +126,12 @@ LCB.view = (function() {
           .attrTween("x",textTweenX).attrTween("y",textTweenY).text(getPercent); 	
 	}
 	
-	donut3D.draw=function(id, data, x /*center x*/, y/*center y*/, 
-			rx/*radius x*/, ry/*radius y*/, h/*height*/, ir/*inner radius*/, COLORS){
-
+	donut3D.draw=function(id, data, availWidth, pieCtr, ir, COLORS){
+        setDimensions(availWidth);
+        var x = (xCenter1 * pieCtr) + (gapSize * (pieCtr - 1));
         var _data = d3.pie().sort(null).value(function(d) {return d.value;})(data);
-		
+        var type = id[0].toUpperCase() + id.slice(1,6);
+      
 		var slices = d3.select("#"+id).append("g").attr("transform", "translate(" + x + "," + y + ")")
 			.attr("class", "slices");
 		
@@ -115,10 +139,11 @@ LCB.view = (function() {
       
         var z = d3.scaleOrdinal()
             .range(COLORS);
-        var keys = ["Budget", "Actual"];
+        var keys = data.map(e => e.label);
         var margin = {top: 20, right: 20, bottom: 30, left: 40};
         var width = +d3.select("#"+id).attr("width") - margin.left - margin.right;
 
+      
       
 		slices.selectAll(".innerSlice").data(_data).enter().append("path").attr("class", "innerSlice")
 			.style("fill", function(d) { return d3.hsl(d.data.color).darker(0.7); })
@@ -134,7 +159,7 @@ LCB.view = (function() {
                     .style("left", d3.event.pageX - 50 + "px")
                     .style("top", d3.event.pageY - 70 + "px")
                     .style("display", "inline-block")
-                    .html((d.data.label) + "<br>" + "$" + (d.data.value));
+                    .html(type + "<br>" + (d.data.label) + "<br>" + "$" + (d.data.value));
                 })
             .on("mouseout", function(d){ tooltip.style("display", "none");})
 			.each(function(d){this._current=d;});
@@ -150,7 +175,10 @@ LCB.view = (function() {
 			.text(getPercent).each(function(d){this._current=d;});		
       
       
+        // Legend for first pie only
+        if (pieCtr === 1) {
         var legend = slices.append("g")
+                    .attr("class", "legend")
                     .attr("font-family", "Raleway")
                     .attr("font-size", 10)
                     .attr("text-anchor", "end")
@@ -162,16 +190,19 @@ LCB.view = (function() {
                     });
 
         legend.append("rect")
-          .attr("x", width - 19)
+//          .attr("x", width - 19)
+          .attr("x", width + 25)
           .attr("width", 19)
           .attr("height", 19)
           .attr("fill", z);
 
         legend.append("text")
-          .attr("x", width - 24)
+//          .attr("x", width - 24)
+          .attr("x", width + 20)
           .attr("y", 9.5)
           .attr("dy", "0.32em")
           .text(function(d) { return d; });
+        }
 
 	}
 	
