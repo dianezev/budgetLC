@@ -400,6 +400,7 @@ console.log(host + "php/api/login.php");
         data: expenseData,
         url: "php/api/v1/" + dtype + "/" + userId,
 //        url: "php/api/v1/" + dtype + "/" + userId,
+        headers: {Authorization: 'Bearer ' + authToken},
         success: function(result){
           console.log('success with POSTing expense data and result is:');
           console.log(result);
