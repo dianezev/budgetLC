@@ -16,9 +16,9 @@ class MyAPI extends API
             $jwt = substr($headers['Authorization'], 7); // skip initial 'bearer '
             $payload = JWT::decode($jwt, getenv('JWT_SECRET'));
 
-            // if (time > $payload->exp) {
-            //     throw new Exception('Unauthorized (expired token)');
-            // }
+            if (time() > $payload->exp) {
+                throw new Exception('Unauthorized (expired token)');
+            }
             $this->userId = $payload->userId;
         }
     }
