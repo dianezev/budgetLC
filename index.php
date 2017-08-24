@@ -379,6 +379,7 @@
 <!--          <svg class="svg_cPie" width="90%" height="100%">-->
             <g id="actualDonut"></g>
             <g id="budgetDonut"></g>
+            <g id="legend"></g>
           </svg>
         </div>
     <div class="w3-container w3-black w3-large" style="height: 2em"></div>

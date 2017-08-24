@@ -101,7 +101,7 @@ LCB.view = (function() {
     // but donut3D needs revision first (donut3D.transition doesn't
     // redraw in correct location if you let .draw be responsive to window size
     setAvailWidth: function() {
-      this.availWidth = .8 * Math.min(screen.availWidth, 960);
+      this.availWidth = .9 * Math.min(screen.availWidth, 960);
       $('.svg_cPie').width(this.availWidth);
       $('.svg_cPie').height(this.availWidth / 2);
     },

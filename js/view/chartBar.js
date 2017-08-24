@@ -18,7 +18,7 @@ LCB.view = (function() {
     var top = availWidth * .02;
     var right = availWidth * .02;
     var bottom = availWidth * .03;
-    var left = availWidth * .04;
+    var left = availWidth * .06;
     
     var svg = d3.select(sel);
     
@@ -31,7 +31,8 @@ LCB.view = (function() {
     // see for more info: https://bl.ocks.org/alandunning/274bf248fd0f362d64674920e85c1eb7
     var tooltip = d3.select("body").append("div").attr("class", "toolTip");
     
-    var g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    // TBD: temp fix adding '40' to line below but best to find cleaner way
+    var g = svg.append("g").attr("transform", "translate(" + (0 + margin.left) + "," + margin.top + ")");
     
     var x0 = d3.scaleBand()
             .rangeRound([0, width])
@@ -113,7 +114,7 @@ LCB.view = (function() {
       .call(d3.axisBottom(x0));
 
     g.append("g")
-      .style("font", "9px Raleway")
+      .style("font", "12px Raleway")
       .attr("class", "axis")
       .call(d3.axisLeft(y).ticks(null))
       .append("text")
@@ -127,7 +128,7 @@ LCB.view = (function() {
 
     var legend = g.append("g")
                 .attr("font-family", "Raleway")
-                .attr("font-size", 10)
+                .attr("font-size", 14)
                 .attr("text-anchor", "end")
                 .selectAll("g")
                 .data(keys.slice())
@@ -137,13 +138,13 @@ LCB.view = (function() {
                 });
 
     legend.append("rect")
-      .attr("x", width - 19)
+      .attr("x", width + 59)
       .attr("width", 19)
       .attr("height", 19)
       .attr("fill", z);
 
     legend.append("text")
-      .attr("x", width - 24)
+      .attr("x", width + 54)
       .attr("y", 9.5)
       .attr("dy", "0.32em")
       .text(function(d) { return d; });

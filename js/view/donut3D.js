@@ -174,10 +174,22 @@ LCB.view = (function() {
 			.attr("y",function(d){ return 0.6*ry*Math.sin(0.5*(d.startAngle+d.endAngle));})
 			.text(getPercent).each(function(d){this._current=d;});		
       
+        slices.append("g")
+                    .attr("font-family", "Raleway")
+                    .attr("font-size", 20)
+                    .attr("text-anchor", "middle")
+                    .append("text")
+        //          .attr("x", width - 24)
+                  //.attr("x", width + 20)
+                    .attr("y", 150)
+                  //.attr("dy", "0.32em")
+                    .text(type);
+
       
         // Legend for first pie only
         if (pieCtr === 1) {
-        var legend = slices.append("g")
+//        var legend = slices.append("g")
+        var legend = d3.select("#legend").append("g")
                     .attr("class", "legend")
                     .attr("font-family", "Raleway")
                     .attr("font-size", 10)
@@ -186,7 +198,7 @@ LCB.view = (function() {
                     .data(keys.slice())
                     .enter().append("g")
                     .attr("transform", function(d, i) {
-                      return "translate(0," + i * 20 + ")";
+                      return "translate(730," + (i * 20 + 50) + ")";
                     });
 
         legend.append("rect")
