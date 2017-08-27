@@ -9,7 +9,7 @@ class MyAPI extends API
         parent::__construct($request);
         $this->db = $db;
 
-        $headers = getallheaders();
+        $headers = apache_request_headers();//getallheaders();
         if (!array_key_exists('Authorization', $headers)) {
             throw new Exception('Unauthorized (no token)');
         } else {
