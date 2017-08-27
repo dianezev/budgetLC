@@ -10,7 +10,7 @@ class MyAPI extends API
         $this->db = $db;
 
         // $headers = getallheaders();
-        if (!array_key_exists('HTTP_AUTHORIZATION', $_SERVER)) {
+        if ($_SERVER['HTTP_AUTHORIZATION'] === '') {
             throw new Exception('Unauthorized (no token)');
         } else {
             $jwt = substr($_SERVER['HTTP_AUTHORIZATION'], 7); // skip initial 'bearer '
