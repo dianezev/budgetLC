@@ -28,7 +28,8 @@ LCB.model = (function() {
   'use strict';
   
   // for testing
-  var host = "https://budgetlc.herokuapp.com/";
+  // var host = "https://budgetlc.herokuapp.com/";
+  var host = "/";
   
   // Private vars here
   //var actSubtotals;
@@ -44,6 +45,8 @@ LCB.model = (function() {
   var bud;
   var act;
 
+  var authToken;
+  
   // Private functions here
   
   
@@ -248,6 +251,7 @@ LCB.model = (function() {
         method: "GET",
 //        url: "php/api/v1/" + dtype + "/" + userId,
         url: host + "php/api/v1/" + dtype + "/" + userId,
+        headers: {Authorization: 'Bearer ' + authToken},
         success: function(result){
           console.log('in getData for user: ' + userId + ' type: ' + dtype + ' and result is: ');
           console.log(result);
@@ -328,8 +332,9 @@ console.log(host + "php/api/login.php");
             
             user = result.user;
             categSel = 0;
+            authToken = result.authToken;
             
-            cb({user, categSel, date});
+            cb({user, categSel, date, authToken});
 
           } else {
             console.log('error with log in');
@@ -395,6 +400,7 @@ console.log(host + "php/api/login.php");
         data: expenseData,
         url: "php/api/v1/" + dtype + "/" + userId,
 //        url: "php/api/v1/" + dtype + "/" + userId,
+        headers: {Authorization: 'Bearer ' + authToken},
         success: function(result){
           console.log('success with POSTing expense data and result is:');
           console.log(result);

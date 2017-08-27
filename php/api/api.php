@@ -1,37 +1,38 @@
 <?php
 include_once '../common/base.php';
 require_once 'API.class.php';
+include_once '../JWT.php';
 
 class MyAPI extends API
 {
-    protected $User;
-
     public function __construct($request, $origin, $db) {
         parent::__construct($request);
         $this->db = $db;
-        // Abstracted out for example
-        // $APIKey = new Models\APIKey();
-        // $User = new Models\User();
-        //
-        // if (!array_key_exists('apiKey', $this->request)) {
-        //     throw new Exception('No API Key provided');
-        // } else if (!$APIKey->verifyKey($this->request['apiKey'], $origin)) {
-        //     throw new Exception('Invalid API Key');
-        // } else if (array_key_exists('token', $this->request) &&
-        //      !$User->get('token', $this->request['token'])) {
-        //
-        //     throw new Exception('Invalid User Token');
-        // }
-        //
-        // $this->User = $User;
+
+        $headers = getallheaders();
+        if (!array_key_exists('Authorization', $headers)) {
+            throw new Exception('Unauthorized (no token)');
+        } else {
+            $jwt = substr($headers['Authorization'], 7); // skip initial 'bearer '
+            $payload = JWT::decode($jwt, getenv('JWT_SECRET'));
+
+            if (time() > $payload->exp) {
+                throw new Exception('Unauthorized (expired token)');
+            }
+            $this->userId = $payload->userId;
+        }
     }
 
     /**
      * Endpoint: actual
      */
      protected function actual($args) {
+         $userId = $args[0];
+         if ($userId != $this->userId) {
+             throw new Exception('Unauthorized User');
+         }
+
         if ($this->method == 'GET') {
-            $userId = $args[0];
             $rows = [];
             
             $sql = "SELECT id, subCode, date, amt, detail
@@ -49,7 +50,6 @@ class MyAPI extends API
             }
             return $rows;
         } else if ($this->method == 'POST') {
-            $userId = $args[0];
             $sql = "INSERT INTO actual (userId, subCode, date, amt, detail)
     				VALUES (:userId, :subCode, :date, :amt, :detail)";
     		if($stmt = $this->db->prepare($sql)) {
@@ -69,6 +69,10 @@ class MyAPI extends API
       * Endpoint: budget
       */
       protected function budget($args) {
+          $userId = $args[0];
+          if ($userId != $this->userId) {
+              throw new Exception('Unauthorized User');
+          }
          if ($this->method == 'GET') {
              $userId = $args[0];
              $rows = [];
