@@ -9,11 +9,11 @@ class MyAPI extends API
         parent::__construct($request);
         $this->db = $db;
 
-        $headers = apache_request_headers();//getallheaders();
-        if (!array_key_exists('Authorization', $headers)) {
+        // $headers = getallheaders();
+        if (!array_key_exists('HTTP_AUTHORIZATION', $_SERVER)) {
             throw new Exception('Unauthorized (no token)');
         } else {
-            $jwt = substr($headers['Authorization'], 7); // skip initial 'bearer '
+            $jwt = substr($_SERVER['HTTP_AUTHORIZATION'], 7); // skip initial 'bearer '
             $payload = JWT::decode($jwt, getenv('JWT_SECRET'));
 
             if (time() > $payload->exp) {
