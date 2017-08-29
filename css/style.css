@@ -13,7 +13,6 @@ th {
   vertical-align: bottom;
 }
 
-/* DMZ added in order to use opacity on background image*/
 .bgimg-1 {
     background-position: center;
     background-size: cover;
@@ -61,12 +60,6 @@ a:focus {
   font-weight: bold;
 }
 .hide { display: none; }
-/*
-.subMenu a:focus,.subMenu a:hover {
-  background-color: #f1f1f1;
-  color: black;
-}
-*/
 .snug p {
   margin: 0;
 }
@@ -216,6 +209,27 @@ input[type=number]::-webkit-outer-spin-button {
   display:inline-flex;
 }
 select {
-/*  font-size: 80%;*/
-  line-height: 1;
+  line-height: 1;  /*TBD make select spacing tighter - this doesn't work*/
+}
+.devNotes a {
+  color: #5d07ff;
+  font-weight: 800;
+}
+.devNotes a:hover {
+  color: #2626d3;
+  text-decoration: underline;
+}
+.devNotes {
+  line-height: 1.3;
+  height: 18em;
+  overflow-y: auto;
+  position: relative;
+}
+.devNotes div {
+  padding-bottom: 6px;
+}
+.socMedia {
+  position: absolute;
+  top: 5px;
+  right: 10px;
 }

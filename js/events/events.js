@@ -61,17 +61,8 @@ $('#m_actual button, #m_budget button').on('click', function(e) {
 // Change user settings 
 $('#m_settings button').on('click', function(e) {
   e.preventDefault();
-  alert('triggered settings button');
+  alert('this feature is not yet completed...');
   // TBD
-});
-
-// View summary 
-// TBD maybe this can be dropped because I think summary update is called at 
-// other times (change date, etc) so that it should always be current
-$('[href="#m_summary"]').on('click', function(e) {
-  //e.preventDefault();
-  
-  //LCB.controller.updateSummary();
 });
 
 // For login - toggling between Sign Up and Log In
@@ -98,8 +89,6 @@ $('.swap, .swap i, .swap span').on('click', function(e) {
 });
 
 // Click on sub-menu  under 'Actual', 'Budget' or 'Summary' pages
-// Note: make them work in sync - clicking on 'Food' under 'Actual' changes the
-// active option to 'Food' under 'Budget' & 'Summary' as well
 $('.subMenu a').on('click', function(e) {
   if (e.target.parentElement.id === "s_summary") {
     LCB.view.showChart(e.target.text);

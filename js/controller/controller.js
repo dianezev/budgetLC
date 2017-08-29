@@ -33,18 +33,14 @@ LCB.controller = (function() {
     // Called when user changes date selector
     changeDate: function(date) {
       model.changeDate(date, function (subtotals, categ, chartData) {
-        console.log('model.changeDate returned date: ' + date + ' and subtotals[categ]:');
-        console.log(subtotals[categ]);
 
         // Show actual & budget detail for user
         view.setDate(date);
         view.refreshDetail(subtotals[categ].actual, "actual");
         view.refreshDetail(subtotals[categ].budget, "budget");
         view.chartBar("svg", chartData.bar);
-//        view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0.4);
-//        view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0);
-        view.donut3D.transition("budgetDonut", chartData.donut.budget, 0.4);
-        view.donut3D.transition("actualDonut", chartData.donut.actual, 0);
+        view.donut3D.transition("budgetDonut", chartData.donut.budget, 0.4);  // old args: ("budgetDonut", chartData.donut.budget, 130, 100, 30, 0.4)
+        view.donut3D.transition("actualDonut", chartData.donut.actual, 0);  // old args: ("actualDonut", chartData.donut.actual, 130, 100, 30, 0)
       });      
     },
     
@@ -64,8 +60,6 @@ LCB.controller = (function() {
     
     // Called when user chooses a category from sub-menu of actual, budget or summary pages
     chooseCategory: function(that) {
-      console.log('in chooseCategory and that is" ');
-      console.log(that);
       var parent_id = $(that).parent().attr("id");
       var categories = $('#' + parent_id + ' a');
       var index = categories.index(that);
@@ -75,15 +69,12 @@ LCB.controller = (function() {
         view.refreshDetail(subtotals[categ].actual, "actual");
         view.refreshDetail(subtotals[categ].budget, "budget");
         view.chartBar("svg", chartData.bar);
-//        view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0.4);
-//        view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0);
         view.donut3D.transition("budgetDonut", chartData.donut.budget, 0.4);
         view.donut3D.transition("actualDonut", chartData.donut.actual, 0);
       });
     },
 
     handleDetail: function(id) {
-      console.log(id);
       view.toggleDetail(id);
     },
     
@@ -123,13 +114,8 @@ LCB.controller = (function() {
         userInfo.password = $('#password').val();
         $('#password').val('');
         
-        console.log('in controller.register & about to call model.login. userInfo is');
-        console.log(userInfo);
-        
         // If login is successful, get user data and update view
         model.login(userInfo, function (result) {
-          console.log('model.login returned:');
-          console.log(result);
           
           if (result.pass === false) {   
             view.userMsg(result);
@@ -137,8 +123,6 @@ LCB.controller = (function() {
             view.userAcct(result);
             view.setDate(result.date);
             model.getData("actual", function (subtotals, categ, chartData) {
-              console.log('LOGIN: model.getData for actual returned subtotals[categ]:');
-              console.log(subtotals[categ].actual);
               view.refreshDetail(subtotals[categ].actual, "actual");
 
               /*
@@ -146,28 +130,12 @@ LCB.controller = (function() {
                * we are sure that actual data (above) is also complete -
                */
               model.getData("budget", function (subtotals, categ, chartData) {
-//                var availChartWidth = Math.min($('#myNavbar').width(), 960);
-//                  $('.cBar').width(availChartWidth);
-//                  $('.cBar').height(availChartWidth / 2.4);
-//                  $('.cPie').width(availChartWidth);
-//                  $('.cPie').height(availChartWidth / 2.4);
-//                alert(availChartWidth);
-                console.log('LOGIN: model.getData for budget returned subtotals[categ]:');
-                console.log(subtotals[categ].budget);
                 view.refreshDetail(subtotals[categ].budget, "budget");
-                console.log('finished refresh');
                 view.chartBar("svg", chartData.bar);
-                console.log('finished chartBar');
-//                view.donut3D.draw("budgetDonut", chartData.donut.budget, 150, 150, 130, 100, 30, 0.4, COLORS);
                 view.donut3D.draw("budgetDonut", chartData.donut.budget, view.availWidth, 1, 0.4, COLORS);
-                console.log('finished draw first donut');
                 view.donut3D.transition("budgetDonut", chartData.donut.budget, 0.4);
-                console.log('finished first transition');
-//                view.donut3D.draw("actualDonut", chartData.donut.actual, 450, 150, 130, 100, 30, 0, COLORS);
                 view.donut3D.draw("actualDonut", chartData.donut.actual, view.availWidth, 2, 0, COLORS);
-                console.log('finished draw second donut');
                 view.donut3D.transition("actualDonut", chartData.donut.actual, 0);
-console.log('finished second transition');
                 view.userMsg("Welcome to Total Finance, " + result.user.name + "!");
               });
             });
@@ -180,7 +148,7 @@ console.log('finished second transition');
     requestReset: function() {
       var userInfo = {};
       
-      // TBD: add validation?
+      // TBD: add validation
       userInfo.email = $('#email_ver').val();
 
       model.requestReset(userInfo, function (result) {
@@ -206,14 +174,10 @@ console.log('finished second transition');
       } else {
       
         model.sendExpense(expenseData, function (result) {
-          // maybe improve later: instead of getExpenses, could just add a new object to the actual or budget array, then recalc subtotals, etc.
-
           model.getData(dtype, function (subtotals, categ, chartData) {
             view.clearEntry();
             view.refreshDetail(subtotals[categ][dtype], dtype);
             view.chartBar("svg", chartData.bar);
-//            view.donut3D.transition("budgetDonut", chartData.donut.budget, 130, 100, 30, 0.4);
-//            view.donut3D.transition("actualDonut", chartData.donut.actual, 130, 100, 30, 0);
             view.donut3D.transition("budgetDonut", chartData.donut.budget, 0.4);
             view.donut3D.transition("actualDonut", chartData.donut.actual, 0);
           });

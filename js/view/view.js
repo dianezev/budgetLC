@@ -17,8 +17,6 @@ LCB.view = (function() {
   var template = LCB.template;
   
   // Private functions here
-
-  
   
   // Clear user data when user logs out
   function clearData() {
@@ -41,7 +39,6 @@ LCB.view = (function() {
     
     // Public vars here
     availWidth: 960,
-    
     
 
     // Public functions here

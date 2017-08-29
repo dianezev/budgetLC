@@ -49,26 +49,6 @@ LCB.view = (function() {
     
     var keys = ["Budget", "Actual"];
 
-    /***********************
-     * for local testing only:
-     ************************/
-//    var testData = d3.csv("testChart.csv", function(d, i, columns) {
-//      for (var j = 1, n = columns.length; j < n; ++j) {
-//        console.log('j INSIDE FOR LOOP is ' + j);
-//        console.log('columns[j] is ' + columns[j]);
-//        console.log('d[columns[j]] is ' + d[columns[j]]);
-//        d[columns[j]] = +d[columns[j]]; 
-//      }
-//
-//      return d;   //returns one object for array, ie {Actual:123, Budget: 456, Categ: "household"}
-//    });
-//    console.log(testData);
-//    data = testData;
-//    
-    /***********************
-     * end testing
-     ************************/
-    
 
     x0.domain(data.map(function(d) { return d.Categ; }));
     x1.domain(keys).rangeRound([0, x0.bandwidth()]);

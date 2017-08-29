@@ -29,11 +29,9 @@ LCB.model = (function() {
   
   // for testing
   // var host = "https://budgetlc.herokuapp.com/";
-  var host = "/";
+  var host = "/";  //DMZ using /totfin/ instead of /
   
   // Private vars here
-  //var actSubtotals;
-  //var budSubtotals;
   var subtotals = [];
   var chartData = {};
   
@@ -47,9 +45,7 @@ LCB.model = (function() {
 
   var authToken;
   
-  // Private functions here
-  
-  
+  // Private functions here  
   function getDateRg() {
 
     // Use today's date to generate date selector
@@ -220,10 +216,8 @@ LCB.model = (function() {
         method: "POST",
         data: {e: urlInfo.e, v: urlInfo.v},
         url: host + "php/api/checkUrl.php",
-//        url: "php/api/checkUrl.php",
         success: function(result){
-//          console.log('success and result is:')
-//          console.log(result);
+
           // Update variables if login was successful
           if (result.hasOwnProperty('user')) {
             user.email = result.user.email;
@@ -249,7 +243,6 @@ LCB.model = (function() {
 
       $.ajax({
         method: "GET",
-//        url: "php/api/v1/" + dtype + "/" + userId,
         url: host + "php/api/v1/" + dtype + "/" + userId,
         headers: {Authorization: 'Bearer ' + authToken},
         success: function(result){
@@ -277,17 +270,16 @@ LCB.model = (function() {
           }
           
           // Update subtotals for current date
-          // TBD: Could pass add'l arg so it only updates based on 'dtype'
-          // instead of updating both the actual & budget
           subtotals = that.calcSubtotals();
           chartData = that.calcChartData();
           
           // Pass subtotals & current category to callback
           cb(subtotals, categSel, chartData);
         },
-        error: function () {
+        error: function (xhr, status, error) {
+          console.log('Error: ajax call in model.getData returns xhr:');
+          console.log(xhr);
           alert('error: the AJAX call in model.getData for php/api/v1/' + dtype + '/' + userId + ' failed.');
-          console.log('error');
         }
       });    
     },
@@ -318,11 +310,10 @@ LCB.model = (function() {
       date = dateReset;
 
       cb = cb || function () {};
-console.log(host + "php/api/login.php");
+
       $.ajax({
         method: "POST",
         data: {email, password},
-//        url: "php/api/login.php",
         url: host + "php/api/login.php",
         success: function(result){
 
@@ -337,14 +328,13 @@ console.log(host + "php/api/login.php");
             cb({user, categSel, date, authToken});
 
           } else {
-            console.log('error with log in');
+            console.log("success object did not contain 'user' property");
             cb(result);
           }
         },
         error: function(xhr, status, error) {
           
           console.log(xhr);
-          console.log(status);
           alert('ajax ERROR: ' + status);
         }
       });      
@@ -359,8 +349,6 @@ console.log(host + "php/api/login.php");
       // Re-initialize subtotals
       subtotals = this.calcSubtotals();
       chartData = this.calcChartData();
-
-      // TBD: other db/backend processing?
     },
     requestReset: function(userInfo, cb) {
       var email = userInfo.email;
@@ -371,7 +359,6 @@ console.log(host + "php/api/login.php");
       $.ajax({
         method: "POST",
         data: {email},
-//        url: "php/api/requestReset.php",
         url: host + "php/api/requestReset.php",
         success: function(result){
           console.log(result);
@@ -393,13 +380,10 @@ console.log(host + "php/api/login.php");
       console.log('in sendExpense and expenseData obj is:');
       console.log(expenseData);
       
-      // TBD: continue with cb fcn when php returns updated actual or budget data
-      // need to update view
       $.ajax({
         method: "POST",
         data: expenseData,
         url: "php/api/v1/" + dtype + "/" + userId,
-//        url: "php/api/v1/" + dtype + "/" + userId,
         headers: {Authorization: 'Bearer ' + authToken},
         success: function(result){
           console.log('success with POSTing expense data and result is:');
@@ -440,7 +424,6 @@ console.log(host + "php/api/login.php");
       $.ajax({
         method: "POST",
         data: {email, name},
-//        url: "php/api/signup.php",
         url: host + "php/api/signup.php",
         success: function(result){
           console.log('success with signup.php and result is:');
@@ -452,13 +435,6 @@ console.log(host + "php/api/login.php");
         }
       });      
     },
-
-//    // Return subtotals for use in charts
-//    // TBD: might work better to return an object that has
-//    // a prop for each chart type - with data sliced as needed
-//    updateSummary: function(cb) {
-//      cb(subtotals);
-//    }
   };
   return publicAPI;
 })();

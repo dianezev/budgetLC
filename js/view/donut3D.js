@@ -8,7 +8,7 @@
  ****************************************************/
 
 LCB = window.LCB || {};
-console.log('in d3d');
+
 LCB.view = (function() {
   'use strict';
 
@@ -21,7 +21,6 @@ LCB.view = (function() {
     var gapSize;
 
     function setDimensions(availWidth) {
-      console.log('in setDim and availWidth is ' + availWidth);
         if (availWidth >= 700 ) {
           xCenter1 = 150;
           
@@ -33,8 +32,6 @@ LCB.view = (function() {
         ry = Math.floor(xCenter1 * 2/3);
         h = Math.floor(xCenter1 / 5);
         gapSize = xCenter1;
-      console.log('xCenter1 is ' + xCenter1);
-      console.log('y is ' + y);
     }
   
 	function pieTop(d, rx, ry, ir ){

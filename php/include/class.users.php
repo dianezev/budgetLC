@@ -46,8 +46,6 @@ class Users
 	public function accountLogin()
 	{
         $result = new stdClass();
-        // DMZ question: ask about whether $email, $password could
-        //just be passed in here from login.php - i.e. accountLogin($email, $password)
         $email = $_POST['email'];
         $password = $_POST['password'];
   
@@ -77,9 +75,6 @@ class Users
               
               // Otherwise check that password is valid
               } else if ($row['hashedPW'] === MD5($password)) {
-                // this is from the original - not sure what it does
-	    		//$_SESSION['email'] = htmlentities($_POST['email'], ENT_QUOTES);
-	    		//$_SESSION['LoggedIn'] = 1;
                 $result->pass = TRUE;
                 $result->user = $row;
 				$payload = [
@@ -124,11 +119,8 @@ class Users
         // Use hashed timestamp when sending ver. email
 		$v = sha1(time());
       
-      // check if email is valid
+      // TBD check if email is valid
 
-      // DMZ question - is there a way to get 'name' from an UPDATE (see below)
-      // or do I need to use SELECT and then $row = $stmt->fetch();....
-      
         // Verify that email address is in users table & get 'name'
 		$sql = "SELECT COUNT(email) AS theCount, name
 				FROM users
@@ -226,6 +218,7 @@ class Users
 
           $note = "You have a new account at Total Finance! To get started, ";
           
+          // TBD send email...
           // this is temp, until mail server works - just used to return 'misc' property which
           // is written to console (paste to url to test v & e codes in activ. links)
           $result->misc = $this->sendVerificationEmail($email, $name, $v, $note);
@@ -281,42 +274,33 @@ class Users
         $v = $_POST["v"];
         $password = $_POST["password"];
 
-//		if(isset($_POST['p'])
-//		&& isset($_POST['r'])
-//		&& $_POST['p']==$_POST['r'])
-//		{
-			$sql = "UPDATE users
-					SET hashedPW=MD5(:pass), verified=1
-					WHERE ver_code=:ver
-					LIMIT 1";
-			try
-			{
-				$stmt = $this->_db->prepare($sql);
-				$stmt->bindParam(":pass", $password, PDO::PARAM_STR);
-				$stmt->bindParam(":ver", $v, PDO::PARAM_STR);
-				$stmt->execute();
-                $row = $stmt->fetch();
-				$stmt->closeCursor();
+          $sql = "UPDATE users
+                  SET hashedPW=MD5(:pass), verified=1
+                  WHERE ver_code=:ver
+                  LIMIT 1";
+          try
+          {
+              $stmt = $this->_db->prepare($sql);
+              $stmt->bindParam(":pass", $password, PDO::PARAM_STR);
+              $stmt->bindParam(":ver", $v, PDO::PARAM_STR);
+              $stmt->execute();
+              $row = $stmt->fetch();
+              $stmt->closeCursor();
 
-                $result->pass = TRUE;	
-                $result->msg = 'Your account password was validated. '
-                            . 'Welcome to Total Finance! To '
-                            . 'continue, please log in.';
-                return $result;
-			}
-			catch(PDOException $e)
-			{
-                $result->pass = FALSE;
-                $result->err_msg = 'Your password could not be set '
-                              . 'at this time. Please try again later.';
+              $result->pass = TRUE;	
+              $result->msg = 'Your account password was validated. '
+                          . 'Welcome to Total Finance! To '
+                          . 'continue, please log in.';
+              return $result;
+          }
+          catch(PDOException $e)
+          {
+              $result->pass = FALSE;
+              $result->err_msg = 'Your password could not be set '
+                            . 'at this time. Please try again later.';
 
-				return $result;
-			}
-//		}
-//		else
-//		{
-//			return FALSE;
-//		}
+              return $result;
+          }
 	}
   
   
@@ -344,8 +328,6 @@ class Users
 			$stmt->execute();
 			$row = $stmt->fetch();
             
-            // DMZ question: is there a purpose to using this over rowCount?
-            // TBD: maybe revise to return object for consistency betw php & js
             if(isset($row['email']))
 			{
 				// Logs the user in if verification is successful
@@ -366,7 +348,6 @@ class Users
             $result->pass = TRUE;
             $result->user = $row;
           
-            // DMZ question: what does this do?
 			$stmt->closeCursor();
 
 			return $result;
@@ -407,7 +388,7 @@ password by following the link below.
 
 Your Username: $name
 
-Activate your account: http://localhost/test/index.php?v=$ver&e=$e
+Activate your account: http://budgetlc.herokuapp.com/index.php?v=$ver&e=$e
 
 If you have any questions, please contact daniel@pacifictech.us .
 
@@ -424,35 +405,5 @@ EMAIL;
       // temp - so I can copy & paste url stuff for debugging
       return $msg;
 	}
-
-  
-  
-  
-//    public function experimentUpdate()
-//	{
-//		$sql = "UPDATE `users` SET `hashedPW`='aaa' WHERE `email`='jasonzz1@comcast.net'";
-//
-//        try
-//	    {
-//	    	$stmt = $this->_db->prepare($sql);
-//	    	$stmt->execute();
-//          echo $stmt->rowCount();
-//	    	if($stmt->rowCount()==1)
-//	    	{
-////	    		$_SESSION['name'] = htmlentities($_POST['name'], ENT_QUOTES);
-////	    		$_SESSION['LoggedIn'] = 1;
-//	    		return TRUE;
-//	    	}
-//	    	else
-//	    	{
-//	    		return FALSE;
-//	    	}
-//	    }
-//	    catch(PDOException $e)
-//	    {
-//	    	return FALSE;
-//	    }
-//	}
-  
 }
 ?>

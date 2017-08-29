@@ -18,10 +18,6 @@
 <body>
 
 <!-- Navbar (sit on top) -->
-<!--
-  TBD: As window gets narrower, switch text in menu bar to icons so that it doesn't
-  double in height & block other stuff - or other fix
--->
 <div class="w3-top">
   <div class="w3-bar w3-white w3-card-2" id="myNavbar">
     <a href="#m_home" class="swap w3-bar-item w3-button w3-wide">TOTAL FINANCE!</a>
@@ -33,8 +29,8 @@
       <a href="#m_summary" class="swap w3-bar-item w3-button" id="gotoSummary">SUMMARY</a>
       <a href="#register" class="toLogin w3-bar-item w3-button">LOG IN/SIGN UP</a>
     </div>
+    
     <!-- Hide right-floated links on small screens and replace them with a menu icon -->
-
     <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" id="menu_icon">
       <i class="fa fa-bars"></i>
     </a>
@@ -57,9 +53,6 @@
     <span class="w3-jumbo w3-hide-small">Track your Finances</span><br>
     <span class="w3-xxlarge w3-hide-large w3-hide-medium">Track your Finances</span><br>
     <span class="w3-xlarge">and make your money go further</span>
-<!--    TBD: I don't think href="#login" anywhere does anything
-... cuz js references class .toLogin
-...check before changing to href="#"-->
     <p><a href="#login" class="toLogin w3-button w3-white w3-padding-large w3-large w3-margin-top w3-opacity w3-hover-opacity-off">Log In or Sign Up</a></p>
   </div> 
   <div class="w3-display-bottomleft w3-text-grey w3-xxlarge" style="padding:24px 48px">
@@ -79,32 +72,24 @@
     
     <!--    Register-->
     <form class="register-form">
-<!--    <div class="register-form">-->
       <input id="name_set" type="text" placeholder="Name"/>
       <input id="email_set" type="text" placeholder="Email address"/>
       <button type="button" class="w3-button w3-black" id="signup_now">Sign up</button>
       <p id="gotoLogin" class="message">Already registered? <a href="#login">Log In</a></p>
-<!--    </div>-->
     </form>
     
     <!--    Log in-->
     <form class="login-form">
-<!--    <div class="login-form">-->
       <input id="email" type="text" placeholder="Email"/>
       <input id="password" type="password" placeholder="Password"/>
       <button type="button" class="w3-button w3-black" id="login_now">login</button>
       <p id="gotoSignin" class="message">Not registered? <a href="#login">Sign up now</a></p>
       <p id="requestPasswordReset" class="message">Forgot password? <a href="#login">Reset password</a></p>
-<!--    </div>-->
     </form>
   </div>
 </div>  
 
 <!-- Modal: prompt user for email, in order to send reset pw link -->
-<!--
-  TBD: might be better to incorporate within the <div id="register"... section above - 
-  but not sure since we may also have this option in user settings
--->
 <div id="getEmail" class="w3-modal">
   <div class="w3-modal-content form">
     <span class="w3-button w3-display-topright">&times;</span>
@@ -147,13 +132,11 @@
 
   
 <!-- Actual Section -->
-<!-- TBD: Add template to make this dynamic for all categories-->
-<!--  TBD: Actual & Budgeted Expenses may be similar enough to just use one template-->
-<!--<div class="results w3-row-padding w3-text-indigo w3-grey" style="padding:64px 16px" id="m_actual">-->
 <div class="results actual w3-row-padding w3-text-indigo w3-grey" id="m_actual">
   <div class="w3-card w3-light-grey">
       <div class="subMenu w3-bar w3-indigo w3-card-2">
         <div class="w3-center" id="s_actual">
+<!--          TBD: better to add template for this-->
           <a href="#" class="w3-bar-item w3-button">Household</a>
           <a href="#" class="w3-bar-item w3-button">Car/Transit</a>
           <a href="#" class="w3-bar-item w3-button">Food</a>
@@ -167,19 +150,8 @@
           <a href="#" class="w3-bar-item w3-button">Misc</a>
         </div>
       </div>
-<!--    </div>-->
     <form action="">
       <div class="w3-container w3-hide-small">
-<!--
-        <div class="dateSel">
-          <p>Show actual expenses for:</p>
-          <select id="date_actual">
--->
-<!--        completed by template-->
-<!--
-          </select>
-        </div>
--->
 
 <!--
         Note: The table headers are outside
@@ -242,13 +214,11 @@
 
   
 <!-- Budget Section -->
-<!-- template will make the category dynamic...-->
 <div class="results budget w3-row-padding w3-text-teal w3-grey" id="m_budget">
   <div class="w3-card w3-light-grey">
-
     <div class="subMenu w3-bar w3-teal w3-card-2">
         <div class="w3-center" id="s_budget">
-<!--          could add template for this-->
+<!--          TBD: better to add template for this-->
           <a href="#" class="w3-bar-item w3-button">Household</a>
           <a href="#" class="w3-bar-item w3-button">Car/Transit</a>
           <a href="#" class="w3-bar-item w3-button">Food</a>
@@ -265,16 +235,6 @@
     
     <form action="">
       <div class="w3-container w3-hide-small">
-<!--
-        <div class="dateSel">
-          <p>Show budgeted expenses for:</p>
-          <select id="date_budget">
--->
-<!--        completed by template-->
-<!--
-          </select>
-        </div>
--->
 
 <!--
         Note: The reason the table headers are outside
@@ -334,49 +294,33 @@
 </div>
   
 
-<!-- Summary Section -->
-<!-- TBD: Add template to make this dynamic-->
-<!--<div class="summary w3-row-padding w3-text-blue-gray w3-grey" id="m_summary">-->
+<!-- Summary (Charts) Section -->
+<!--  TBD: 1) make existing charts responsive and 2) add other useful charts-->
 <div class="summary w3-row-padding w3-text-blue-gray w3-grey" id="m_summary">
   <div class="w3-card w3-light-grey">
       <div class="subMenu w3-bar w3-black w3-card-2">
         <div class="w3-center" id="s_summary">
-<!--          could add template for this-->
-          <a href="#" class="w3-bar-item w3-button">Bar Chart</a>
           <a href="#" class="w3-bar-item w3-button">Pie Charts</a>
-<!--
-          <a href="#" class="w3-bar-item w3-button">Food</a>
-          <a href="#" class="w3-bar-item w3-button">Health</a>
-          <a href="#" class="w3-bar-item w3-button">Utilities</a>
-          <a href="#" class="w3-bar-item w3-button">Clothing/Pers</a>
-          <a href="#" class="w3-bar-item w3-button">Charity</a>
-          <a href="#" class="w3-bar-item w3-button">Leisure</a>
-          <a href="#" class="w3-bar-item w3-button">Taxes</a>
-          <a href="#" class="w3-bar-item w3-button">Accounts</a>
-          <a href="#" class="w3-bar-item w3-button">Misc</a>
--->
+          <a href="#" class="w3-bar-item w3-button">Bar Chart</a>
         </div>
       </div>
-    
-    
-        <div class="dateSel">
-          <p>Show summary for:</p>
-          <select id="date_summary">
+        
+      <div class="dateSel">
+        <p>Show summary for:</p>
+        <select id="date_summary">
 
 <!--        completed by template-->
-          </select>
-        </div>
+        </select>
+      </div>
     
-        <!--  put chart elements here -->  
 <!--        TBD: need to make responsive-->
-
         <div class="cBar">
-          <svg class="svg_cBar" width="960" height="400"></svg>
+          <h2>To be added...</h2>
+<!--          <svg class="svg_cBar" width="960" height="400"></svg>-->
         </div>
 
         <div class="cPie hide">
           <svg class="svg_cPie">
-<!--          <svg class="svg_cPie" width="90%" height="100%">-->
             <g id="actualDonut"></g>
             <g id="budgetDonut"></g>
             <g id="legend"></g>
@@ -385,18 +329,15 @@
     <div class="w3-container w3-black w3-large" style="height: 2em"></div>
   </div>
 </div>
-  
 
-
-  
-
-  
   
 <!-- Settings Section -->  
+<!--  TBD: revise as needed-->
 <div class="settings w3-row-padding w3-text-blue-gray w3-grey" id="m_settings">
   <div class="w3-card w3-light-grey">
     <div class="w3-container w3-black">
-      <h5 class="w3-center">USER SETTINGS</h5>
+      <h5 class="w3-center">TBD: USER SETTINGS</h5>
+      <h3 class="w3-center">(still under construction...)</h3>
     </div>
     <form action="">
       <div class="w3-container w3-border-top">
@@ -448,20 +389,24 @@
 </div>
 
 <!-- About Section -->
-<!--  TBD: Change some of the grey text to colors - think grayscale needs adjustment-->
-<div class="w3-container w3-dark-gray" style="padding:64px 16px" id="about">
-  <h3 class="w3-center">ABOUT (app name...)</h3>
-  <p class="w3-center w3-large">A message here about the app...</p>
+<div class="w3-container w3-dark-gray"  style="padding:64px 16px" id="about">
+  <h3 class="w3-center">ABOUT TOTAL FINANCE</h3>
+  <p class="w3-center w3-large">Total Finance is a personal finance application that tracks a user's actual expenses against budgeted expenses, broken down by categories and subcategories. The login/signup feature includes email verification for user privacy. Users can quickly review listings of the expenses they've entered by category and date. New expenses can easily be added and charts - which are still under design - provide insight and comparisons between actual and budgeted data.</p>
   <br>
   <h3 class="w3-center">DEVELOPERS</h3>
   <div class="w3-row-padding w3-grayscale" style="margin-top:32px">
     <div class="w3-col w3-third w3-margin-bottom">
       <div class="w3-card-2">
-        <div class="w3-container w3-white">
+        <div class="devNotes w3-container w3-white">
           <h3 class="w3-text-indigo">Daniel Clough</h3>
-          <p class="w3-opacity">Web Developer</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-           <div class="w3-text-grey w3-xxlarge w3-center">
+          <h5 class="w3-opacity">Web Developer</h5>
+          <p>contact info</p>
+          <br>
+          <br>
+          <div>
+            <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+          </div>
+           <div class="socMedia w3-text-grey w3-xxlarge w3-center">
             <a target="_blank"  href="#">
               <i class="fa fa-github w3-hover-opacity"></i>
             </a>
@@ -474,11 +419,16 @@
     </div>
     <div class="w3-col w3-third w3-margin-bottom">
       <div class="w3-card-2">
-        <div class="w3-container w3-white">
+        <div class="devNotes w3-container w3-white">
           <h3 class="w3-text-indigo">Michael Park</h3>
-          <p class="w3-opacity">Web Developer</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-          <div class="w3-text-grey w3-xxlarge w3-center">
+          <h5 class="w3-opacity">Web Developer</h5>
+          <p>contact info</p>
+          <br>
+          <br>
+          <div>
+            <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+          </div>
+          <div class="socMedia w3-text-grey w3-xxlarge w3-center">
             <a target="_blank"  href="https://github.com/">
               <i class="fa fa-github w3-hover-opacity"></i>
             </a>
@@ -491,12 +441,23 @@
     </div>
     <div class="w3-col w3-third w3-margin-bottom">
       <div class="w3-card-2">
-        <div class="w3-container w3-white">
+        <div class="devNotes w3-container w3-white">
           <h3 class="w3-text-indigo">Diane Zevenbergen</h3>
-          <p class="w3-opacity">Web Developer</p>
-          <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
-          <div class="w3-text-grey w3-xxlarge w3-center">
-            <a target="_blank"  href="https://github.com/dianezev/mathfacts">
+          <h5 class="w3-opacity">Web Developer</h5>
+          <p>dianezev@comcast.net<br>206-679-3795</p>
+          <br>
+          <br>
+          <div>
+            <p>Contributions to Total Finance include development of front-end components using JavaScript, jQuery, RESTful APIs, Underscore, Bootstrap and D3. Our code is available for review on
+              <a target="_blank"  href="https://github.com/dianezev/budgetLC">Github.</a>
+            </p>
+          </div>
+          <div>
+            <p>Other code samples by Diane can be found at <a target="_blank"  href="http://www.fastermathfacts.org">fastermathfacts.org</a> and on <a target="_blank"  href="https://github.com/dianezev">Github.</a>
+            </p>
+          </div>
+          <div class="socMedia w3-text-grey w3-xxlarge w3-center">
+            <a target="_blank"  href="https://github.com/dianezev">
               <i class="fa fa-github w3-hover-opacity"></i>
             </a>
             <a target="_blank" href="https://www.linkedin.com/in/dianezev">
@@ -512,37 +473,16 @@
 <!-- Footer -->
 <footer class="w3-center w3-black w3-padding-64">
   <a href="#m_home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
-  <div class="w3-xxlarge w3-section">
-    <a target="_blank"  href="https://github.com/">
-      <i class="fa fa-github w3-hover-opacity"></i>
-    </a>
-    <a target="_blank" href="https://twitter.com/?lang=en">
-      <i class="fa fa-twitter w3-hover-opacity"></i>
-    </a>
-  </div>
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
-<!--  note this is the chart script that works with chart01.js-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
-
-<!--  note this is the chart script that works with chart03.js and chart04.js-->
-<!--<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>-->
-  
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
 <script src="js/helpers/getAllUrlParams.js"></script>
-
-<!--this ref is temporary, until JSON data returned by php-->
-<script type="text/javascript" src="js/model/testData.json"></script>
   
 <!--  this is current version V4; don't use templates based on V3 due to conflicts-->
-<script src="js/d3.min.js"></script>
-<!--<script src="https://d3js.org/d3.v4.min.js"></script>-->
+<script src="js/helpers/d3.min.js"></script>
   
 <script src="js/templates/template.js"></script>
 <script src="js/model/model.js"></script>
@@ -553,12 +493,6 @@
 <script src="js/controller/controller.js"></script>
 <script src="js/script.js"></script>
 <script src="js/events/events.js"></script>
-  
-  
-  
-<!--  <script src="js/charts/chartD3_01.js"></script>-->
-<!--  <script src="js/charts/chart03.js"></script>-->
-<!--  <script src="js/charts/chart04.js"></script>-->
   
 </body>
 </html>
