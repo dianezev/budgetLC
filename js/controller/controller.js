@@ -38,7 +38,7 @@ LCB.controller = (function() {
         view.setDate(date);
         view.refreshDetail(subtotals[categ].actual, "actual");
         view.refreshDetail(subtotals[categ].budget, "budget");
-        view.chartBar("svg", chartData.bar);
+//        view.chartBar("svg", chartData.bar);
         view.donut3D.transition("budgetDonut", chartData.donut.budget, 0.4);  // old args: ("budgetDonut", chartData.donut.budget, 130, 100, 30, 0.4)
         view.donut3D.transition("actualDonut", chartData.donut.actual, 0);  // old args: ("actualDonut", chartData.donut.actual, 130, 100, 30, 0)
       });      
@@ -68,7 +68,7 @@ LCB.controller = (function() {
         view.makeActiveCateg(index + 1, subtotals[categ].actual.sub);
         view.refreshDetail(subtotals[categ].actual, "actual");
         view.refreshDetail(subtotals[categ].budget, "budget");
-        view.chartBar("svg", chartData.bar);
+//        view.chartBar("svg", chartData.bar);
         view.donut3D.transition("budgetDonut", chartData.donut.budget, 0.4);
         view.donut3D.transition("actualDonut", chartData.donut.actual, 0);
       });
@@ -131,7 +131,7 @@ LCB.controller = (function() {
                */
               model.getData("budget", function (subtotals, categ, chartData) {
                 view.refreshDetail(subtotals[categ].budget, "budget");
-                view.chartBar("svg", chartData.bar);
+//                view.chartBar("svg", chartData.bar);
                 view.donut3D.draw("budgetDonut", chartData.donut.budget, view.availWidth, 1, 0.4, COLORS);
                 view.donut3D.transition("budgetDonut", chartData.donut.budget, 0.4);
                 view.donut3D.draw("actualDonut", chartData.donut.actual, view.availWidth, 2, 0, COLORS);
@@ -177,7 +177,7 @@ LCB.controller = (function() {
           model.getData(dtype, function (subtotals, categ, chartData) {
             view.clearEntry();
             view.refreshDetail(subtotals[categ][dtype], dtype);
-            view.chartBar("svg", chartData.bar);
+//            view.chartBar("svg", chartData.bar);
             view.donut3D.transition("budgetDonut", chartData.donut.budget, 0.4);
             view.donut3D.transition("actualDonut", chartData.donut.actual, 0);
           });
