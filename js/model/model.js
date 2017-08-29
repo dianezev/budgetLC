@@ -27,8 +27,8 @@ LCB = window.LCB || {};
 LCB.model = (function() {
   'use strict';
   
-  // for testing
-  // var host = "https://budgetlc.herokuapp.com/";
+  // for testing only
+//   var host = "https://budgetlc.herokuapp.com/";
   var host = "/";  //DMZ using /totfin/ instead of /
   
   // Private vars here

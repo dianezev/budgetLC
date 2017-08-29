@@ -314,12 +314,12 @@
       </div>
     
 <!--        TBD: need to make responsive-->
-        <div class="cBar">
+        <div class="cBar hide">
           <h2>To be added...</h2>
 <!--          <svg class="svg_cBar" width="960" height="400"></svg>-->
         </div>
 
-        <div class="cPie hide">
+        <div class="cPie">
           <svg class="svg_cPie">
             <g id="actualDonut"></g>
             <g id="budgetDonut"></g>
