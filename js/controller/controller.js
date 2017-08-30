@@ -103,6 +103,8 @@ LCB.controller = (function() {
         // TBD: add validation?
         userInfo.name = $('#name_set').val();
         userInfo.email = $('#email_set').val();
+        $('#register').hide();
+        $('#waitSymbol').show();
 
         model.signup(userInfo, function (result) {
           view.userMsg(result);
@@ -113,6 +115,9 @@ LCB.controller = (function() {
         userInfo.email = $('#email').val();
         userInfo.password = $('#password').val();
         $('#password').val('');
+        $('#register').hide();
+        // TBD: apply waitSymbol for other AJAX calls
+        $('#waitSymbol').show();
         
         // If login is successful, get user data and update view
         model.login(userInfo, function (result) {

@@ -233,3 +233,9 @@ select {
   top: 5px;
   right: 10px;
 }
+.waiting {
+  color: black;
+  background-color: transparent;
+  margin: 100px auto;
+  text-align: center;
+}

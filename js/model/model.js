@@ -335,7 +335,7 @@ LCB.model = (function() {
         error: function(xhr, status, error) {
           
           console.log(xhr);
-          alert('ajax ERROR: ' + status);
+          cb({pass: false, err_msg: 'AJAX error [' + error + ']: see console for details.'});
         }
       });      
     },

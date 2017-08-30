@@ -65,8 +65,15 @@
   </div>
 </header>
 
+<!-- Display spinner when waiting for data to load, login etc -->
+<div id="waitSymbol" class="waiting w3-modal">
+  <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+</div>  
+
+  
 <!-- Modal: Log In/Sign Up -->
 <div id="register" class="w3-modal">
+  <span class="sr-only">Loading...</span>
   <div class="w3-modal-content form">
     <span class="w3-button w3-display-topright">&times;</span>
     

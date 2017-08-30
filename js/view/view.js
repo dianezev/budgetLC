@@ -214,7 +214,9 @@ LCB.view = (function() {
                 : (result.hasOwnProperty('err_msg')) 
                    ? result.err_msg 
                    : result;
+      
       $('#register').hide();
+      $('#waitSymbol').hide();
       
       showMsg(msg);
     },
