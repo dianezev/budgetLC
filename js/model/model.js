@@ -29,7 +29,7 @@ LCB.model = (function() {
   
   // for testing only
 //   var host = "https://budgetlc.herokuapp.com/";
-  var host = "/";  //DMZ using /totfin/ instead of /
+  var host = "/totfin/";  //DMZ using /totfin/ instead of /
   
   // Private vars here
   var subtotals = [];
@@ -240,7 +240,7 @@ LCB.model = (function() {
     getData: function(dtype, cb) {
       var that = this;
       var userId = user.userId;
-
+console.log(host + "php/api/v1/" + dtype + "/" + userId);
       $.ajax({
         method: "GET",
         url: host + "php/api/v1/" + dtype + "/" + userId,
@@ -383,7 +383,7 @@ LCB.model = (function() {
       $.ajax({
         method: "POST",
         data: expenseData,
-        url: "php/api/v1/" + dtype + "/" + userId,
+        url: host + "php/api/v1/" + dtype + "/" + userId,
         headers: {Authorization: 'Bearer ' + authToken},
         success: function(result){
           console.log('success with POSTing expense data and result is:');
@@ -401,7 +401,7 @@ LCB.model = (function() {
       $.ajax({
         method: "POST",
         data: {v: userInfo.v, password: userInfo.password},
-        url: "php/api/setPassword.php",
+        url: host + "php/api/setPassword.php",
         success: function(result){
           console.log('success with setPassword.php and result is:');
           console.log(result);
