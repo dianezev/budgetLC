@@ -29,7 +29,7 @@ LCB.model = (function() {
   
   // for testing only
 //   var host = "https://budgetlc.herokuapp.com/";
-  var host = "/totfin/";  //DMZ using /totfin/ instead of /
+  var host = "/";  //DMZ using /totfin/ instead of /
   
   // Private vars here
   var subtotals = [];
