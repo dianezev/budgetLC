@@ -429,17 +429,17 @@
         <div class="devNotes w3-container w3-white">
           <h3 class="w3-text-indigo">Michael Park</h3>
           <h5 class="w3-opacity">Web Developer</h5>
-          <p>contact info</p>
+          <p>thatmichaelpark@gmail.com</p>
           <br>
           <br>
           <div>
-            <p>Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.</p>
+            <p>Wrote Total Finance database API. More about Michael at <a href="https://thatmichaelpark.github.io">thatmichaelpark.github.io</a></p>
           </div>
           <div class="socMedia w3-text-grey w3-xxlarge w3-center">
-            <a target="_blank"  href="https://github.com/">
+            <a target="_blank"  href="https://github.com/thatmichaelpark">
               <i class="fa fa-github w3-hover-opacity"></i>
             </a>
-            <a target="_blank" href="#">
+            <a target="_blank" href="https://linkedin.com/in/thatmichaelpark">
               <i class="fa fa-linkedin w3-hover-opacity"></i>
             </a>
           </div>
