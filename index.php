@@ -210,7 +210,7 @@
         </div>
       </div>        
       
-      <p class="w3-center"><i class="fa fa-spinner" aria-hidden="true"></i>
+      <p class="w3-center">
         <button class="w3-button w3-black" type="submit" name="actual">SAVE ACTUAL EXPENSE</button>
       </p>
     </form>
