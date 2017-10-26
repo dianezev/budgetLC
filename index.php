@@ -48,8 +48,10 @@
 </nav>
 
 <!-- Header with full-height image -->
+<!-- DMZ added demo line to make it easy for potential employers work with app -->
 <header class="bgimg-1 w3-display-container w3-grayscale-min" id="m_home">
   <div class="w3-display-left w3-text-dark-grey" style="padding:48px">
+    <span class="w3-xlarge"><small>For DEMO: Login as <strong>'tom@comcast.net'</strong> with password <strong>'tom'</strong> and view expenses for <strong>January 2017</strong> or <strong>October 2017</strong>.</small></span><br><br>
     <span class="w3-jumbo w3-hide-small">Track your Finances</span><br>
     <span class="w3-xxlarge w3-hide-large w3-hide-medium">Track your Finances</span><br>
     <span class="w3-xlarge">and make your money go further</span>
